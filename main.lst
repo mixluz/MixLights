@@ -1,0 +1,1302 @@
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; *************************************************************************** ;
+                      00002 ; The RS232 to DALI interface by Ross Fosler                                  ;
+                      00003 ; v1.00 1/29/01   ... created ...                                             ;
+                      00004 ;                                                                             ;
+                      00005 ; This is the main program to direct command execution and data reception.    ;
+                      00006 ;                                                                             ;
+                      00007 ; *************************************************************************** ;
+                      00008 
+2007   3F3C           00009  __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_NOCLKOUT & _MCLRE_ON & _LVP_OFF
+                      00010 
+                      00011 
+                      00012 ; *** Extra *******************************************************************
+                      00013 #include        p16f628.inc     ; Standard include file
+                      00001         LIST
+                      00002 ; P16F628.INC  Standard Header File, Version 1.01    Microchip Technology, Inc.
+                      00258         LIST
+                      00014 #include        instruct.inc    ; Bring in complex instructions
+                      00001 ; *****************************************************************************
+                      00002 #define skifz           btfss   STATUS, Z       ; Skip if zero
+                      00003 #define skifnz          btfsc   STATUS, Z       ; Skip if not zero
+                      00004 ; *****************************************************************************
+                      00005 
+                      00006 ; *** Branch if Zero **********************************************************
+                      00007 brz     macro   WHERE
+                      00008         skifnz
+                      00009         goto    WHERE
+                      00010         endm
+                      00011 ; *****************************************************************************
+                      00012 
+                      00013 ; *** Branch if Not Zero ******************************************************
+                      00014 brnz    macro   WHERE
+                      00015         skifz
+                      00016         goto    WHERE
+                      00017         endm
+                      00018 ; *****************************************************************************
+                      00019 
+                      00020 ; *** Wait Until Set **********************************************************
+                      00021 wus     macro   WHO, BIT
+                      00022         btfss   WHO, BIT
+                      00023         goto    $ - 1
+                      00024         endm
+                      00025 ; *****************************************************************************
+                      00026 
+                      00027 ; *** Wait Until Clear ********************************************************
+                      00028 wuc     macro   WHO, BIT
+                      00029         btfsc   WHO, BIT
+                      00030         goto    $ - 1
+                      00031         endm
+                      00032 ; *****************************************************************************
+                      00033 
+                      00034 ; *** Branch if Bit is Set ****************************************************
+                      00035 brset   macro   WHO, BIT, WHERE 
+                      00036         btfsc   WHO, BIT
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00037         goto    WHERE
+                      00038         endm
+                      00039 ; *****************************************************************************
+                      00040 
+                      00041 ; *** Branch if Bit is Clear **************************************************
+                      00042 brclr   macro   WHO, BIT, WHERE
+                      00043         btfss   WHO, BIT
+                      00044         goto    WHERE
+                      00045         endm    
+                      00046 ; *****************************************************************************
+                      00047 
+                      00048 ; *** Branch if Negative ******************************************************
+                      00049 brn     macro   WHERE
+                      00050         btfss   STATUS, C
+                      00051         goto    WHERE
+                      00052         endm
+                      00053 ; *****************************************************************************
+                      00054 
+                      00055 ; *** If FILE1 > FILE2 then Branch ********************************************
+                      00056 cffbig  macro   FILE1, FILE2, WHERE
+                      00057         movf    FILE1, W
+                      00058         subwf   FILE2, W
+                      00059         btfss   STATUS, C
+                      00060         goto    WHERE
+                      00061         endm
+                      00062 ; *****************************************************************************
+                      00063 
+                      00064 ; *** If FILE1 < FILE2 then Branch ********************************************
+                      00065 cffbis  macro   FILE1, FILE2, WHERE
+                      00066         movf    FILE2, W
+                      00067         subwf   FILE1, W
+                      00068         btfss   STATUS, C
+                      00069         goto    WHERE
+                      00070         endm
+                      00071 ; *****************************************************************************
+                      00072 
+                      00073 ; *** If FILE1 = FILE2 then Branch ********************************************
+                      00074 cffbie  macro   FILE1, FILE2, WHERE
+                      00075         movf    FILE2, W
+                      00076         subwf   FILE1, W
+                      00077         btfsc   STATUS, Z
+                      00078         goto    WHERE
+                      00079         endm
+                      00080 ; *****************************************************************************
+                      00081 
+                      00082 ; *** If FILE1 != FILE2 then Branch *******************************************
+                      00083 cffbin  macro   FILE1, FILE2, WHERE
+                      00084         movf    FILE2, W
+                      00085         subwf   FILE1, W
+                      00086         btfss   STATUS, Z
+                      00087         goto    WHERE
+                      00088         endm
+                      00089 ; *****************************************************************************
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00090 
+                      00091 ; *** If FILE1 > LIT1 then Branch *********************************************
+                      00092 cflbig  macro   FILE1, LIT1, WHERE
+                      00093         movf    FILE1, W
+                      00094         sublw   LIT1
+                      00095         btfss   STATUS, C
+                      00096         goto    WHERE
+                      00097         endm
+                      00098 ; *****************************************************************************
+                      00099 
+                      00100 ; *** If FILE1 < LIT1 then Branch *********************************************
+                      00101 cflbis  macro   FILE1, LIT1, WHERE
+                      00102         movlw   LIT1
+                      00103         subwf   FILE1, W
+                      00104         btfss   STATUS, C
+                      00105         goto    WHERE
+                      00106         endm
+                      00107 ; *****************************************************************************
+                      00108 
+                      00109 ; *** If FILE1 = LIT1 then Branch *********************************************
+                      00110 cflbie  macro   FILE1, LIT1, WHERE
+                      00111         movf    FILE1, W
+                      00112         sublw   LIT1
+                      00113         btfsc   STATUS, Z
+                      00114         goto    WHERE
+                      00115         endm
+                      00116 ; *****************************************************************************
+                      00117 
+                      00118 ; *** If FILE1 != LIT1 then Branch ********************************************
+                      00119 cflbin  macro   FILE1, LIT1, WHERE
+                      00120         movf    FILE1, W
+                      00121         sublw   LIT1
+                      00122         btfss   STATUS, Z
+                      00123         goto    WHERE
+                      00124         endm
+                      00125 ; *****************************************************************************
+                      00126 
+                      00127 ; *** If FILE1 > FILE2 then Branch ********************************************
+                      00128 cffcig  macro   FILE1, FILE2, WHERE
+                      00129         movf    FILE1, W
+                      00130         subwf   FILE2, W
+                      00131         btfss   STATUS, C
+                      00132         call    WHERE
+                      00133         endm
+                      00134 ; *****************************************************************************
+                      00135 
+                      00136 ; *** If FILE1 < FILE2 then Branch ********************************************
+                      00137 cffcis  macro   FILE1, FILE2, WHERE
+                      00138         movf    FILE2, W
+                      00139         subwf   FILE1, W
+                      00140         btfss   STATUS, C
+                      00141         call    WHERE
+                      00142         endm
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00143 ; *****************************************************************************
+                      00144 
+                      00145 ; *** If FILE1 = FILE2 then Branch ********************************************
+                      00146 cffcie  macro   FILE1, FILE2, WHERE
+                      00147         movf    FILE2, W
+                      00148         subwf   FILE1, W
+                      00149         btfsc   STATUS, Z
+                      00150         call    WHERE
+                      00151         endm
+                      00152 ; *****************************************************************************
+                      00153 
+                      00154 ; *** If FILE1 != FILE2 then Branch *******************************************
+                      00155 cffcin  macro   FILE1, FILE2, WHERE
+                      00156         movf    FILE2, W
+                      00157         subwf   FILE1, W
+                      00158         btfss   STATUS, Z
+                      00159         call    WHERE
+                      00160         endm
+                      00161 ; *****************************************************************************
+                      00162 
+                      00163 ; *** If FILE1 > LIT1 then Branch *********************************************
+                      00164 cflcig  macro   FILE1, LIT1, WHERE
+                      00165         movf    FILE1, W
+                      00166         sublw   LIT1
+                      00167         btfss   STATUS, C
+                      00168         call    WHERE
+                      00169         endm
+                      00170 ; *****************************************************************************
+                      00171 
+                      00172 ; *** If FILE1 < LIT1 then Branch *********************************************
+                      00173 cflcis  macro   FILE1, LIT1, WHERE
+                      00174         movlw   LIT1
+                      00175         subwf   FILE1, W
+                      00176         btfss   STATUS, C
+                      00177         call    WHERE
+                      00178         endm
+                      00179 ; *****************************************************************************
+                      00180 
+                      00181 ; *** If FILE1 = LIT1 then Branch *********************************************
+                      00182 cflcie  macro   FILE1, LIT1, WHERE
+                      00183         movf    FILE1, W
+                      00184         sublw   LIT1
+                      00185         btfsc   STATUS, Z
+                      00186         call    WHERE
+                      00187         endm
+                      00188 ; *****************************************************************************
+                      00189 
+                      00190 ; *** If FILE1 != LIT1 then Branch ********************************************
+                      00191 cflcin  macro   FILE1, LIT1, WHERE
+                      00192         movf    FILE1, W
+                      00193         sublw   LIT1
+                      00194         btfss   STATUS, Z
+                      00195         call    WHERE
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00196         endm
+                      00197 ; *****************************************************************************
+                      00198 
+                      00199 ; *****************************************************************************
+                      00200 movff   macro   HERE, THERE
+                      00201         movf    HERE, W
+                      00202         movwf   THERE
+                      00203         endm
+                      00204 ; *****************************************************************************
+                      00205 
+                      00206 ; *****************************************************************************
+                      00207 movlf   macro   DAT, THERE
+                      00208         movlw   DAT
+                      00209         movwf   THERE
+                      00210         endm
+                      00211 ; *****************************************************************************
+                      00212 
+                      00213 ; *** Add Literal to File *****************************************************
+                      00214 addlf   macro   LIT1, FILE1, DIR
+                      00215         movlw   LIT1
+                      00216         addwf   FILE1, DIR
+                      00217         endm    
+                      00218 ; *****************************************************************************
+                      00219 
+                      00220 ; *** Subtract Literal from File **********************************************
+                      00221 sublf   macro   LIT1, FILE1, DIR
+                      00222         movlw   LIT1
+                      00223         subwf   FILE1, DIR
+                      00224         endm    
+                      00225 ; *****************************************************************************
+                      00226 
+                      00227 ; *** Branch if Carry *********************************************************
+                      00228 brc     macro   WHERE
+                      00229         btfsc   STATUS, C
+                      00230         goto    WHERE
+                      00231         endm
+                      00232 ; *****************************************************************************
+                      00233 
+                      00234 ; *** Branch if No Carry ******************************************************
+                      00235 brnc    macro   WHERE
+                      00236         btfss   STATUS, C
+                      00237         goto    WHERE
+                      00238         endm
+                      00239 ; *****************************************************************************
+                      00240 
+                      00241 ; *** OR file w/ file *********************************************************
+                      00242 iorff   macro   FILE1, FILE2, DIR
+                      00243         movf    FILE2, W
+                      00244         iorwf   FILE1, DIR
+                      00245         endm
+                      00246 ; *****************************************************************************
+                      00247 
+                      00248 
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00015 #include        user_mac.inc    ; Bring in application specific instructions    
+                      00001 #define dvron   bsf     PORTB, 3
+                      00002 #define dvroff  bcf     PORTB, 3
+                      00003 
+                      00004 
+                      00005 ; *****************************************************************************
+                      00006 txdali  macro   MYREGH, MYREGL
+                      00007         movff   MYREGH, DALI_H
+                      00008         movff   MYREGL, DALI_L
+                      00009         call    SendData
+                      00010         endm
+                      00011 ; *****************************************************************************
+                      00012 
+                      00013 
+                      00014 ; *****************************************************************************
+                      00015 rxdali  macro
+                      00016         call    RecvData
+                      00017         endm
+                      00018 ; *****************************************************************************
+                      00019 
+                      00020 
+                      00021 ; *****************************************************************************
+                      00022 tx      macro   MYREG
+                      00023         movff   MYREG, TXREG
+                      00024         endm
+                      00025 ; *****************************************************************************
+                      00026 
+                      00027 
+                      00028 ; *****************************************************************************
+                      00029 delay   macro   MYLIT
+                      00030         movlf   high MYLIT, TMR1H
+                      00031         movlf   low MYLIT, TMR1L
+                      00032         call    DelayCyclesT1
+                      00033         endm
+                      00034 ; *****************************************************************************
+                      00035 
+                      00036 
+                      00037 ; *****************************************************************************
+                      00038 delayf  macro   MYFILE_H, MYFILE_L
+                      00039         movff   MYFILE_H, TMR1H
+                      00040         movff   MYFILE_L, TMR1L
+                      00041         call    DelayCyclesT1
+                      00042         endm
+                      00043 ; *****************************************************************************
+                      00044 
+                      00045 
+                      00046 ; *** Set DALI Bus High *******************************************************
+                      00047 outhi   macro
+                      00048         bcf     PORTB, 4                ; Turn off clamp
+                      00049         goto    $ + 1
+                      00050         bsf     PORTB, 5                ; Turn on output
+                      00051 ;       goto    $ + 1
+                      00052 ;       goto    $ + 1
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00053         endm
+                      00054 ; *****************************************************************************
+                      00055 
+                      00056 
+                      00057 ; *** Set DALI Bus Low ********************************************************
+                      00058 outlo   macro
+                      00059         bcf     PORTB, 5                ; Turn off output driver
+                      00060         goto    $ + 1                   ; Wait a little for gate discharge
+                      00061         bsf     PORTB, 4                ; Turn on clamp
+                      00062 ;       goto    $ + 1
+                      00063         endm
+                      00064 ; *****************************************************************************
+                      00065 
+                      00066 
+                      00067 ; *** Emergency Shutdown ******************************************************
+                      00068 esdwn   macro   WHERE
+                      00069         bcf     PORTB, 3                ; Turn off output driver
+                      00070         goto    WHERE
+                      00071         endm
+                      00072 ; *****************************************************************************
+                      00073 
+                      00074 
+                      00075 ; *****************************************************************************
+                      00076 wrtee   macro   MYREG
+                      00077         banksel EEADR
+                      00078         movwf   EEDATA                          ; Init the first values 
+                      00079         movlw   TX_EDGE_DELAY_H
+                      00080         sublw   MYREG
+                      00081         movwf   EEADR 
+                      00082         call    WriteEEData
+                      00083         endm
+                      00084 ; *****************************************************************************
+                      00085 
+                      00086 
+                      00016 #include        main.inc
+                      00001 ; *****************************************************************************
+                      00002 ; This file contains all defined registers for the main task to run.
+                      00003 
+                      00004 
+                      00005 ; *** Constants ***************************************************************
+                      00006 
+                      00007 ; *****************************************************************************
+                      00008 
+                      00009 
+                      00010 ; *** Externals ***************************************************************
+  0000                00011         EXTERN  TimeCounter
+                      00012 
+  0000                00013         EXTERN  ResetBridge, ReportStatus       ; Bridge commands
+  0000                00014         EXTERN  SequenceDATA1, SequenceDATA2    ; Sequence storage commands
+  0000                00015         EXTERN  SequenceDATA3
+  0000                00016         EXTERN  SingleSend, DoubleSend          ; DALI bus commands
+  0000                00017         EXTERN  SendSequence
+  0000                00018         EXTERN  SendReceive
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  0000                00019         EXTERN  ChngTXEdgeDelay, ChngTXStopDelay
+  0000                00020         EXTERN  ChngTXRegDelay, ChngRXWait, ChngRXStartDelay
+  0000                00021         EXTERN  ChngRXSampleDelay, ChngRXDelayNext, ChngRXDebug
+  0000                00022         EXTERN  ChngDblSendDelay, ChngSequenceDelay
+  0000                00023         EXTERN  ChngBaudRate
+  0000                00024         EXTERN  QueryTXEdge_H, QueryTXEdge_L, QueryTXStop_H, QueryTXStop_L
+  0000                00025         EXTERN  QueryTXReg_H, QueryTXReg_L, QueryRXWait
+  0000                00026         EXTERN  QueryRXStart_H, QueryRXStart_L, QueryRXSample_H, QueryRXSample_L
+  0000                00027         EXTERN  QueryRXNext_H, QueryRXNext_L, QueryRXDebug
+  0000                00028         EXTERN  QueryDblSendDel, QuerySeqDel
+  0000                00029         EXTERN  LoadReset
+                      00030 ;       EXTERN  SendData
+                      00031 ; *****************************************************************************
+                      00032 
+                      00033         
+                      00034 ; *** Variables ***************************************************************
+                      00035 MAIN_DATA       udata   0x20
+                      00036 ; *****************************************************************************
+0020                  00037 TX_EDGE_DELAY_H         res     1
+0021                  00038 TX_EDGE_DELAY_L         res     1
+0022                  00039 TX_STOP_DELAY_H         res     1
+0023                  00040 TX_STOP_DELAY_L         res     1
+0024                  00041 TX_REG_DELAY_H          res     1
+0025                  00042 TX_REG_DELAY_L          res     1
+0026                  00043 RX_WAIT                 res     1
+0027                  00044 RX_START_DELAY_H        res     1
+0028                  00045 RX_START_DELAY_L        res     1
+0029                  00046 RX_SAMPLE_DELAY_H       res     1
+002A                  00047 RX_SAMPLE_DELAY_L       res     1
+002B                  00048 RX_DELAY_NEXT_H         res     1
+002C                  00049 RX_DELAY_NEXT_L         res     1
+002D                  00050 RX_DEBUG                res     1
+002E                  00051 DOUBLE_SEND_DELAY       res     1
+002F                  00052 SEQUENCE_DELAY          res     1
+0030                  00053 BAUD_RATE               res     1
+                      00054 
+  0000                00055         GLOBAL  TX_EDGE_DELAY_H, TX_EDGE_DELAY_L, TX_STOP_DELAY_H, TX_STOP_DELAY_L
+  0000                00056         GLOBAL  TX_REG_DELAY_H, TX_REG_DELAY_L, RX_WAIT, RX_START_DELAY_H
+  0000                00057         GLOBAL  RX_START_DELAY_L, RX_SAMPLE_DELAY_H, RX_SAMPLE_DELAY_L
+  0000                00058         GLOBAL  RX_DELAY_NEXT_H, RX_DELAY_NEXT_L, DOUBLE_SEND_DELAY, SEQUENCE_DELAY
+  0000                00059         GLOBAL  RX_DEBUG, BAUD_RATE
+                      00060 
+0031                  00061 COMMAND         res     1
+0032                  00062 DALI_H          res     1
+0033                  00063 DALI_L          res     1
+0034                  00064 BRIDGE_STATUS   res     1
+                      00065 
+0035                  00066 DALI_H_BAK1     res     1
+0036                  00067 DALI_L_BAK1     res     1
+0037                  00068 DALI_H_BAK2     res     1
+0038                  00069 DALI_L_BAK2     res     1
+0039                  00070 DALI_H_BAK3     res     1
+003A                  00071 DALI_L_BAK3     res     1
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00072 
+  0000                00073         GLOBAL  DALI_H, DALI_L, BRIDGE_STATUS
+  0000                00074         GLOBAL  DALI_H_BAK1, DALI_L_BAK1
+  0000                00075         GLOBAL  DALI_H_BAK2, DALI_L_BAK2
+  0000                00076         GLOBAL  DALI_H_BAK3, DALI_L_BAK3
+                      00077 
+003B                  00078 MILLISECONDS    res     1               ; This is an 8-bit 1ms timer
+003C                  00079 OVER_LOAD_CNT   res     1
+003D                  00080 COUNTER_L       res     1
+  0000                00081         GLOBAL  MILLISECONDS, OVER_LOAD_CNT, COUNTER_L
+                      00082 
+                      00083 
+003E                  00084 SEARCH_H        res     1
+003F                  00085 SEARCH_M        res     1
+0040                  00086 SEARCH_L        res     1
+  0000                00087         GLOBAL  SEARCH_H, SEARCH_M, SEARCH_L
+                      00088 ; *****************************************************************************
+                      00089 
+                      00090 
+                      00091 ; *** Variables ***************************************************************
+                      00092 ACCESS1         udata_shr       0x70
+                      00093 ; *****************************************************************************
+0070                  00094 W_COPY          res     1
+0071                  00095 STATUS_COPY     res     1
+0072                  00096 PORTB_COPY      res     1       
+0073                  00097 WREG1           res     1
+0074                  00098 WREG2           res     1
+0075                  00099 WREG3           res     1
+0076                  00100 WREG4           res     1
+0077                  00101 WREG5           res     1
+0078                  00102 WREG6           res     1
+  0000                00103         GLOBAL  W_COPY, STATUS_COPY, WREG1
+  0000                00104         GLOBAL  WREG2, WREG3, WREG4, WREG5, WREG6
+  0000                00105         GLOBAL  PORTB_COPY
+                      00106 ; *****************************************************************************
+                      00017 ; *****************************************************************************
+                      00018 
+                      00019  
+                      00020 ; *** Vectors *****************************************************************
+                      00021 STARTUP CODE
+0000   2???           00022         goto    Setup
+                      00023         
+                      00024 INTVCT  CODE                            ; Handle interrupts 
+0000   00??           00025         movwf   W_COPY                  ; Save data
+0001   0E03           00026         swapf   STATUS, W
+0002   00??           00027         movwf   STATUS_COPY
+                      00028         
+                      00029         brset   INTCON, T0IF, TimeCounter
+0003   190B               M         btfsc   INTCON, T0IF
+0004   2???               M         goto    TimeCounter
+                      00030 
+0005   2???           00031         goto    Setup
+                      00032 ; *****************************************************************************
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00033 
+                      00034 
+                      00035 ; **** Setup Everything *******************************************************
+                      00036 MAIN_SETUP      CODE                    ; Init all necessary 
+                      00037 ; ***************************************************************************** 
+0000                  00038 Setup   
+0000   1283 1303      00039         banksel PORTA                   ; ** Select bank 0 **
+                      00040 
+0002   0181           00041         clrf    TMR0                    ; Reset TIMER0
+                      00042                 
+0003   3090           00043         movlw   0x90                    ; Setup serial port receive
+0004   0098           00044         movwf   RCSTA   
+                      00045 
+                      00046         movlf   0x36, CMCON             ; Setup comparators     
+0005   3036               M         movlw   0x36
+0006   009F               M         movwf   CMCON
+                      00047 
+                      00048         movlf   0x00, PIR1              ; Clear int flags
+0007   3000               M         movlw   0x00
+0008   008C               M         movwf   PIR1
+                      00049         movlf   0x00, INTCON            ; Setup interrupts
+0009   3000               M         movlw   0x00
+000A   008B               M         movwf   INTCON
+                      00050 
+000B   0185           00051         clrf    PORTA                   ; Clear the ports
+000C   0186           00052         clrf    PORTB
+                      00053 
+                      00054         movlf   0x02, OVER_LOAD_CNT     ; Init overload counter
+000D   3002               M         movlw   0x02
+000E   00??               M         movwf   OVER_LOAD_CNT
+                      00055 
+                      00056 
+000F   1683 1303      00057         banksel TXSTA                   ; ** Select bank 1 **
+                      00058                 
+0011   3020           00059         movlw   0x20                    ; Setup serial port send
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0012   0098           00060         movwf   TXSTA
+0013   3018           00061         movlw   0x18                    ; Setup baud rate, 2400 bps
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   0099           00062         movwf   SPBRG
+                      00063 
+                      00064         movlf   0x02, TRISB             ; Setup PORT directions
+0015   3002               M         movlw   0x02
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0086               M         movwf   TRISB
+                      00065         movlf   0x27, TRISA             
+0017   3027               M         movlw   0x27
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0018   0085               M         movwf   TRISA
+                      00066 
+                      00067 ;       movlf   0x80, OPTION_REG        ; WDT and INT related bits
+                      00068         movlf   0x8F, OPTION_REG        ; WDT and INT related bits
+0019   308F               M         movlw   0x8F
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001A   0081               M         movwf   OPTION_REG
+                      00069 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001B   158E           00070         bsf     PCON, OSCF              ; Set 4MHz
+                      00071 
+001C   1283 1303      00072         banksel PORTA                   ; ** Select bank 0 **
+                      00073 
+001E   2???           00074         call    LoadReset               ; Load the reset values
+                      00075 
+001F   08??           00076         movf    BAUD_RATE, W            ; Load the baud rate
+0020   1683 1303      00077         banksel SPBRG
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0022   0099           00078         movwf   SPBRG
+0023   1283 1303      00079         banksel PORTA
+                      00080 
+                      00081 
+0025   168B           00082         bsf     INTCON, T0IE            ; Enable TIMER0 interrupt
+                      00083 
+0026   178B           00084         bsf     INTCON, GIE             ; Enable interrupts
+                      00085 
+0027   01??           00086         clrf    BRIDGE_STATUS           ; Init the status register
+                      00087 
+0028   01??           00088         clrf    MILLISECONDS
+                      00089 
+                      00090 Lp1     cflbig  MILLISECONDS, 0xFA, Main
+0029   08??               M         movf    MILLISECONDS, W
+002A   3CFA               M         sublw   0xFA
+002B   1C03               M         btfss   STATUS, C
+002C   2???               M         goto    Main
+                      00091 
+                      00092         brclr   CMCON, C1OUT, Lp1       ; Wait 250ms for circuit stabilization
+002D   1F1F               M         btfss   CMCON, C1OUT
+002E   2???               M         goto    Lp1
+                      00093 
+002F   2???           00094         goto            Main
+                      00095 ; *****************************************************************************
+                      00096 
+                      00097 
+                      00098 ; *** Main Decision Branch ****************************************************
+                      00099 MAIN_PROG       CODE    
+                      00100 ; *****************************************************************************
+0000                  00101 Main    
+0000   1283 1303      00102         banksel PORTA
+0002   1218           00103         bcf     RCSTA, CREN                     ; Reset Communications
+                      00104         movlf   0x90, RCSTA
+0003   3090               M         movlw   0x90
+0004   0098               M         movwf   RCSTA
+                      00105 
+0005   08??           00106         movf    BAUD_RATE, W                    ; Load the baud rate
+0006   1683 1303      00107         banksel TXSTA                           ; ** Select bank 1 **
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0099           00108         movwf   SPBRG   
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00109         movlf   0x20, TXSTA                     ; Setup serial port send        
+0009   3020               M         movlw   0x20
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000A   0098               M         movwf   TXSTA
+000B   1283 1303      00110         banksel PORTA                           ; ** Select bank 0 **
+                      00111 
+000D   1218           00112         bcf     RCSTA, CREN                     ; Reset Communications
+000E   1618           00113         bsf     RCSTA, CREN
+                      00114 
+000F   081A           00115         movf    RCREG, W                        ; Clear FIFO
+0010   081A           00116         movf    RCREG, W
+                      00117         
+0011                  00118 MainLoop
+0011   0064           00119         clrwdt
+                      00120 
+                      00121         brclr   PIR1, RCIF, MainLoop            ; Receive command byte
+0012   1E8C               M         btfss   PIR1, RCIF
+0013   2???               M         goto    MainLoop
+                      00122         brset   RCSTA, FERR, Main               ; Check for communication error
+0014   1918               M         btfsc   RCSTA, FERR
+0015   2???               M         goto    Main
+                      00123         brset   RCSTA, OERR, Main
+0016   1898               M         btfsc   RCSTA, OERR
+0017   2???               M         goto    Main
+                      00124         movff   RCREG, COMMAND          
+0018   081A               M         movf    RCREG, W
+0019   00??               M         movwf   COMMAND
+                      00125         
+001A   01??           00126         clrf    MILLISECONDS                    ; Wait 100ms before giving up
+                      00127 Lp2     cflbig  MILLISECONDS, 0x64, Main
+001B   08??               M         movf    MILLISECONDS, W
+001C   3C64               M         sublw   0x64
+001D   1C03               M         btfss   STATUS, C
+001E   2???               M         goto    Main
+                      00128         brclr   PIR1, RCIF, Lp2                 ; Receive high byte for DALI
+001F   1E8C               M         btfss   PIR1, RCIF
+0020   2???               M         goto    Lp2
+                      00129         brset   RCSTA, FERR, Main               ; Check for communication error
+0021   1918               M         btfsc   RCSTA, FERR
+0022   2???               M         goto    Main
+                      00130         brset   RCSTA, OERR, Main
+0023   1898               M         btfsc   RCSTA, OERR
+0024   2???               M         goto    Main
+                      00131         movff   RCREG, DALI_H
+0025   081A               M         movf    RCREG, W
+0026   00??               M         movwf   DALI_H
+                      00132 
+0027   01??           00133         clrf    MILLISECONDS                    ; Wait 100ms before giving up
+                      00134 Lp3     cflbig  MILLISECONDS, 0x64, Main
+0028   08??               M         movf    MILLISECONDS, W
+0029   3C64               M         sublw   0x64
+002A   1C03               M         btfss   STATUS, C
+002B   2???               M         goto    Main
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00135         brclr   PIR1, RCIF, Lp3                 ; Receive low byte for DALI
+002C   1E8C               M         btfss   PIR1, RCIF
+002D   2???               M         goto    Lp3
+                      00136         brset   RCSTA, FERR, Main               ; Check for communication error
+002E   1918               M         btfsc   RCSTA, FERR
+002F   2???               M         goto    Main
+                      00137         brset   RCSTA, OERR, Main
+0030   1898               M         btfsc   RCSTA, OERR
+0031   2???               M         goto    Main
+                      00138         movff   RCREG, DALI_L
+0032   081A               M         movf    RCREG, W
+0033   00??               M         movwf   DALI_L
+                      00139 
+                      00140 
+                      00141         cflbie  COMMAND, 0x00, ResetBridge      ; Bridge commands
+0034   08??               M         movf    COMMAND, W
+0035   3C00               M         sublw   0x00
+0036   1903               M         btfsc   STATUS, Z
+0037   2???               M         goto    ResetBridge
+                      00142         cflbie  COMMAND, 0x01, ReportStatus
+0038   08??               M         movf    COMMAND, W
+0039   3C01               M         sublw   0x01
+003A   1903               M         btfsc   STATUS, Z
+003B   2???               M         goto    ReportStatus
+                      00143 
+                      00144         cflbie  COMMAND, 0x08, SequenceDATA1    ; Storage
+003C   08??               M         movf    COMMAND, W
+003D   3C08               M         sublw   0x08
+003E   1903               M         btfsc   STATUS, Z
+003F   2???               M         goto    SequenceDATA1
+                      00145         cflbie  COMMAND, 0x09, SequenceDATA2
+0040   08??               M         movf    COMMAND, W
+0041   3C09               M         sublw   0x09
+0042   1903               M         btfsc   STATUS, Z
+0043   2???               M         goto    SequenceDATA2
+                      00146         cflbie  COMMAND, 0x0A, SequenceDATA3
+0044   08??               M         movf    COMMAND, W
+0045   3C0A               M         sublw   0x0A
+0046   1903               M         btfsc   STATUS, Z
+0047   2???               M         goto    SequenceDATA3
+                      00147 
+                      00148         cflbie  COMMAND, 0x10, SingleSend       ; DALI bus related commands
+0048   08??               M         movf    COMMAND, W
+0049   3C10               M         sublw   0x10
+004A   1903               M         btfsc   STATUS, Z
+004B   2???               M         goto    SingleSend
+                      00149         cflbie  COMMAND, 0x11, DoubleSend
+004C   08??               M         movf    COMMAND, W
+004D   3C11               M         sublw   0x11
+004E   1903               M         btfsc   STATUS, Z
+004F   2???               M         goto    DoubleSend
+                      00150         cflbie  COMMAND, 0x12, SendReceive
+0050   08??               M         movf    COMMAND, W
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0051   3C12               M         sublw   0x12
+0052   1903               M         btfsc   STATUS, Z
+0053   2???               M         goto    SendReceive
+                      00151         cflbie  COMMAND, 0x13, SendSequence
+0054   08??               M         movf    COMMAND, W
+0055   3C13               M         sublw   0x13
+0056   1903               M         btfsc   STATUS, Z
+0057   2???               M         goto    SendSequence
+                      00152 
+                      00153 ;       cflbie  COMMAND, 0x20, AutoFind
+                      00154 ;       cflbie  COMMAND, 0x21, QuerySearch_H
+                      00155 ;       cflbie  COMMAND, 0x22, QuerySearch_M
+                      00156 ;       cflbie  COMMAND, 0x23, QuerySearch_L
+                      00157 
+                      00158         cflbie  COMMAND, 0xC0, ChngTXEdgeDelay
+0058   08??               M         movf    COMMAND, W
+0059   3CC0               M         sublw   0xC0
+005A   1903               M         btfsc   STATUS, Z
+005B   2???               M         goto    ChngTXEdgeDelay
+                      00159         cflbie  COMMAND, 0xC1, ChngTXStopDelay
+005C   08??               M         movf    COMMAND, W
+005D   3CC1               M         sublw   0xC1
+005E   1903               M         btfsc   STATUS, Z
+005F   2???               M         goto    ChngTXStopDelay
+                      00160         cflbie  COMMAND, 0xC2, ChngTXRegDelay
+0060   08??               M         movf    COMMAND, W
+0061   3CC2               M         sublw   0xC2
+0062   1903               M         btfsc   STATUS, Z
+0063   2???               M         goto    ChngTXRegDelay
+                      00161         cflbie  COMMAND, 0xC3, ChngRXWait
+0064   08??               M         movf    COMMAND, W
+0065   3CC3               M         sublw   0xC3
+0066   1903               M         btfsc   STATUS, Z
+0067   2???               M         goto    ChngRXWait
+                      00162         cflbie  COMMAND, 0xC4, ChngRXStartDelay
+0068   08??               M         movf    COMMAND, W
+0069   3CC4               M         sublw   0xC4
+006A   1903               M         btfsc   STATUS, Z
+006B   2???               M         goto    ChngRXStartDelay
+                      00163         cflbie  COMMAND, 0xC5, ChngRXSampleDelay
+006C   08??               M         movf    COMMAND, W
+006D   3CC5               M         sublw   0xC5
+006E   1903               M         btfsc   STATUS, Z
+006F   2???               M         goto    ChngRXSampleDelay
+                      00164         cflbie  COMMAND, 0xC6, ChngRXDelayNext
+0070   08??               M         movf    COMMAND, W
+0071   3CC6               M         sublw   0xC6
+0072   1903               M         btfsc   STATUS, Z
+0073   2???               M         goto    ChngRXDelayNext
+                      00165         cflbie  COMMAND, 0xC7, ChngRXDebug
+0074   08??               M         movf    COMMAND, W
+0075   3CC7               M         sublw   0xC7
+0076   1903               M         btfsc   STATUS, Z
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0077   2???               M         goto    ChngRXDebug
+                      00166         cflbie  COMMAND, 0xC8, ChngDblSendDelay 
+0078   08??               M         movf    COMMAND, W
+0079   3CC8               M         sublw   0xC8
+007A   1903               M         btfsc   STATUS, Z
+007B   2???               M         goto    ChngDblSendDelay
+                      00167         cflbie  COMMAND, 0xC9, ChngSequenceDelay
+007C   08??               M         movf    COMMAND, W
+007D   3CC9               M         sublw   0xC9
+007E   1903               M         btfsc   STATUS, Z
+007F   2???               M         goto    ChngSequenceDelay
+                      00168         cflbie  COMMAND, 0xCA, ChngBaudRate
+0080   08??               M         movf    COMMAND, W
+0081   3CCA               M         sublw   0xCA
+0082   1903               M         btfsc   STATUS, Z
+0083   2???               M         goto    ChngBaudRate
+                      00169 
+                      00170         cflbie  COMMAND, 0xD0, QueryTXEdge_H
+0084   08??               M         movf    COMMAND, W
+0085   3CD0               M         sublw   0xD0
+0086   1903               M         btfsc   STATUS, Z
+0087   2???               M         goto    QueryTXEdge_H
+                      00171         cflbie  COMMAND, 0xD1, QueryTXEdge_L
+0088   08??               M         movf    COMMAND, W
+0089   3CD1               M         sublw   0xD1
+008A   1903               M         btfsc   STATUS, Z
+008B   2???               M         goto    QueryTXEdge_L
+                      00172         cflbie  COMMAND, 0xD2, QueryTXStop_H
+008C   08??               M         movf    COMMAND, W
+008D   3CD2               M         sublw   0xD2
+008E   1903               M         btfsc   STATUS, Z
+008F   2???               M         goto    QueryTXStop_H
+                      00173         cflbie  COMMAND, 0xD3, QueryTXStop_L
+0090   08??               M         movf    COMMAND, W
+0091   3CD3               M         sublw   0xD3
+0092   1903               M         btfsc   STATUS, Z
+0093   2???               M         goto    QueryTXStop_L
+                      00174         cflbie  COMMAND, 0xD4, QueryTXReg_H
+0094   08??               M         movf    COMMAND, W
+0095   3CD4               M         sublw   0xD4
+0096   1903               M         btfsc   STATUS, Z
+0097   2???               M         goto    QueryTXReg_H
+                      00175         cflbie  COMMAND, 0xD5, QueryTXReg_L
+0098   08??               M         movf    COMMAND, W
+0099   3CD5               M         sublw   0xD5
+009A   1903               M         btfsc   STATUS, Z
+009B   2???               M         goto    QueryTXReg_L
+                      00176         cflbie  COMMAND, 0xD6, QueryRXWait
+009C   08??               M         movf    COMMAND, W
+009D   3CD6               M         sublw   0xD6
+009E   1903               M         btfsc   STATUS, Z
+009F   2???               M         goto    QueryRXWait
+                      00177         cflbie  COMMAND, 0xD7, QueryRXStart_H
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+00A0   08??               M         movf    COMMAND, W
+00A1   3CD7               M         sublw   0xD7
+00A2   1903               M         btfsc   STATUS, Z
+00A3   2???               M         goto    QueryRXStart_H
+                      00178         cflbie  COMMAND, 0xD8, QueryRXStart_L
+00A4   08??               M         movf    COMMAND, W
+00A5   3CD8               M         sublw   0xD8
+00A6   1903               M         btfsc   STATUS, Z
+00A7   2???               M         goto    QueryRXStart_L
+                      00179         cflbie  COMMAND, 0xD9, QueryRXSample_H
+00A8   08??               M         movf    COMMAND, W
+00A9   3CD9               M         sublw   0xD9
+00AA   1903               M         btfsc   STATUS, Z
+00AB   2???               M         goto    QueryRXSample_H
+                      00180         cflbie  COMMAND, 0xDA, QueryRXSample_L
+00AC   08??               M         movf    COMMAND, W
+00AD   3CDA               M         sublw   0xDA
+00AE   1903               M         btfsc   STATUS, Z
+00AF   2???               M         goto    QueryRXSample_L
+                      00181         cflbie  COMMAND, 0xDB, QueryRXNext_H
+00B0   08??               M         movf    COMMAND, W
+00B1   3CDB               M         sublw   0xDB
+00B2   1903               M         btfsc   STATUS, Z
+00B3   2???               M         goto    QueryRXNext_H
+                      00182         cflbie  COMMAND, 0xDC, QueryRXNext_L
+00B4   08??               M         movf    COMMAND, W
+00B5   3CDC               M         sublw   0xDC
+00B6   1903               M         btfsc   STATUS, Z
+00B7   2???               M         goto    QueryRXNext_L
+                      00183         cflbie  COMMAND, 0xDD, QueryRXDebug
+00B8   08??               M         movf    COMMAND, W
+00B9   3CDD               M         sublw   0xDD
+00BA   1903               M         btfsc   STATUS, Z
+00BB   2???               M         goto    QueryRXDebug
+                      00184         cflbie  COMMAND, 0xDE, QueryDblSendDel
+00BC   08??               M         movf    COMMAND, W
+00BD   3CDE               M         sublw   0xDE
+00BE   1903               M         btfsc   STATUS, Z
+00BF   2???               M         goto    QueryDblSendDel
+                      00185         cflbie  COMMAND, 0xDF, QuerySeqDel
+00C0   08??               M         movf    COMMAND, W
+00C1   3CDF               M         sublw   0xDF
+00C2   1903               M         btfsc   STATUS, Z
+00C3   2???               M         goto    QuerySeqDel
+                      00186 
+                      00187 
+                      00188 
+                      00189 
+00C4   2???           00190         goto    Main
+                      00191 
+                      00192 
+  0000                00193         GLOBAL  Main
+                      00194 
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00195 
+                      00196 ; *****************************************************************************
+                      00197 
+                      00198 
+                      00199 
+                      00200 ; *** EEDATA Memory ***********************************************************
+                      00201 EE_DATA CODE    0x2100
+                      00202 ; *****************************************************************************
+2100   00FE 0080 00FA 00203         de      0xFE, 0x80, 0xFA, 0xFF, 0xFE, 0x7C, 0x0A, 0xFE
+       00FF 00FE 007C 
+       000A 00FE 
+2108   00D3 00FF 00B0 00204         de      0xD3, 0xFF, 0xB0, 0xFD, 0xD8, 0x00, 0x0B, 0x0B
+       00FD 00D8 0000 
+       000B 000B 
+2110   0018 00FF 00FF 00205         de      0x18, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+       00FF 00FF 00FF 
+       00FF 00FF 
+2118   00FF 00FF 00FF 00206         de      0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+       00FF 00FF 00FF 
+       00FF 00FF 
+2120   00FF 00FF 00FF 00207         de      0xFF, 0xFF, 0xFF
+                      00208 ; *****************************************************************************
+                      00209 
+                      00210 
+3F3C                  00211         END
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADEN                              00000003
+BAUD_RATE                         00000030
+BRGH                              00000002
+BRIDGE_STATUS                     00000034
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000001F
+CMIE                              00000006
+CMIF                              00000006
+COMMAND                           00000031
+COUNTER_L                         0000003D
+CREN                              00000004
+CSRC                              00000007
+ChngBaudRate                      00000000
+ChngDblSendDelay                  00000000
+ChngRXDebug                       00000000
+ChngRXDelayNext                   00000000
+ChngRXSampleDelay                 00000000
+ChngRXStartDelay                  00000000
+ChngRXWait                        00000000
+ChngSequenceDelay                 00000000
+ChngTXEdgeDelay                   00000000
+ChngTXRegDelay                    00000000
+ChngTXStopDelay                   00000000
+DALI_H                            00000032
+DALI_H_BAK1                       00000035
+DALI_H_BAK2                       00000037
+DALI_H_BAK3                       00000039
+DALI_L                            00000033
+DALI_L_BAK1                       00000036
+DALI_L_BAK2                       00000038
+DALI_L_BAK3                       0000003A
+DC                                00000001
+DOUBLE_SEND_DELAY                 0000002E
+DoubleSend                        00000000
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LoadReset                         00000000
+Lp1                               00000029
+Lp2                               0000001B
+Lp3                               00000028
+MILLISECONDS                      0000003B
+Main                              00000000
+MainLoop                          00000011
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OERR                              00000001
+OPTION_REG                        00000081
+OSCF                              00000003
+OVER_LOAD_CNT                     0000003C
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PORTA                             00000005
+PORTB                             00000006
+PORTB_COPY                        00000072
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+QueryDblSendDel                   00000000
+QueryRXDebug                      00000000
+QueryRXNext_H                     00000000
+QueryRXNext_L                     00000000
+QueryRXSample_H                   00000000
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 20
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+QueryRXSample_L                   00000000
+QueryRXStart_H                    00000000
+QueryRXStart_L                    00000000
+QueryRXWait                       00000000
+QuerySeqDel                       00000000
+QueryTXEdge_H                     00000000
+QueryTXEdge_L                     00000000
+QueryTXReg_H                      00000000
+QueryTXReg_L                      00000000
+QueryTXStop_H                     00000000
+QueryTXStop_L                     00000000
+RBIE                              00000003
+RBIF                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+RX_DEBUG                          0000002D
+RX_DELAY_NEXT_H                   0000002B
+RX_DELAY_NEXT_L                   0000002C
+RX_SAMPLE_DELAY_H                 00000029
+RX_SAMPLE_DELAY_L                 0000002A
+RX_START_DELAY_H                  00000027
+RX_START_DELAY_L                  00000028
+RX_WAIT                           00000026
+ReportStatus                      00000000
+ResetBridge                       00000000
+SEARCH_H                          0000003E
+SEARCH_L                          00000040
+SEARCH_M                          0000003F
+SEQUENCE_DELAY                    0000002F
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+STATUS                            00000003
+STATUS_COPY                       00000071
+SYNC                              00000004
+SendReceive                       00000000
+SendSequence                      00000000
+SequenceDATA1                     00000000
+SequenceDATA2                     00000000
+SequenceDATA3                     00000000
+Setup                             00000000
+SingleSend                        00000000
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 21
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1OSCEN                           00000003
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRMT                              00000001
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+TX_EDGE_DELAY_H                   00000020
+TX_EDGE_DELAY_L                   00000021
+TX_REG_DELAY_H                    00000024
+TX_REG_DELAY_L                    00000025
+TX_STOP_DELAY_H                   00000022
+TX_STOP_DELAY_L                   00000023
+TimeCounter                       00000000
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             0000009F
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+W                                 00000000
+WR                                00000001
+WREG1                             00000073
+WREG2                             00000074
+WREG3                             00000075
+WREG4                             00000076
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 22
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WREG5                             00000077
+WREG6                             00000078
+WREN                              00000002
+WRERR                             00000003
+W_COPY                            00000070
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CP_50                            00002BFF
+_CP_75                            000017FF
+_CP_ALL                           000003FF
+_CP_OFF                           00003FFF
+_ER_OSC_CLKOUT                    00003FFF
+_ER_OSC_NOCLKOUT                  00003FFE
+_EXTCLK_OSC                       00003FEF
+_HS_OSC                           00003FEE
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FED
+__16F628                          00000001
+__DEBUG                           1
+addlf                             
+brc                               
+brclr                             
+brn                               
+brnc                              
+brnz                              
+brset                             
+brz                               
+cffbie                            
+cffbig                            
+cffbin                            
+cffbis                            
+cffcie                            
+cffcig                            
+cffcin                            
+cffcis                            
+cflbie                            
+cflbig                            
+cflbin                            
+cflbis                            
+cflcie                            
+cflcig                            
+cflcin                            
+MPASM  5.36                          MAIN.ASM   9-16-2010  14:18:51         PAGE 23
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+cflcis                            
+delay                             
+delayf                            
+dvroff                            bcf     PORTB, 3
+dvron                             bsf     PORTB, 3
+esdwn                             
+iorff                             
+movff                             
+movlf                             
+outhi                             
+outlo                             
+rxdali                            
+skifnz                            btfsc   STATUS, Z
+skifz                             btfss   STATUS, Z
+sublf                             
+tx                                
+txdali                            
+wrtee                             
+wuc                               
+wus                               
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     9 reported,     0 suppressed
+
+

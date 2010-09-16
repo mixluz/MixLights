@@ -1,0 +1,57 @@
+// File: 16f628.lkr
+// Linker file for Balast interface by Ross Fosler
+//  v1.00 10/29/00	...created...
+
+LIBPATH  .
+
+
+CODEPAGE   NAME=svector   START=0x0      END=0x3      PROTECTED
+CODEPAGE   NAME=ivector   START=0x4      END=0x15     PROTECTED
+CODEPAGE   NAME=page      START=0x16     END=0x7FF
+CODEPAGE   NAME=.idlocs   START=0x2000   END=0x2003   PROTECTED
+CODEPAGE   NAME=.config   START=0x2007   END=0x2007   PROTECTED
+CODEPAGE   NAME=eedata	  START=0x2100	 END=0x217F   PROTECTED	
+
+DATABANK   NAME=sfr0      START=0x0      END=0x1F     PROTECTED
+DATABANK   NAME=sfr1      START=0x80     END=0x9F     PROTECTED
+DATABANK   NAME=sfr2      START=0x100    END=0x11F    PROTECTED
+DATABANK   NAME=sfr3      START=0x180    END=0x19F    PROTECTED
+
+DATABANK   NAME=gpr0      START=0x20     END=0x6F
+DATABANK   NAME=gpr1      START=0xA0     END=0xEF
+DATABANK   NAME=gpr2      START=0x120    END=0x14F
+
+SHAREBANK  NAME=gprnobnk  START=0x70     END=0x7F
+SHAREBANK  NAME=gprnobnk  START=0xF0     END=0xFF
+SHAREBANK  NAME=gprnobnk  START=0x170    END=0x17F
+SHAREBANK  NAME=gprnobnk  START=0x1F0    END=0x1FF
+
+
+
+//*****************************************************************************
+SECTION	   NAME=MAIN_DATA	RAM=gpr0  //Required defined variables
+SECTION	   NAME=MAIN_OTHER_DATA	RAM=gpr0
+SECTION	   NAME=COUNTERS	RAM=gpr0
+//*****************************************************************************
+
+
+//*****************************************************************************
+SECTION	NAME=STARTUP  	ROM=svector    	// Reset and interrupt vectors
+SECTION	NAME=IDLOCS   	ROM=.idlocs    	// ID locations
+SECTION	NAME=CONFIG   	ROM=.config    	// Configuration bits location
+SECTION	NAME=INTVCT	ROM=ivector    	// Interrupt vector code
+
+//SECTION	NAME=COM_JUMP1	ROM=page	//Command Jump Routine one
+//SECTION	NAME=C0		ROM=page	// Command 0
+//SECTION	NAME=C1		ROM=page	// Command 1
+//SECTION	NAME=C2		ROM=page	// Command 2
+//SECTION	NAME=C3		ROM=page	// Command 3
+//SECTION	NAME=C4		ROM=page	// Command 4
+//SECTION	NAME=C5		ROM=page	// Command 5
+//SECTION	NAME=C6		ROM=page	// Command 6
+//SECTION	NAME=C16_31	ROM=page	// Command 16-31
+//*****************************************************************************
+
+
+
+

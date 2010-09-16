@@ -1,0 +1,774 @@
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ; *****************************************************************************
+                      00002 #include        p16f628.inc     ; Standard include file
+                      00001         LIST
+                      00002 ; P16F628.INC  Standard Header File, Version 1.01    Microchip Technology, Inc.
+                      00258         LIST
+                      00003 #include        instruct.inc    ; Bring in complex instructions
+                      00001 ; *****************************************************************************
+                      00002 #define skifz           btfss   STATUS, Z       ; Skip if zero
+                      00003 #define skifnz          btfsc   STATUS, Z       ; Skip if not zero
+                      00004 ; *****************************************************************************
+                      00005 
+                      00006 ; *** Branch if Zero **********************************************************
+                      00007 brz     macro   WHERE
+                      00008         skifnz
+                      00009         goto    WHERE
+                      00010         endm
+                      00011 ; *****************************************************************************
+                      00012 
+                      00013 ; *** Branch if Not Zero ******************************************************
+                      00014 brnz    macro   WHERE
+                      00015         skifz
+                      00016         goto    WHERE
+                      00017         endm
+                      00018 ; *****************************************************************************
+                      00019 
+                      00020 ; *** Wait Until Set **********************************************************
+                      00021 wus     macro   WHO, BIT
+                      00022         btfss   WHO, BIT
+                      00023         goto    $ - 1
+                      00024         endm
+                      00025 ; *****************************************************************************
+                      00026 
+                      00027 ; *** Wait Until Clear ********************************************************
+                      00028 wuc     macro   WHO, BIT
+                      00029         btfsc   WHO, BIT
+                      00030         goto    $ - 1
+                      00031         endm
+                      00032 ; *****************************************************************************
+                      00033 
+                      00034 ; *** Branch if Bit is Set ****************************************************
+                      00035 brset   macro   WHO, BIT, WHERE 
+                      00036         btfsc   WHO, BIT
+                      00037         goto    WHERE
+                      00038         endm
+                      00039 ; *****************************************************************************
+                      00040 
+                      00041 ; *** Branch if Bit is Clear **************************************************
+                      00042 brclr   macro   WHO, BIT, WHERE
+                      00043         btfss   WHO, BIT
+                      00044         goto    WHERE
+                      00045         endm    
+                      00046 ; *****************************************************************************
+                      00047 
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00048 ; *** Branch if Negative ******************************************************
+                      00049 brn     macro   WHERE
+                      00050         btfss   STATUS, C
+                      00051         goto    WHERE
+                      00052         endm
+                      00053 ; *****************************************************************************
+                      00054 
+                      00055 ; *** If FILE1 > FILE2 then Branch ********************************************
+                      00056 cffbig  macro   FILE1, FILE2, WHERE
+                      00057         movf    FILE1, W
+                      00058         subwf   FILE2, W
+                      00059         btfss   STATUS, C
+                      00060         goto    WHERE
+                      00061         endm
+                      00062 ; *****************************************************************************
+                      00063 
+                      00064 ; *** If FILE1 < FILE2 then Branch ********************************************
+                      00065 cffbis  macro   FILE1, FILE2, WHERE
+                      00066         movf    FILE2, W
+                      00067         subwf   FILE1, W
+                      00068         btfss   STATUS, C
+                      00069         goto    WHERE
+                      00070         endm
+                      00071 ; *****************************************************************************
+                      00072 
+                      00073 ; *** If FILE1 = FILE2 then Branch ********************************************
+                      00074 cffbie  macro   FILE1, FILE2, WHERE
+                      00075         movf    FILE2, W
+                      00076         subwf   FILE1, W
+                      00077         btfsc   STATUS, Z
+                      00078         goto    WHERE
+                      00079         endm
+                      00080 ; *****************************************************************************
+                      00081 
+                      00082 ; *** If FILE1 != FILE2 then Branch *******************************************
+                      00083 cffbin  macro   FILE1, FILE2, WHERE
+                      00084         movf    FILE2, W
+                      00085         subwf   FILE1, W
+                      00086         btfss   STATUS, Z
+                      00087         goto    WHERE
+                      00088         endm
+                      00089 ; *****************************************************************************
+                      00090 
+                      00091 ; *** If FILE1 > LIT1 then Branch *********************************************
+                      00092 cflbig  macro   FILE1, LIT1, WHERE
+                      00093         movf    FILE1, W
+                      00094         sublw   LIT1
+                      00095         btfss   STATUS, C
+                      00096         goto    WHERE
+                      00097         endm
+                      00098 ; *****************************************************************************
+                      00099 
+                      00100 ; *** If FILE1 < LIT1 then Branch *********************************************
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00101 cflbis  macro   FILE1, LIT1, WHERE
+                      00102         movlw   LIT1
+                      00103         subwf   FILE1, W
+                      00104         btfss   STATUS, C
+                      00105         goto    WHERE
+                      00106         endm
+                      00107 ; *****************************************************************************
+                      00108 
+                      00109 ; *** If FILE1 = LIT1 then Branch *********************************************
+                      00110 cflbie  macro   FILE1, LIT1, WHERE
+                      00111         movf    FILE1, W
+                      00112         sublw   LIT1
+                      00113         btfsc   STATUS, Z
+                      00114         goto    WHERE
+                      00115         endm
+                      00116 ; *****************************************************************************
+                      00117 
+                      00118 ; *** If FILE1 != LIT1 then Branch ********************************************
+                      00119 cflbin  macro   FILE1, LIT1, WHERE
+                      00120         movf    FILE1, W
+                      00121         sublw   LIT1
+                      00122         btfss   STATUS, Z
+                      00123         goto    WHERE
+                      00124         endm
+                      00125 ; *****************************************************************************
+                      00126 
+                      00127 ; *** If FILE1 > FILE2 then Branch ********************************************
+                      00128 cffcig  macro   FILE1, FILE2, WHERE
+                      00129         movf    FILE1, W
+                      00130         subwf   FILE2, W
+                      00131         btfss   STATUS, C
+                      00132         call    WHERE
+                      00133         endm
+                      00134 ; *****************************************************************************
+                      00135 
+                      00136 ; *** If FILE1 < FILE2 then Branch ********************************************
+                      00137 cffcis  macro   FILE1, FILE2, WHERE
+                      00138         movf    FILE2, W
+                      00139         subwf   FILE1, W
+                      00140         btfss   STATUS, C
+                      00141         call    WHERE
+                      00142         endm
+                      00143 ; *****************************************************************************
+                      00144 
+                      00145 ; *** If FILE1 = FILE2 then Branch ********************************************
+                      00146 cffcie  macro   FILE1, FILE2, WHERE
+                      00147         movf    FILE2, W
+                      00148         subwf   FILE1, W
+                      00149         btfsc   STATUS, Z
+                      00150         call    WHERE
+                      00151         endm
+                      00152 ; *****************************************************************************
+                      00153 
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00154 ; *** If FILE1 != FILE2 then Branch *******************************************
+                      00155 cffcin  macro   FILE1, FILE2, WHERE
+                      00156         movf    FILE2, W
+                      00157         subwf   FILE1, W
+                      00158         btfss   STATUS, Z
+                      00159         call    WHERE
+                      00160         endm
+                      00161 ; *****************************************************************************
+                      00162 
+                      00163 ; *** If FILE1 > LIT1 then Branch *********************************************
+                      00164 cflcig  macro   FILE1, LIT1, WHERE
+                      00165         movf    FILE1, W
+                      00166         sublw   LIT1
+                      00167         btfss   STATUS, C
+                      00168         call    WHERE
+                      00169         endm
+                      00170 ; *****************************************************************************
+                      00171 
+                      00172 ; *** If FILE1 < LIT1 then Branch *********************************************
+                      00173 cflcis  macro   FILE1, LIT1, WHERE
+                      00174         movlw   LIT1
+                      00175         subwf   FILE1, W
+                      00176         btfss   STATUS, C
+                      00177         call    WHERE
+                      00178         endm
+                      00179 ; *****************************************************************************
+                      00180 
+                      00181 ; *** If FILE1 = LIT1 then Branch *********************************************
+                      00182 cflcie  macro   FILE1, LIT1, WHERE
+                      00183         movf    FILE1, W
+                      00184         sublw   LIT1
+                      00185         btfsc   STATUS, Z
+                      00186         call    WHERE
+                      00187         endm
+                      00188 ; *****************************************************************************
+                      00189 
+                      00190 ; *** If FILE1 != LIT1 then Branch ********************************************
+                      00191 cflcin  macro   FILE1, LIT1, WHERE
+                      00192         movf    FILE1, W
+                      00193         sublw   LIT1
+                      00194         btfss   STATUS, Z
+                      00195         call    WHERE
+                      00196         endm
+                      00197 ; *****************************************************************************
+                      00198 
+                      00199 ; *****************************************************************************
+                      00200 movff   macro   HERE, THERE
+                      00201         movf    HERE, W
+                      00202         movwf   THERE
+                      00203         endm
+                      00204 ; *****************************************************************************
+                      00205 
+                      00206 ; *****************************************************************************
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00207 movlf   macro   DAT, THERE
+                      00208         movlw   DAT
+                      00209         movwf   THERE
+                      00210         endm
+                      00211 ; *****************************************************************************
+                      00212 
+                      00213 ; *** Add Literal to File *****************************************************
+                      00214 addlf   macro   LIT1, FILE1, DIR
+                      00215         movlw   LIT1
+                      00216         addwf   FILE1, DIR
+                      00217         endm    
+                      00218 ; *****************************************************************************
+                      00219 
+                      00220 ; *** Subtract Literal from File **********************************************
+                      00221 sublf   macro   LIT1, FILE1, DIR
+                      00222         movlw   LIT1
+                      00223         subwf   FILE1, DIR
+                      00224         endm    
+                      00225 ; *****************************************************************************
+                      00226 
+                      00227 ; *** Branch if Carry *********************************************************
+                      00228 brc     macro   WHERE
+                      00229         btfsc   STATUS, C
+                      00230         goto    WHERE
+                      00231         endm
+                      00232 ; *****************************************************************************
+                      00233 
+                      00234 ; *** Branch if No Carry ******************************************************
+                      00235 brnc    macro   WHERE
+                      00236         btfss   STATUS, C
+                      00237         goto    WHERE
+                      00238         endm
+                      00239 ; *****************************************************************************
+                      00240 
+                      00241 ; *** OR file w/ file *********************************************************
+                      00242 iorff   macro   FILE1, FILE2, DIR
+                      00243         movf    FILE2, W
+                      00244         iorwf   FILE1, DIR
+                      00245         endm
+                      00246 ; *****************************************************************************
+                      00247 
+                      00248 
+                      00004 #include        user_mac.inc    ; Bring in application specific instructions
+                      00001 #define dvron   bsf     PORTB, 3
+                      00002 #define dvroff  bcf     PORTB, 3
+                      00003 
+                      00004 
+                      00005 ; *****************************************************************************
+                      00006 txdali  macro   MYREGH, MYREGL
+                      00007         movff   MYREGH, DALI_H
+                      00008         movff   MYREGL, DALI_L
+                      00009         call    SendData
+                      00010         endm
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00011 ; *****************************************************************************
+                      00012 
+                      00013 
+                      00014 ; *****************************************************************************
+                      00015 rxdali  macro
+                      00016         call    RecvData
+                      00017         endm
+                      00018 ; *****************************************************************************
+                      00019 
+                      00020 
+                      00021 ; *****************************************************************************
+                      00022 tx      macro   MYREG
+                      00023         movff   MYREG, TXREG
+                      00024         endm
+                      00025 ; *****************************************************************************
+                      00026 
+                      00027 
+                      00028 ; *****************************************************************************
+                      00029 delay   macro   MYLIT
+                      00030         movlf   high MYLIT, TMR1H
+                      00031         movlf   low MYLIT, TMR1L
+                      00032         call    DelayCyclesT1
+                      00033         endm
+                      00034 ; *****************************************************************************
+                      00035 
+                      00036 
+                      00037 ; *****************************************************************************
+                      00038 delayf  macro   MYFILE_H, MYFILE_L
+                      00039         movff   MYFILE_H, TMR1H
+                      00040         movff   MYFILE_L, TMR1L
+                      00041         call    DelayCyclesT1
+                      00042         endm
+                      00043 ; *****************************************************************************
+                      00044 
+                      00045 
+                      00046 ; *** Set DALI Bus High *******************************************************
+                      00047 outhi   macro
+                      00048         bcf     PORTB, 4                ; Turn off clamp
+                      00049         goto    $ + 1
+                      00050         bsf     PORTB, 5                ; Turn on output
+                      00051 ;       goto    $ + 1
+                      00052 ;       goto    $ + 1
+                      00053         endm
+                      00054 ; *****************************************************************************
+                      00055 
+                      00056 
+                      00057 ; *** Set DALI Bus Low ********************************************************
+                      00058 outlo   macro
+                      00059         bcf     PORTB, 5                ; Turn off output driver
+                      00060         goto    $ + 1                   ; Wait a little for gate discharge
+                      00061         bsf     PORTB, 4                ; Turn on clamp
+                      00062 ;       goto    $ + 1
+                      00063         endm
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00064 ; *****************************************************************************
+                      00065 
+                      00066 
+                      00067 ; *** Emergency Shutdown ******************************************************
+                      00068 esdwn   macro   WHERE
+                      00069         bcf     PORTB, 3                ; Turn off output driver
+                      00070         goto    WHERE
+                      00071         endm
+                      00072 ; *****************************************************************************
+                      00073 
+                      00074 
+                      00075 ; *****************************************************************************
+                      00076 wrtee   macro   MYREG
+                      00077         banksel EEADR
+                      00078         movwf   EEDATA                          ; Init the first values 
+                      00079         movlw   TX_EDGE_DELAY_H
+                      00080         sublw   MYREG
+                      00081         movwf   EEADR 
+                      00082         call    WriteEEData
+                      00083         endm
+                      00084 ; *****************************************************************************
+                      00085 
+                      00086 
+                      00005 ; *****************************************************************************
+                      00006 
+                      00007 
+                      00008 ; *****************************************************************************
+  0000                00009         EXTERN  SendData
+  0000                00010         EXTERN  RecvData
+  0000                00011         EXTERN  DelayCyclesT1
+                      00012 
+  0000                00013         EXTERN  Main
+  0000                00014         EXTERN  WREG1, DALI_H, DALI_L
+  0000                00015         EXTERN  MILLISECONDS
+  0000                00016         EXTERN  BRIDGE_STATUS
+                      00017 
+  0000                00018         EXTERN  WREG2, WREG3, WREG4, WREG5, WREG6
+  0000                00019         EXTERN  SEARCH_H, SEARCH_M, SEARCH_L
+                      00020 ; *****************************************************************************
+                      00021 
+                      00022 
+                      00023 ; *****************************************************************************
+                      00024 SETUP_DALI      CODE
+                      00025 ; *****************************************************************************
+0000                  00026 AutoFind
+0000   1900           00027         btfsc   BRIDGE_STATUS, 2                ; Prevent transmission if overload
+0001   2???           00028         goto    Main
+                      00029 
+                      00030         movlf   0x80, SEARCH_H
+0002   3080               M         movlw   0x80
+0003   00??               M         movwf   SEARCH_H
+0004   01??           00031         clrf    SEARCH_M
+0005   01??           00032         clrf    SEARCH_L
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00033 
+0006   01??           00034         clrf    WREG5
+0007   01??           00035         clrf    WREG4
+0008   01??           00036         clrf    WREG3
+                      00037 
+                      00038 Lp1     movlf   b'10110001', DALI_H             ; Transmit search address
+0009   30B1               M         movlw   b'10110001'
+000A   00??               M         movwf   DALI_H
+                      00039         iorff   WREG5, SEARCH_H, W
+000B   08??               M         movf    SEARCH_H, W
+000C   04??               M         iorwf   WREG5, W
+000D   00??           00040         movwf   DALI_L
+                      00041 ;       txdali  DALI_H, DALI_L
+                      00042 ;       delay   0xD8EF  
+                      00043                         
+                      00044         movlf   b'10110011', DALI_H
+000E   30B3               M         movlw   b'10110011'
+000F   00??               M         movwf   DALI_H
+                      00045         iorff   WREG4, SEARCH_M, W
+0010   08??               M         movf    SEARCH_M, W
+0011   04??               M         iorwf   WREG4, W
+0012   00??           00046         movwf   DALI_L
+                      00047 ;       txdali  DALI_H, DALI_L
+                      00048 ;       delay   0xD8EF
+                      00049 
+                      00050         movlf   b'10110111', DALI_H
+0013   30B7               M         movlw   b'10110111'
+0014   00??               M         movwf   DALI_H
+                      00051         iorff   WREG3, SEARCH_L, W
+0015   08??               M         movf    SEARCH_L, W
+0016   04??               M         iorwf   WREG3, W
+0017   00??           00052         movwf   DALI_L
+                      00053 ;       txdali  DALI_H, DALI_L
+                      00054 ;       delay   0xD8EF
+                      00055 
+                      00056         movlf   b'10101001', DALI_H             ; Compare search with random
+0018   30A9               M         movlw   b'10101001'
+0019   00??               M         movwf   DALI_H
+001A   01??           00057         clrf    DALI_L
+                      00058 ;       txdali  DALI_H, DALI_L
+                      00059         
+                      00060 ;       rxdali                                  ; Receive data from DALI bus
+                      00061                         
+001B   08??           00062         movf    DALI_L, W
+                      00063         brnz    Jp3                             ; Jump if Search => Rand
+001C   1D03               M         skifz
+001D   2???               M         goto    Jp3
+                      00064 
+001E   1003           00065         bcf     STATUS, C                       ; if Search < Rand
+001F   0D??           00066         rlf     SEARCH_L, F
+0020   0D??           00067         rlf     SEARCH_M, F
+0021   0D??           00068         rlf     SEARCH_H, F
+                      00069 
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0022   2???           00070         goto    Lp1
+                      00071 
+0023   1003           00072 Jp3     bcf     STATUS, C                       ; If Search => Rand
+0024   0C??           00073         rrf     SEARCH_H, F
+0025   0C??           00074         rrf     SEARCH_M, F
+0026   0C??           00075         rrf     SEARCH_L, F
+                      00076         
+                      00077         iorff   WREG5, SEARCH_H, F
+0027   08??               M         movf    SEARCH_H, W
+0028   04??               M         iorwf   WREG5, F
+                      00078         iorff   WREG4, SEARCH_M, F
+0029   08??               M         movf    SEARCH_M, W
+002A   04??               M         iorwf   WREG4, F
+                      00079         iorff   WREG3, SEARCH_L, F
+002B   08??               M         movf    SEARCH_L, W
+002C   04??               M         iorwf   WREG3, F
+                      00080         
+002D   01??           00081         clrf    SEARCH_H
+002E   01??           00082         clrf    SEARCH_M
+                      00083         movlf   0x01, SEARCH_L
+002F   3001               M         movlw   0x01
+0030   00??               M         movwf   SEARCH_L
+                      00084 
+0031   2???           00085         goto    Lp1
+                      00086         
+                      00087 Jp4     movff   WREG5, SEARCH_H
+0032   08??               M         movf    WREG5, W
+0033   00??               M         movwf   SEARCH_H
+                      00088         movff   WREG4, SEARCH_M
+0034   08??               M         movf    WREG4, W
+0035   00??               M         movwf   SEARCH_M
+                      00089         movff   WREG3, SEARCH_L
+0036   08??               M         movf    WREG3, W
+0037   00??               M         movwf   SEARCH_L
+                      00090 
+0038   0008           00091         return
+                      00092 ; *****************************************************************************
+                      00093 
+                      00094 
+                      00095         END
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ADEN                              00000003
+AutoFind                          00000000
+BRGH                              00000002
+BRIDGE_STATUS                     00000000
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCPR1H                            00000016
+CCPR1L                            00000015
+CIS                               00000003
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000001F
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+DALI_H                            00000000
+DALI_L                            00000000
+DC                                00000001
+DelayCyclesT1                     00000000
+EEADR                             0000009B
+EECON1                            0000009C
+EECON2                            0000009D
+EEDATA                            0000009A
+EEIE                              00000007
+EEIF                              00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+Jp3                               00000023
+Jp4                               00000032
+Lp1                               00000009
+MILLISECONDS                      00000000
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+Main                              00000000
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+OERR                              00000001
+OPTION_REG                        00000081
+OSCF                              00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PIE1                              0000008C
+PIR1                              0000000C
+PORTA                             00000005
+PORTB                             00000006
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RBIE                              00000003
+RBIF                              00000000
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+RX9                               00000006
+RX9D                              00000000
+RecvData                          00000000
+SEARCH_H                          00000000
+SEARCH_L                          00000000
+SEARCH_M                          00000000
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+STATUS                            00000003
+SYNC                              00000004
+SendData                          00000000
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1OSCEN                           00000003
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TMR0                              00000001
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISB                             00000086
+TRMT                              00000001
+TX9                               00000006
+TX9D                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             0000009F
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+W                                 00000000
+WR                                00000001
+WREG1                             00000000
+WREG2                             00000000
+WREG3                             00000000
+WREG4                             00000000
+WREG5                             00000000
+WREG6                             00000000
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+_BODEN_ON                         00003FFF
+_CP_50                            00002BFF
+_CP_75                            000017FF
+_CP_ALL                           000003FF
+_CP_OFF                           00003FFF
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_ER_OSC_CLKOUT                    00003FFF
+_ER_OSC_NOCLKOUT                  00003FFE
+_EXTCLK_OSC                       00003FEF
+_HS_OSC                           00003FEE
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FEC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FED
+__16F628                          00000001
+__DEBUG                           1
+addlf                             
+brc                               
+brclr                             
+brn                               
+brnc                              
+brnz                              
+brset                             
+brz                               
+cffbie                            
+cffbig                            
+cffbin                            
+cffbis                            
+cffcie                            
+cffcig                            
+cffcin                            
+cffcis                            
+cflbie                            
+cflbig                            
+cflbin                            
+cflbis                            
+cflcie                            
+cflcig                            
+cflcin                            
+cflcis                            
+delay                             
+delayf                            
+dvroff                            bcf     PORTB, 3
+dvron                             bsf     PORTB, 3
+esdwn                             
+iorff                             
+movff                             
+movlf                             
+outhi                             
+outlo                             
+rxdali                            
+MPASM  5.36                          CMD4.ASM   9-16-2010  14:18:48         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+skifnz                            btfsc   STATUS, Z
+skifz                             btfss   STATUS, Z
+sublf                             
+tx                                
+txdali                            
+wrtee                             
+wuc                               
+wus                               
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
