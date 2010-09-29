@@ -1,7 +1,7 @@
 [HEADER]
 magic_cookie={66E99B07-E706-4689-9E80-9B2582898A13}
 file_version=1.0
-device=PIC16F628
+device=PIC16F628A
 [PATH_INFO]
 BuildDirPolicy=BuildDirIsProjectDir
 dir_src=
@@ -42,7 +42,6 @@ file_014=.
 file_015=.
 file_016=.
 file_017=.
-file_018=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -62,7 +61,6 @@ file_014=no
 file_015=no
 file_016=no
 file_017=no
-file_018=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -82,7 +80,6 @@ file_014=no
 file_015=no
 file_016=no
 file_017=no
-file_018=no
 [FILE_INFO]
 file_000=cmd1.asm
 file_001=cmd2.asm
@@ -101,8 +98,7 @@ file_013=writeee.asm
 file_014=232macro.inc
 file_015=instruct.inc
 file_016=main.inc
-file_017=P16F628.INC
-file_018=user_mac.inc
+file_017=user_mac.inc
 [SUITE_INFO]
 suite_guid={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
 suite_state=

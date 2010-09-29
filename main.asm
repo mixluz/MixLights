@@ -6,11 +6,11 @@
 ;            								      ;
 ; *************************************************************************** ;
 
- __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_NOCLKOUT & _MCLRE_ON & _LVP_OFF
+ __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_CLKOUT & _MCLRE_ON & _LVP_OFF
 
 
 ; *** Extra *******************************************************************
-#include	p16f628.inc	; Standard include file
+#include	p16f628a.inc	; Standard include file
 #include	instruct.inc	; Bring in complex instructions
 #include	user_mac.inc	; Bring in application specific instructions	
 #include	main.inc
@@ -35,7 +35,43 @@ INTVCT	CODE				; Handle interrupts
 ; **** Setup Everything *******************************************************
 MAIN_SETUP	CODE			; Init all necessary 
 ; *****************************************************************************	
-Setup	
+Setup
+
+; test running CPU %%%
+	banksel TRISB
+	movlw	0x02
+	movwf   TRISB		; RB1 = Rx from PC - Setup PORT directions
+	movlw	0x27
+	movwf 	TRISA		; RA5 = MCLR, RA0..2 = Analog in
+	banksel CMCON
+	movlw	0x07
+	movwf   CMCON		; disable comparators, all PA = GPIO	
+	banksel PORTB
+blinki
+	bsf		PORTB,7			; luz: signal startup of program
+	bsf		PORTA,3			; luz: signal startup of program
+	bsf		PORTB,3			; luz: signal startup of program
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	bcf		PORTB,7			; luz: signal startup of program
+	bcf		PORTA,3			; luz: signal startup of program
+	bcf		PORTB,3			; luz: signal startup of program
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	goto blinki
+; %%%
+
+	
 	banksel	PORTA			; ** Select bank 0 **
 
 	clrf	TMR0			; Reset TIMER0
@@ -61,15 +97,18 @@ Setup
 	movlw	0x18			; Setup baud rate, 2400 bps
 	movwf	SPBRG
 
-	movlf	0x02, TRISB		; Setup PORT directions
-	movlf	0x27, TRISA		
+	movlf	0x02, TRISB		; RB1 = Rx from PC - Setup PORT directions
+	movlf	0x27, TRISA		; RA0..2 = analog in, RA5 = reset in
 
 ;	movlf	0x80, OPTION_REG	; WDT and INT related bits
-	movlf	0x8F, OPTION_REG	; WDT and INT related bits
+	movlf	0x8F, OPTION_REG	; WDT and INT related bits (No weak pullup on PortB)
 
 	bsf	PCON, OSCF		; Set 4MHz
 
 	banksel PORTA			; ** Select bank 0 **
+
+	bsf		PORTB,7			; luz: signal startup of program
+
 
 	call	LoadReset		; Load the reset values
 
@@ -114,14 +153,21 @@ Main
 
 	movf	RCREG, W			; Clear FIFO
 	movf	RCREG, W
+
+	bcf		PORTB,7					; luz: init activity signal bit
+
 	
 MainLoop
 	clrwdt
 
 	brclr	PIR1, RCIF, MainLoop		; Receive command byte
+
+	bsf		PORTB,7					; luz: signal reception of command byte
+
 	brset	RCSTA, FERR, Main		; Check for communication error
 	brset	RCSTA, OERR, Main
-	movff	RCREG, COMMAND		
+	movff	RCREG, COMMAND
+
 	
 	clrf	MILLISECONDS			; Wait 100ms before giving up
 Lp2	cflbig	MILLISECONDS, 0x64, Main
@@ -130,12 +176,17 @@ Lp2	cflbig	MILLISECONDS, 0x64, Main
 	brset	RCSTA, OERR, Main
 	movff	RCREG, DALI_H
 
+	bcf		PORTB,7					; luz: signal reception of Dali_H byte
+
+
 	clrf	MILLISECONDS			; Wait 100ms before giving up
 Lp3	cflbig	MILLISECONDS, 0x64, Main
 	brclr	PIR1, RCIF, Lp3			; Receive low byte for DALI
 	brset	RCSTA, FERR, Main		; Check for communication error
 	brset	RCSTA, OERR, Main
 	movff	RCREG, DALI_L
+
+	bsf		PORTB,7					; luz: signal reception of Dali_L byte
 
 
 	cflbie	COMMAND, 0x00, ResetBridge	; Bridge commands

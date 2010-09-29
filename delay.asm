@@ -8,7 +8,7 @@
 
 
 ; *****************************************************************************
-#include	p16f628.inc	; Standard include file
+#include	p16f628a.inc	; Standard include file
 #include	instruct.inc	; Bring in complex instructions
 ; *****************************************************************************
 
