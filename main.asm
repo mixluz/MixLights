@@ -6,7 +6,13 @@
 ;            								      ;
 ; *************************************************************************** ;
 
- __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_CLKOUT & _MCLRE_ON & _LVP_OFF
+; original from AN for 16F628 non-A
+; __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_CLKOUT & _MCLRE_ON & _LVP_OFF
+
+; original from 16F628A template for MPASM suite
+; __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_NOCLKOUT 
+
+ __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_CLKOUT 
 
 
 #include    common.inc		; include stuff that is common to all files
@@ -17,22 +23,29 @@
 
  
 ; *** Vectors *****************************************************************
-STARTUP	CODE
+	ORG     0x000             ; processor reset vector
 	goto 	Setup
 	
-INTVCT	CODE				; Handle interrupts 
+	ORG     0x004             ; interrupt vector location
 	movwf	W_COPY			; Save data
 	swapf	STATUS, W
 	movwf	STATUS_COPY
-	
-	brset	INTCON, T0IF, TimeCounter
 
+; %%% disabled for now by luz	
+;	brset	INTCON, T0IF, TimeCounter
+; %%% added proper return by luz
+	movf    STATUS_COPY,w     ; retrieve copy of STATUS register
+	movwf	STATUS            ; restore pre-isr STATUS register contents
+	swapf   W_COPY,f
+	swapf   W_COPY,w          ; restore pre-isr W register contents
+	retfie                    ; return from interrupt
+; %%% end luz
+
+; spurios interrupt - reset
 	goto	Setup
 ; *****************************************************************************
 
 
-; **** Setup Everything *******************************************************
-MAIN_SETUP	CODE			; Init all necessary 
 ; *****************************************************************************	
 Setup
 

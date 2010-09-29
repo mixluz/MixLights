@@ -99,10 +99,10 @@ file_011=timecnt.asm
 file_012=txdali.asm
 file_013=writeee.asm
 file_014=232macro.inc
-file_015=instruct.inc
-file_016=main.inc
-file_017=user_mac.inc
-file_018=common.inc
+file_015=common.inc
+file_016=instruct.inc
+file_017=main.inc
+file_018=user_mac.inc
 [SUITE_INFO]
 suite_guid={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
 suite_state=
