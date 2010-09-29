@@ -1,3 +1,8 @@
+
+; luz: we should be aware of which bank we are in - so suppress the bank warning message
+	errorlevel  -302              ; suppress message 302 from list file
+
+
 ; *****************************************************************************
 #define	skifz		btfss	STATUS, Z	; Skip if zero
 #define skifnz		btfsc	STATUS, Z	; Skip if not zero
