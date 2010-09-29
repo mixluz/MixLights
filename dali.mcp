@@ -42,6 +42,7 @@ file_014=.
 file_015=.
 file_016=.
 file_017=.
+file_018=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -61,6 +62,7 @@ file_014=no
 file_015=no
 file_016=no
 file_017=no
+file_018=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -80,6 +82,7 @@ file_014=no
 file_015=no
 file_016=no
 file_017=no
+file_018=no
 [FILE_INFO]
 file_000=cmd1.asm
 file_001=cmd2.asm
@@ -99,6 +102,7 @@ file_014=232macro.inc
 file_015=instruct.inc
 file_016=main.inc
 file_017=user_mac.inc
+file_018=common.inc
 [SUITE_INFO]
 suite_guid={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
 suite_state=

@@ -9,10 +9,9 @@
  __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_CLKOUT & _MCLRE_ON & _LVP_OFF
 
 
+#include    common.inc		; include stuff that is common to all files
+
 ; *** Extra *******************************************************************
-#include	p16f628a.inc	; Standard include file
-#include	instruct.inc	; Bring in complex instructions
-#include	user_mac.inc	; Bring in application specific instructions	
 #include	main.inc
 ; *****************************************************************************
 

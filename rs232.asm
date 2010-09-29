@@ -1,4 +1,4 @@
-#include	p16f628a.inc	; Standard include file
+#include    common.inc		; include stuff that is common to all files
 
 ; *****************************************************************************
 TX_RS232	CODE	
