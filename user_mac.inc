@@ -1,5 +1,3 @@
-#define	dvron	bsf	PORTB, 3
-#define dvroff	bcf	PORTB, 3
 
 
 ; *****************************************************************************
@@ -45,7 +43,7 @@ delayf	macro	MYFILE_H, MYFILE_L
 
 ; *** Set DALI Bus High *******************************************************
 outhi	macro
-	bcf	PORTB, 4		; Turn off clamp
+	bcf	PORTB, 3		; Turn off clamp  (luz: originally RB4, but ruined by VPP so using RB3 now)
 	goto	$ + 1
 	bsf	PORTB, 5		; Turn on output
 ;	goto	$ + 1
@@ -58,27 +56,20 @@ outhi	macro
 outlo	macro
 	bcf	PORTB, 5		; Turn off output driver
 	goto 	$ + 1			; Wait a little for gate discharge
-	bsf	PORTB, 4		; Turn on clamp
+	bsf	PORTB, 3		; Turn on clamp  (luz: originally RB4, but ruined by VPP so using RB3 now)
 ;	goto	$ + 1
 	endm
 ; *****************************************************************************
 
 
-; *** Emergency Shutdown ******************************************************
-esdwn	macro	WHERE
-	bcf	PORTB, 3		; Turn off output driver
-	goto	WHERE
-	endm
-; *****************************************************************************
-
 
 ; *****************************************************************************
 wrtee	macro	MYREG
 	banksel	EEADR
-	movwf	EEDATA				; Init the first values 
+	movwf	EEDATA				; Init the first values
 	movlw	TX_EDGE_DELAY_H
 	sublw	MYREG
-	movwf	EEADR 
+	movwf	EEADR
 	call	WriteEEData
 	endm
 ; *****************************************************************************

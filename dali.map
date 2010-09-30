@@ -1,25 +1,25 @@
 MPLINK 4.36, Linker
-Linker Map File - Created Wed Sep 29 16:41:55 2010
+Linker Map File - Created Thu Sep 30 12:21:14 2010
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000002
                    .cinit    romdata   0x000001    program   0x000004
-                   .org_1       code   0x000004    program   0x0000b6
-                MAIN_PROG       code   0x00005f    program   0x000192
-          CHANGE_SETTINGS       code   0x000128    program   0x000142
-                  TX_DALI       code   0x0001c9    program   0x0000fa
-                  RX_DALI       code   0x000246    program   0x0000e4
-            SEQUENCE_DATA       code   0x0002b8    program   0x0000d8
-               SETUP_DALI       code   0x000324    program   0x000072
-           QUERY_SETTINGS       code   0x00035d    program   0x000060
-               TIME_COUNT       code   0x00038d    program   0x00004e
-               RESET_LOAD       code   0x0003b4    program   0x000022
-            WRITE_EE_DATA       code   0x0003c5    program   0x00001c
-          DELAY_CYCLES_T1       code   0x0003d3    program   0x00000e
-          BRIDGE_COMMANDS       code   0x0003da    program   0x000008
-                 TX_RS232       code   0x0003de    program   0x000004
+                   .org_1       code   0x000004    program   0x00006e
+                MAIN_PROG       code   0x00003b    program   0x00019e
+          CHANGE_SETTINGS       code   0x00010a    program   0x000142
+                  TX_DALI       code   0x0001ab    program   0x0000fa
+                  RX_DALI       code   0x000228    program   0x0000e4
+            SEQUENCE_DATA       code   0x00029a    program   0x0000d8
+               SETUP_DALI       code   0x000306    program   0x000072
+           QUERY_SETTINGS       code   0x00033f    program   0x000060
+               TIME_COUNT       code   0x00036f    program   0x00004e
+               RESET_LOAD       code   0x000396    program   0x000022
+            WRITE_EE_DATA       code   0x0003a7    program   0x00001c
+          DELAY_CYCLES_T1       code   0x0003b5    program   0x00000e
+          BRIDGE_COMMANDS       code   0x0003bc    program   0x00000e
+                 TX_RS232       code   0x0003c3    program   0x000004
       .config_2007_MAIN.O       code   0x002007    program   0x000002
                   EE_DATA       code   0x002100    program   0x000046
                 MAIN_DATA      udata   0x000020       data   0x000021
@@ -31,93 +31,93 @@ Linker Map File - Created Wed Sep 29 16:41:55 2010
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000002      
-                            0x000004    0x0003df      
+                            0x000004    0x0003c4      
                             0x002007    0x002007      
                             0x002100    0x002122      
-            1027 out of 2183 program addresses used, program memory utilization is 47%
+            1000 out of 2183 program addresses used, program memory utilization is 45%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                 AutoFind   0x000324    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-             ChngBaudRate   0x0001bf    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-         ChngDblSendDelay   0x0001ab    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-              ChngRXDebug   0x0001a4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-          ChngRXDelayNext   0x000191    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-        ChngRXSampleDelay   0x00017e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-         ChngRXStartDelay   0x00016b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-               ChngRXWait   0x000161    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-        ChngSequenceDelay   0x0001b5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-          ChngTXEdgeDelay   0x000128    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-           ChngTXRegDelay   0x00014e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-          ChngTXStopDelay   0x00013b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-            DelayCyclesT1   0x0003d3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
-               DoubleSend   0x0002cf    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                  FinRecv   0x0002a2    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                      Jp1   0x0002f3    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Jp1   0x0003a4    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-                      Jp3   0x000347    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                      Jp4   0x000356    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                LoadReset   0x0003b4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
-                LookForHi   0x00029d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                LookForLo   0x000298    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                      Lp1   0x0003d6    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
-                      Lp1   0x000058    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                      Lp1   0x00032d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                      Lp1   0x0003b9    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
-                      Lp1   0x0003cd    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
-                      Lp1   0x0002d7    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                     Lp10   0x000247    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                      Lp2   0x00030e    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Lp2   0x00007c    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                      Lp3   0x00031a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Lp3   0x00008a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                     Main   0x00005f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                 MainLoop   0x000071    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                 OverLoad   0x0003aa    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-          QueryDblSendDel   0x000387    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryRXDebug   0x000384    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryRXNext_H   0x00037e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryRXNext_L   0x000381    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-          QueryRXSample_H   0x000378    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-          QueryRXSample_L   0x00037b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-           QueryRXStart_H   0x000372    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-           QueryRXStart_L   0x000375    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-              QueryRXWait   0x00036f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-              QuerySeqDel   0x00038a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXEdge_H   0x00035d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXEdge_L   0x000360    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryTXReg_H   0x000369    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryTXReg_L   0x00036c    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXStop_H   0x000363    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXStop_L   0x000366    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-                  RecvBit   0x000293    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                 RecvData   0x000246    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                RecvError   0x0002b6    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                ReportErr   0x000290    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-             ReportStatus   0x0003db    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
-              ResetBridge   0x0003da    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
-                 SendData   0x0001c9    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-              SendReceive   0x0002e1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-             SendSequence   0x000304    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-            SequenceDATA1   0x0002b8    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-            SequenceDATA2   0x0002bd    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-            SequenceDATA3   0x0002c2    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-                    Setup   0x00000d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-               SingleSend   0x0002c7    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-              TimeCounter   0x00038d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-              WriteEEData   0x0003c5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
-                  XmitOne   0x000224    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-                 XmitZero   0x000235    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0048   0x000211    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_005C   0x000225    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0064   0x00022d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_006D   0x000236    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0075   0x00023e    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-              _XMIT_RS232   0x0003de    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rs232.asm
-                   blinki   0x000019    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                 AutoFind   0x000306    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+             ChngBaudRate   0x0001a1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+         ChngDblSendDelay   0x00018d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+              ChngRXDebug   0x000186    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+          ChngRXDelayNext   0x000173    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+        ChngRXSampleDelay   0x000160    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+         ChngRXStartDelay   0x00014d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+               ChngRXWait   0x000143    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+        ChngSequenceDelay   0x000197    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+          ChngTXEdgeDelay   0x00010a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+           ChngTXRegDelay   0x000130    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+          ChngTXStopDelay   0x00011d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+                 CommEcho   0x0003c0    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+            DelayCyclesT1   0x0003b5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
+               DoubleSend   0x0002b1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                  FinRecv   0x000284    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                      Jp1   0x0002d5    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Jp1   0x000386    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+                      Jp3   0x000329    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                      Jp4   0x000338    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                LoadReset   0x000396    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
+                LookForHi   0x00027f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                LookForLo   0x00027a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                      Lp1   0x000034    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                      Lp1   0x0003b8    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
+                      Lp1   0x00030f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                      Lp1   0x00039b    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
+                      Lp1   0x0002b9    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp1   0x0003af    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
+                     Lp10   0x000229    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                      Lp2   0x0002f0    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp2   0x000058    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                      Lp3   0x0002fc    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp3   0x000067    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                     Main   0x00003b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                 MainLoop   0x00004d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                 OverLoad   0x00038c    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+          QueryDblSendDel   0x000369    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryRXDebug   0x000366    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryRXNext_H   0x000360    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryRXNext_L   0x000363    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+          QueryRXSample_H   0x00035a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+          QueryRXSample_L   0x00035d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+           QueryRXStart_H   0x000354    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+           QueryRXStart_L   0x000357    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+              QueryRXWait   0x000351    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+              QuerySeqDel   0x00036c    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXEdge_H   0x00033f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXEdge_L   0x000342    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryTXReg_H   0x00034b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryTXReg_L   0x00034e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXStop_H   0x000345    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXStop_L   0x000348    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+                  RecvBit   0x000275    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                 RecvData   0x000228    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                RecvError   0x000298    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                ReportErr   0x000272    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+             ReportStatus   0x0003bd    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+              ResetBridge   0x0003bc    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+                 SendData   0x0001ab    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+              SendReceive   0x0002c3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+             SendSequence   0x0002e6    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+            SequenceDATA1   0x00029a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+            SequenceDATA2   0x00029f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+            SequenceDATA3   0x0002a4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+                    Setup   0x00000a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+               SingleSend   0x0002a9    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+              TimeCounter   0x00036f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+              WriteEEData   0x0003a7    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
+                  XmitOne   0x000206    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+                 XmitZero   0x000217    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0048   0x0001f3    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_005C   0x000207    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0064   0x00020f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_006D   0x000218    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0075   0x000220    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+              _XMIT_RS232   0x0003c3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rs232.asm
                 BAUD_RATE   0x000030       data     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc
             BRIDGE_STATUS   0x000034       data     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc
                   COMMAND   0x000031       data     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc
@@ -166,83 +166,83 @@ Linker Map File - Created Wed Sep 29 16:41:55 2010
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    Setup   0x00000d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                   blinki   0x000019    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                      Lp1   0x000058    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                     Main   0x00005f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                 MainLoop   0x000071    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                      Lp2   0x00007c    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-                      Lp3   0x00008a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
-          ChngTXEdgeDelay   0x000128    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-          ChngTXStopDelay   0x00013b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-           ChngTXRegDelay   0x00014e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-               ChngRXWait   0x000161    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-         ChngRXStartDelay   0x00016b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-        ChngRXSampleDelay   0x00017e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-          ChngRXDelayNext   0x000191    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-              ChngRXDebug   0x0001a4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-         ChngDblSendDelay   0x0001ab    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-        ChngSequenceDelay   0x0001b5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-             ChngBaudRate   0x0001bf    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
-                 SendData   0x0001c9    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0048   0x000211    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-                  XmitOne   0x000224    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_005C   0x000225    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0064   0x00022d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-                 XmitZero   0x000235    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_006D   0x000236    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-            _TX_DALI_0075   0x00023e    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
-                 RecvData   0x000246    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                     Lp10   0x000247    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                ReportErr   0x000290    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                  RecvBit   0x000293    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                LookForLo   0x000298    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                LookForHi   0x00029d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                  FinRecv   0x0002a2    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-                RecvError   0x0002b6    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
-            SequenceDATA1   0x0002b8    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-            SequenceDATA2   0x0002bd    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-            SequenceDATA3   0x0002c2    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
-               SingleSend   0x0002c7    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-               DoubleSend   0x0002cf    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Lp1   0x0002d7    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-              SendReceive   0x0002e1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Jp1   0x0002f3    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-             SendSequence   0x000304    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Lp2   0x00030e    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                      Lp3   0x00031a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
-                 AutoFind   0x000324    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                      Lp1   0x00032d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                      Jp3   0x000347    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-                      Jp4   0x000356    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
-            QueryTXEdge_H   0x00035d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXEdge_L   0x000360    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXStop_H   0x000363    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryTXStop_L   0x000366    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryTXReg_H   0x000369    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryTXReg_L   0x00036c    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-              QueryRXWait   0x00036f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-           QueryRXStart_H   0x000372    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-           QueryRXStart_L   0x000375    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-          QueryRXSample_H   0x000378    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-          QueryRXSample_L   0x00037b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryRXNext_H   0x00037e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-            QueryRXNext_L   0x000381    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-             QueryRXDebug   0x000384    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-          QueryDblSendDel   0x000387    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-              QuerySeqDel   0x00038a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
-              TimeCounter   0x00038d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-                      Jp1   0x0003a4    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-                 OverLoad   0x0003aa    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
-                LoadReset   0x0003b4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
-                      Lp1   0x0003b9    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
-              WriteEEData   0x0003c5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
-                      Lp1   0x0003cd    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
-            DelayCyclesT1   0x0003d3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
-                      Lp1   0x0003d6    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
-              ResetBridge   0x0003da    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
-             ReportStatus   0x0003db    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
-              _XMIT_RS232   0x0003de    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rs232.asm
+                    Setup   0x00000a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                      Lp1   0x000034    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                     Main   0x00003b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                 MainLoop   0x00004d    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                      Lp2   0x000058    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+                      Lp3   0x000067    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.asm
+          ChngTXEdgeDelay   0x00010a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+          ChngTXStopDelay   0x00011d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+           ChngTXRegDelay   0x000130    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+               ChngRXWait   0x000143    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+         ChngRXStartDelay   0x00014d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+        ChngRXSampleDelay   0x000160    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+          ChngRXDelayNext   0x000173    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+              ChngRXDebug   0x000186    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+         ChngDblSendDelay   0x00018d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+        ChngSequenceDelay   0x000197    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+             ChngBaudRate   0x0001a1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd5.asm
+                 SendData   0x0001ab    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0048   0x0001f3    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+                  XmitOne   0x000206    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_005C   0x000207    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0064   0x00020f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+                 XmitZero   0x000217    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_006D   0x000218    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+            _TX_DALI_0075   0x000220    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\txdali.asm
+                 RecvData   0x000228    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                     Lp10   0x000229    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                ReportErr   0x000272    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                  RecvBit   0x000275    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                LookForLo   0x00027a    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                LookForHi   0x00027f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                  FinRecv   0x000284    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+                RecvError   0x000298    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rxdali.asm
+            SequenceDATA1   0x00029a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+            SequenceDATA2   0x00029f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+            SequenceDATA3   0x0002a4    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd2.asm
+               SingleSend   0x0002a9    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+               DoubleSend   0x0002b1    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp1   0x0002b9    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+              SendReceive   0x0002c3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Jp1   0x0002d5    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+             SendSequence   0x0002e6    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp2   0x0002f0    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                      Lp3   0x0002fc    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd3.asm
+                 AutoFind   0x000306    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                      Lp1   0x00030f    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                      Jp3   0x000329    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+                      Jp4   0x000338    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd4.asm
+            QueryTXEdge_H   0x00033f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXEdge_L   0x000342    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXStop_H   0x000345    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryTXStop_L   0x000348    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryTXReg_H   0x00034b    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryTXReg_L   0x00034e    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+              QueryRXWait   0x000351    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+           QueryRXStart_H   0x000354    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+           QueryRXStart_L   0x000357    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+          QueryRXSample_H   0x00035a    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+          QueryRXSample_L   0x00035d    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryRXNext_H   0x000360    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+            QueryRXNext_L   0x000363    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+             QueryRXDebug   0x000366    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+          QueryDblSendDel   0x000369    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+              QuerySeqDel   0x00036c    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd6.asm
+              TimeCounter   0x00036f    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+                      Jp1   0x000386    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+                 OverLoad   0x00038c    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\timecnt.asm
+                LoadReset   0x000396    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
+                      Lp1   0x00039b    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\reset.asm
+              WriteEEData   0x0003a7    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
+                      Lp1   0x0003af    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\writeee.asm
+            DelayCyclesT1   0x0003b5    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
+                      Lp1   0x0003b8    program     static E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\delay.asm
+              ResetBridge   0x0003bc    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+             ReportStatus   0x0003bd    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+                 CommEcho   0x0003c0    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\cmd1.asm
+              _XMIT_RS232   0x0003c3    program     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\rs232.asm
           TX_EDGE_DELAY_H   0x000020       data     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc
           TX_EDGE_DELAY_L   0x000021       data     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc
           TX_STOP_DELAY_H   0x000022       data     extern E:\Lukas\DALI_MixWerk\DALI_Bridge_Source_00811\v2_04a\main.inc

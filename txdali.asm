@@ -24,7 +24,7 @@ SendData
 
 	call	XmitOne			; Send Start Bit
 
-	btfsc	DALI_H, 7		
+	btfsc	DALI_H, 7
 	call	XmitOne
 	btfss	DALI_H, 7
 	call	XmitZero
@@ -100,9 +100,9 @@ SendData
 	delayf	TX_REG_DELAY_H, TX_REG_DELAY_L
 ;	delay	0xFF9B			; Wait for regulator to come up, 100us
 
-	bcf	PORTB, 4		; Disable driving output
+	bcf	PORTB, 3		; Disable driving output (luz: originally RB4, but ruined by VPP so using RB3 now)
 	bcf	PORTB, 5
-	
+
 	bsf	INTCON, GIE		; Enable interrupts
 
 	retlw	0x00
@@ -114,7 +114,7 @@ SendData
 ; *****************************************************************************
 XmitOne
 	outlo
-;	delay	0xFE76	
+;	delay	0xFE76
 	delayf	TX_EDGE_DELAY_H, TX_EDGE_DELAY_L
 	outhi
 ;	delay	0xFE76

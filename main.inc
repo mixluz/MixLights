@@ -10,7 +10,7 @@
 ; *** Externals ***************************************************************
 	EXTERN	TimeCounter
 
-	EXTERN	ResetBridge, ReportStatus	; Bridge commands
+	EXTERN	ResetBridge, ReportStatus, CommEcho	; Bridge commands
 	EXTERN	SequenceDATA1, SequenceDATA2	; Sequence storage commands
 	EXTERN 	SequenceDATA3
 	EXTERN	SingleSend, DoubleSend		; DALI bus commands
@@ -30,7 +30,7 @@
 ;	EXTERN	SendData
 ; *****************************************************************************
 
-	
+
 ; *** Variables ***************************************************************
 MAIN_DATA	udata	0x20
 ; *****************************************************************************
@@ -93,7 +93,7 @@ ACCESS1		udata_shr
 ; *****************************************************************************
 W_COPY		res	1
 STATUS_COPY	res	1
-PORTB_COPY	res	1	
+PORTB_COPY	res	1
 WREG1		res	1
 WREG2		res	1
 WREG3		res	1

@@ -10,9 +10,9 @@
 ; __CONFIG _CP_OFF & _WDT_ON & _BODEN_OFF & _INTRC_OSC_CLKOUT & _MCLRE_ON & _LVP_OFF
 
 ; original from 16F628A template for MPASM suite
-; __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_NOCLKOUT 
+; __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_NOCLKOUT
 
- __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_CLKOUT 
+ __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_ON & _PWRTE_ON & _INTOSC_OSC_CLKOUT
 
 
 #include    common.inc		; include stuff that is common to all files
@@ -21,77 +21,34 @@
 #include	main.inc
 ; *****************************************************************************
 
- 
+
 ; *** Vectors *****************************************************************
 	ORG     0x000             ; processor reset vector
 	goto 	Setup
-	
+
 	ORG     0x004             ; interrupt vector location
 	movwf	W_COPY			; Save data
 	swapf	STATUS, W
 	movwf	STATUS_COPY
 
-; %%% disabled for now by luz	
-;	brset	INTCON, T0IF, TimeCounter
-; %%% added proper return by luz
-	movf    STATUS_COPY,w     ; retrieve copy of STATUS register
-	movwf	STATUS            ; restore pre-isr STATUS register contents
-	swapf   W_COPY,f
-	swapf   W_COPY,w          ; restore pre-isr W register contents
-	retfie                    ; return from interrupt
-; %%% end luz
+	brset	INTCON, T0IF, TimeCounter
 
 ; spurios interrupt - reset
 	goto	Setup
 ; *****************************************************************************
 
 
-; *****************************************************************************	
+; *****************************************************************************
 Setup
 
-; test running CPU %%%
-	banksel TRISB
-	movlw	0x02
-	movwf   TRISB		; RB1 = Rx from PC - Setup PORT directions
-	movlw	0x27
-	movwf 	TRISA		; RA5 = MCLR, RA0..2 = Analog in
-	banksel CMCON
-	movlw	0x07
-	movwf   CMCON		; disable comparators, all PA = GPIO	
-	banksel PORTB
-blinki
-	bsf		PORTB,7			; luz: signal startup of program
-	bsf		PORTA,3			; luz: signal startup of program
-	bsf		PORTB,3			; luz: signal startup of program
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	bcf		PORTB,7			; luz: signal startup of program
-	bcf		PORTA,3			; luz: signal startup of program
-	bcf		PORTB,3			; luz: signal startup of program
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	goto blinki
-; %%%
-
-	
 	banksel	PORTA			; ** Select bank 0 **
 
 	clrf	TMR0			; Reset TIMER0
-		
-	movlw	0x90			; Setup serial port receive
-	movwf	RCSTA	
 
-	movlf	0x36, CMCON		; Setup comparators	
+	movlw	0x90			; Setup serial port receive
+	movwf	RCSTA
+
+	movlf	0x36, CMCON		; Setup comparators
 
 	movlf	0x00, PIR1		; Clear int flags
 	movlf	0x00, INTCON		; Setup interrupts
@@ -103,10 +60,10 @@ blinki
 
 
 	banksel	TXSTA			; ** Select bank 1 **
-		
+
 	movlw	0x20			; Setup serial port send
 	movwf	TXSTA
-	movlw	0x18			; Setup baud rate, 2400 bps
+	movlw	0x19			; Setup baud rate, 2400 bps
 	movwf	SPBRG
 
 	movlf	0x02, TRISB		; RB1 = Rx from PC - Setup PORT directions
@@ -147,17 +104,17 @@ Lp1	cflbig	MILLISECONDS, 0xFA, Main
 
 
 ; *** Main Decision Branch ****************************************************
-MAIN_PROG	CODE	
+MAIN_PROG	CODE
 ; *****************************************************************************
-Main	
+Main
 	banksel	PORTA
 	bcf	RCSTA, CREN			; Reset Communications
 	movlf	0x90, RCSTA
 
 	movf	BAUD_RATE, W			; Load the baud rate
 	banksel	TXSTA				; ** Select bank 1 **
-	movwf	SPBRG	
-	movlf	0x20, TXSTA			; Setup serial port send	
+	movwf	SPBRG
+	movlf	0x20, TXSTA			; Setup serial port send
 	banksel	PORTA				; ** Select bank 0 **
 
 	bcf	RCSTA, CREN			; Reset Communications
@@ -166,9 +123,9 @@ Main
 	movf	RCREG, W			; Clear FIFO
 	movf	RCREG, W
 
-	bcf		PORTB,7					; luz: init activity signal bit
+	bcf		PORTB,7					; luz: init Rx activity signal bit
 
-	
+
 MainLoop
 	clrwdt
 
@@ -180,29 +137,34 @@ MainLoop
 	brset	RCSTA, OERR, Main
 	movff	RCREG, COMMAND
 
-	
+
 	clrf	MILLISECONDS			; Wait 100ms before giving up
 Lp2	cflbig	MILLISECONDS, 0x64, Main
 	brclr	PIR1, RCIF, Lp2			; Receive high byte for DALI
+	bcf		PORTB,7					; luz: pulse down to signal reception of second byte
 	brset	RCSTA, FERR, Main		; Check for communication error
 	brset	RCSTA, OERR, Main
 	movff	RCREG, DALI_H
+	bsf		PORTB,7					; luz: high again as we still receive a command
 
-	bcf		PORTB,7					; luz: signal reception of Dali_H byte
 
 
 	clrf	MILLISECONDS			; Wait 100ms before giving up
 Lp3	cflbig	MILLISECONDS, 0x64, Main
 	brclr	PIR1, RCIF, Lp3			; Receive low byte for DALI
+	bcf		PORTB,7					; luz: pulse down to signal reception of third byte
 	brset	RCSTA, FERR, Main		; Check for communication error
 	brset	RCSTA, OERR, Main
 	movff	RCREG, DALI_L
 
-	bsf		PORTB,7					; luz: signal reception of Dali_L byte
+	bsf		PORTB,7					; luz: high again as we still receive a command
 
 
 	cflbie	COMMAND, 0x00, ResetBridge	; Bridge commands
 	cflbie	COMMAND, 0x01, ReportStatus
+
+	cflbie	COMMAND, 0x45, CommEcho  ; luz: Echoes DALI_H
+
 
 	cflbie	COMMAND, 0x08, SequenceDATA1	; Storage
 	cflbie	COMMAND, 0x09, SequenceDATA2
@@ -226,7 +188,7 @@ Lp3	cflbig	MILLISECONDS, 0x64, Main
 	cflbie	COMMAND, 0xC5, ChngRXSampleDelay
 	cflbie	COMMAND, 0xC6, ChngRXDelayNext
 	cflbie	COMMAND, 0xC7, ChngRXDebug
-	cflbie	COMMAND, 0xC8, ChngDblSendDelay 
+	cflbie	COMMAND, 0xC8, ChngDblSendDelay
 	cflbie	COMMAND, 0xC9, ChngSequenceDelay
 	cflbie	COMMAND, 0xCA, ChngBaudRate
 
@@ -265,7 +227,7 @@ EE_DATA	CODE	0x2100
 ; *****************************************************************************
 	de	0xFE, 0x80, 0xFA, 0xFF, 0xFE, 0x7C, 0x0A, 0xFE
 	de	0xD3, 0xFF, 0xB0, 0xFD, 0xD8, 0x00, 0x0B, 0x0B
-	de	0x18, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+	de	0x19, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 	de	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 	de 	0xFF, 0xFF, 0xFF
 ; *****************************************************************************
