@@ -1,0 +1,38 @@
+# ignore Mac OS X finder metadata files
+.DS_Store
+# ignore windows links
+*.lnk
+
+# ignore all sorts of backup files
+*.orig
+*~
+*.BAK
+*.bak
+Kopie von *
+
+# no CVS or SVN
+CVS/
+.svn/
+
+# general generated data
+*.a
+*.o
+*.exe
+*.dylib
+*.dll
+
+# delphi specific files
+*.dcu
+*~
+*.~*
+*.ddp
+*.dsk
+*.cfg
+*.dof
+
+# XCode specific files
+build/
+*.mode1v3
+*.pbxuser
+*.perspectivev3
+xcuserdata/
