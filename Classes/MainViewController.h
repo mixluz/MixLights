@@ -8,13 +8,20 @@
 
 #import "FlipsideViewController.h"
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate> {
+@interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
+{
+	IBOutlet UISegmentedControl *addrGroupSegControl;
+	IBOutlet UISegmentedControl *addrDigitSegControl;
+  // vars
+  FlipsideViewController *flipSideViewController;
 }
 
 // controls for light
 - (IBAction)lightSwitch:(UISwitch *)sender;
 - (IBAction)lightDimmer:(UISlider *)sender;
 - (IBAction)resetBridge:(UIButton *)sender;
+- (IBAction)addrGroupChanged:(UISegmentedControl *)sender;
+- (IBAction)addrDigitChanged:(UISegmentedControl *)sender;
 
 // call Flipside
 - (IBAction)showInfo:(id)sender;

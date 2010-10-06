@@ -8,6 +8,7 @@
 
 #import "FlipsideViewController.h"
 
+#import "MixLightsAppDelegate.h"
 
 @implementation FlipsideViewController
 
@@ -51,6 +52,55 @@
 - (void)dealloc {
     [super dealloc];
 }
+
+
+- (void)sendCommandAnswer:(NSNumber *)aAnswer
+{
+	if (aAnswer) {
+  	daliAnswerField.text = [NSString stringWithFormat:@"%02X",[aAnswer intValue]];
+  }
+  else {
+  	daliAnswerField.text = @"n/a";
+  }
+}
+
+
+- (IBAction)sendCommand:(id)sender
+{
+	// scan hex values
+  // - bridge command
+	NSScanner *scanner = [NSScanner scannerWithString:bridgeCmdField.text];
+	unsigned bridgeCmd;
+  if (![scanner scanHexInt:&bridgeCmd]) return; // nop
+  // - DALI command
+	scanner = [NSScanner scannerWithString:daliCmdField.text];
+	unsigned daliCmd;
+  if (![scanner scanHexInt:&daliCmd]) return; // nop
+  // values ok, update texts
+  bridgeCmdField.text = [NSString stringWithFormat:@"%02X",bridgeCmd];
+  daliCmdField.text = [NSString stringWithFormat:@"%04X",daliCmd];
+  // send
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm
+  	sendDaliBridgeCommand:bridgeCmd dali1:(daliCmd>>8)&0xFF dali2:daliCmd&0xFF
+    expectsAnswer:YES answerTarget:self selector:@selector(sendCommandAnswer:)
+    timeout:1.0 // wait long enough
+  ];
+}
+
+
+- (IBAction)sendDTRAndCommand:(id)sender
+{
+  // - DTR value
+	unsigned dtr = [dtrValueField.text intValue];
+  // send DTR
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm
+		daliSend:0xA3 dali2:dtr
+  ];
+  // now send command itself
+  [self sendCommand:sender];
+}
+
+
 
 
 @end

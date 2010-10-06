@@ -14,12 +14,24 @@
 @implementation MainViewController
 
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
+	// flip side not yet loaded
+  flipSideViewController = nil;
+	// init defaults
+  [[NSUserDefaults standardUserDefaults] registerDefaults:
+  	[NSDictionary dictionaryWithObjectsAndKeys:
+    	[NSNumber numberWithInt:0], @"addrGroup", // all lamps
+    	[NSNumber numberWithInt:0], @"addrDigit", // first digit
+    	nil
+    ]
+  ];
+	// get segment controls from defaults
+	addrGroupSegControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrGroup"];
+	addrDigitSegControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrDigit"];
 	[super viewDidLoad];
 }
-*/
 
 
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
@@ -29,14 +41,14 @@
 
 
 - (IBAction)showInfo:(id)sender
-{    	
-	FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
-	controller.delegate = self;
+{ 
+	if (!flipSideViewController) {   	
+		flipSideViewController = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
+		flipSideViewController.delegate = self;
+  }
 	
-	controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:controller animated:YES];
-	
-	[controller release];
+	flipSideViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:flipSideViewController animated:YES];	
 }
 
 
@@ -53,6 +65,7 @@
 {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+  [flipSideViewController release]; flipSideViewController=nil;
 }
 
 
@@ -67,13 +80,45 @@
 
 - (void)dealloc
 {
+  [flipSideViewController release];
   [super dealloc];
 }
 
 
+
+- (uint8_t)daliAddr
+{
+	int group = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrGroup"];
+	int digit = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrDigit"];
+  if (group<=0) {
+  	// broadcast to all
+    return 0xFE;
+  }
+  else {
+  	// single lamp address
+    return ((group-1)*10+digit) << 1;
+  }
+}
+
+
+
+- (IBAction)addrGroupChanged:(UISegmentedControl *)sender
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"addrGroup"];
+}
+
+
+- (IBAction)addrDigitChanged:(UISegmentedControl *)sender
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"addrDigit"];
+}
+
+
+
+
 - (IBAction)lightSwitch:(UISwitch *)sender
 {
-	[[MixLightsAppDelegate sharedAppDelegate].daliComm sendDaliBridgeCommand:16 dali1:0xFE dali2:[sender isOn] ? 254 : 0];
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:[sender isOn] ? 254 : 0];
 }
 
 
@@ -81,15 +126,20 @@
 {
 	DALIcomm *daliComm = [MixLightsAppDelegate sharedAppDelegate].daliComm;
   if ([daliComm isReady]) {
-		[daliComm sendDaliBridgeCommand:16 dali1:0xFE dali2:[sender value]*254];
+		[daliComm daliSend:[self daliAddr] dali2:[sender value]*254];
   }
 }
 
 
+
+
+
 - (IBAction)resetBridge:(UIButton *)sender
 {
-	[[MixLightsAppDelegate sharedAppDelegate].daliComm sendDaliBridgeCommand:0 dali1:0 dali2:0];
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm sendDaliBridgeCommand:0 dali1:0 dali2:0 expectsAnswer:NO answerTarget:nil selector:nil timeout:1];
 }
+
+
 
 
 
