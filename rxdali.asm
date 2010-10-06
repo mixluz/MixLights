@@ -15,6 +15,8 @@
 
 ; *****************************************************************************
 RX_DALI	CODE
+
+; receive DALI byte into DALI_L, return W==0 if ok, W==0xFE if error
 RecvData
 
 	clrf	MILLISECONDS
@@ -26,13 +28,13 @@ Lp10	cffbig	MILLISECONDS, RX_WAIT, ReportErr	; Quit after some ms
 	bcf	INTCON, GIE			; Disable Interrupts
 
 ;	delay	0xFED3				; Delay 300us
-	delayf	RX_START_DELAY_H, RX_START_DELAY_L		
-	
+	delayf	RX_START_DELAY_H, RX_START_DELAY_L
+
 	call	RecvBit				; Get start bit
 	btfsc	WREG1, 7
 	goto	ReportErr
-	
-	
+
+
 	call	RecvBit				; Get bit 7
 	btfsc	WREG1, 7
 	goto	ReportErr
@@ -115,15 +117,15 @@ ReportErr
 	GLOBAL	RecvData
 ; *****************************************************************************
 
-	
+
 ; *****************************************************************************
 RecvBit
 	movlf	0x01, TMR0		; Setup timer for 200us overflow
 	bcf	INTCON, T0IF
 
 	brclr	CMCON, C1OUT, LookForHi	; High or Low next
-	
-LookForLo	
+
+LookForLo
 	brclr	CMCON, C1OUT, FinRecv	; If low then finish receive
 
 	brclr	INTCON, T0IF, LookForLo	; Too much time
@@ -131,7 +133,7 @@ LookForLo
 
 LookForHi
 	brset	CMCON, C1OUT, FinRecv	; If high then finish receive
-	
+
 	brclr	INTCON, T0IF, LookForHi	; Too much time
 	goto	RecvError		; Exit with error
 
@@ -144,9 +146,9 @@ FinRecv
 
 ;	btfsc	RX_DEBUG, 0
 	bcf	PORTB, 7
-	
-	clrf	WREG1	
-	btfsc	CMCON, C1OUT		
+
+	clrf	WREG1
+	btfsc	CMCON, C1OUT
 	bsf	WREG1, 2
 
 	btfsc	RX_DEBUG, 1

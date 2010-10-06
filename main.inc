@@ -13,9 +13,10 @@
 	EXTERN	ResetBridge, ReportStatus, CommEcho	; Bridge commands
 	EXTERN	SequenceDATA1, SequenceDATA2	; Sequence storage commands
 	EXTERN 	SequenceDATA3
-	EXTERN	SingleSend, DoubleSend		; DALI bus commands
-	EXTERN	SendSequence
-	EXTERN	SendReceive
+	EXTERN	SingleSend, DoubleSend, SendSequence		; DALI bus send commands
+	EXTERN	SendReceive                 ; DALI bus send&receive
+	EXTERN	SingleSendAck, DoubleSendAck, SendSequenceAck ; DALI bus send commands with acknowledge
+	EXTERN	SendReceiveSB               ; DALI bus send&receive with single byte answer (or no answer on error)
 	EXTERN	ChngTXEdgeDelay, ChngTXStopDelay
 	EXTERN	ChngTXRegDelay, ChngRXWait, ChngRXStartDelay
 	EXTERN	ChngRXSampleDelay, ChngRXDelayNext, ChngRXDebug
@@ -85,6 +86,11 @@ SEARCH_H	res	1
 SEARCH_M	res	1
 SEARCH_L	res	1
 	GLOBAL	SEARCH_H, SEARCH_M, SEARCH_L
+
+
+WITH_ACK    res 1
+    GLOBAL  WITH_ACK
+
 ; *****************************************************************************
 
 

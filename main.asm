@@ -61,9 +61,10 @@ Setup
 
 	banksel	TXSTA			; ** Select bank 1 **
 
-	movlw	0x20			; Setup serial port send
+	movlw	0x20			; Setup serial port send, low speed
+;	movlw	0x24			; Setup serial port send, high speed (4x lowspeed)
 	movwf	TXSTA
-	movlw	0x19			; Setup baud rate, 2400 bps
+	movlw	0x19			; Setup baud rate, 0x19=2400/9600 bps, 0x0C=xxx/19200
 	movwf	SPBRG
 
 	movlf	0x02, TRISB		; RB1 = Rx from PC - Setup PORT directions
@@ -175,10 +176,23 @@ Lp3	cflbig	MILLISECONDS, 0x64, Main
 	cflbie	COMMAND, 0x12, SendReceive
 	cflbie	COMMAND, 0x13, SendSequence
 
+	cflbie	COMMAND, 0x30, SingleSendAck	; DALI bus sending commands with single byte ack when complete
+	cflbie	COMMAND, 0x31, DoubleSendAck
+	cflbie	COMMAND, 0x32, SendReceiveSB    ; DALI send with single byte receive (or nothing)
+	cflbie	COMMAND, 0x33, SendSequenceAck
+
+
+
 ;	cflbie	COMMAND, 0x20, AutoFind
 ;	cflbie	COMMAND, 0x21, QuerySearch_H
 ;	cflbie	COMMAND, 0x22, QuerySearch_M
 ;	cflbie	COMMAND, 0x23, QuerySearch_L
+
+
+
+
+; %%% disabled cmds below to prevent accidental param (BAUD!) changes in the bridge
+    goto Main;
 
 	cflbie	COMMAND, 0xC0, ChngTXEdgeDelay
 	cflbie	COMMAND, 0xC1, ChngTXStopDelay
@@ -227,7 +241,7 @@ EE_DATA	CODE	0x2100
 ; *****************************************************************************
 	de	0xFE, 0x80, 0xFA, 0xFF, 0xFE, 0x7C, 0x0A, 0xFE
 	de	0xD3, 0xFF, 0xB0, 0xFD, 0xD8, 0x00, 0x0B, 0x0B
-	de	0x19, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
+	de	0x19, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF ; first is baud: 0x19=2400/9600 bps, 0x0C=xxx/19200 (9600bd is max for opto couplers)
 	de	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 	de 	0xFF, 0xFF, 0xFF
 ; *****************************************************************************
