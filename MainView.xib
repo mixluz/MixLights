@@ -74,7 +74,7 @@
 					</object>
 					<object class="IBUISwitch" id="77248411">
 						<reference key="NSNextResponder" ref="883825266"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{206, 20}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -94,9 +94,9 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<float key="IBUIValue">0.5</float>
 					</object>
-					<object class="IBUISegmentedControl" id="743300420">
+					<object class="IBUISegmentedControl" id="628657050">
 						<reference key="NSNextResponder" ref="883825266"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{20, 128}, {280, 44}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -134,9 +134,9 @@
 							<reference ref="4"/>
 						</object>
 					</object>
-					<object class="IBUISegmentedControl" id="689688637">
+					<object class="IBUISegmentedControl" id="456986288">
 						<reference key="NSNextResponder" ref="883825266"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{20, 188}, {280, 44}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -209,7 +209,7 @@
 							<reference ref="4"/>
 						</object>
 					</object>
-					<object class="IBUILabel" id="254063660">
+					<object class="IBUILabel" id="924612885">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 12}, {177, 43}}</string>
@@ -293,7 +293,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addrGroupSegControl</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="743300420"/>
+						<reference key="destination" ref="628657050"/>
 					</object>
 					<int key="connectionID">51</int>
 				</object>
@@ -301,14 +301,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addrDigitSegControl</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="689688637"/>
+						<reference key="destination" ref="456986288"/>
 					</object>
 					<int key="connectionID">52</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addrGroupChanged:</string>
-						<reference key="source" ref="743300420"/>
+						<reference key="source" ref="628657050"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -317,7 +317,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addrDigitChanged:</string>
-						<reference key="source" ref="689688637"/>
+						<reference key="source" ref="456986288"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -352,9 +352,9 @@
 							<reference ref="558454645"/>
 							<reference ref="228009858"/>
 							<reference ref="77248411"/>
-							<reference ref="743300420"/>
-							<reference ref="689688637"/>
-							<reference ref="254063660"/>
+							<reference ref="628657050"/>
+							<reference ref="456986288"/>
+							<reference ref="924612885"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -375,17 +375,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
-						<reference key="object" ref="743300420"/>
+						<reference key="object" ref="628657050"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">47</int>
-						<reference key="object" ref="689688637"/>
+						<reference key="object" ref="456986288"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">48</int>
-						<reference key="object" ref="254063660"/>
+						<reference key="object" ref="924612885"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 				</object>
@@ -410,7 +410,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MainViewController</string>
 					<string>UIResponder</string>
-					<string>{{308, 225}, {320, 480}}</string>
+					<string>{{229, 385}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
