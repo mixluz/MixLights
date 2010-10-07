@@ -69,13 +69,18 @@
 }
 
 
-/*
 // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
 	// Return YES for supported orientations.
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	//return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+  	return YES; // iPad: all supported
+  }
+  else {
+  	return (interfaceOrientation == UIInterfaceOrientationPortrait); // iPhone: only portrait
+  }
 }
-*/
 
 
 - (void)dealloc
