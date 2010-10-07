@@ -90,9 +90,13 @@
 {
 	int group = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrGroup"];
 	int digit = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrDigit"];
-  if (group<=0) {
+  if (group==0) {
   	// broadcast to all
     return 0xFE;
+  }
+  else if (group==3) {
+  	// group address
+    return 0x80+(digit<<1);
   }
   else {
   	// single lamp address
@@ -116,10 +120,17 @@
 
 
 
-- (IBAction)lightSwitch:(UISwitch *)sender
+- (IBAction)lightOn:(UIButton *)sender
 {
-	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:[sender isOn] ? 254 : 0];
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:254];
 }
+
+
+- (IBAction)lightOff:(UIButton *)sender
+{
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:0];
+}
+
 
 
 - (IBAction)lightDimmer:(UISlider *)sender
@@ -131,6 +142,28 @@
 }
 
 
+- (IBAction)sceneChanged:(UISegmentedControl *)sender
+{
+	// goto scene (for all ballasts)
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xFF dali2:0x10+sender.selectedSegmentIndex];
+}
+
+
+- (IBAction)addToScene:(UIButton *)sender
+{
+	// add addressed ballasts to scene
+  // - get current arc power level into DTR
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x21];
+  // - save it in the scene
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x40+sceneSegControl.selectedSegmentIndex];
+}
+
+
+- (IBAction)removeFromScene:(UIButton *)sender
+{
+	// remove addressed ballasts from scene
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x50+sceneSegControl.selectedSegmentIndex];
+}
 
 
 

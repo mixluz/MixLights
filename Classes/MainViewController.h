@@ -12,16 +12,21 @@
 {
 	IBOutlet UISegmentedControl *addrGroupSegControl;
 	IBOutlet UISegmentedControl *addrDigitSegControl;
+	IBOutlet UISegmentedControl *sceneSegControl;
   // vars
   FlipsideViewController *flipSideViewController;
 }
 
 // controls for light
-- (IBAction)lightSwitch:(UISwitch *)sender;
+- (IBAction)lightOn:(UIButton *)sender;
+- (IBAction)lightOff:(UIButton *)sender;
 - (IBAction)lightDimmer:(UISlider *)sender;
 - (IBAction)resetBridge:(UIButton *)sender;
 - (IBAction)addrGroupChanged:(UISegmentedControl *)sender;
 - (IBAction)addrDigitChanged:(UISegmentedControl *)sender;
+- (IBAction)sceneChanged:(UISegmentedControl *)sender;
+- (IBAction)addToScene:(UIButton *)sender;
+- (IBAction)removeFromScene:(UIButton *)sender;
 
 // call Flipside
 - (IBAction)showInfo:(id)sender;

@@ -31,7 +31,6 @@
   // Override point for customization after application launch.
   daliComm = [[DALIcomm alloc] init];
   [daliComm setConnectionHost:@"192.168.23.12" port:2101]; // Digi Connect ME in MixWerk LAN, TCP raw access
-  [daliComm openConnection];
   // Add the main view controller's view to the window and display.
   [window addSubview:mainViewController.view];
   [window makeKeyAndVisible];
@@ -44,6 +43,8 @@
 {
   // save prefs
   [NSUserDefaults resetStandardUserDefaults];  
+  // close connection
+  [daliComm closeConnection];
 }
 
 
@@ -81,7 +82,6 @@
   /*
    Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
    */
-	[daliComm openConnection];
 }
 
 

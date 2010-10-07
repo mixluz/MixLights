@@ -50,6 +50,9 @@
   NSMutableArray *sendQueue;
   // next command waiting for response
   DALIcmdBlock *responseWaitCmd;
+  // connection timeout
+  NSTimeInterval connectionLastUsed;
+  BOOL connectionCheckerActive;  
 }
 - (void)setConnectionHost:(NSString *)aHost port:(NSInteger)aPort;
 - (void)openConnection;
@@ -58,8 +61,11 @@
 - (BOOL)isReady;
 - (void)sendDaliBridgeCommand:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2 expectsAnswer:(BOOL)aExpectsAnswer answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aMinTimeToNextCmd;
 
+- (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd;
 - (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2;
+- (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd;
 - (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2;
+- (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aTimeout;
 - (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector;
 
 @end

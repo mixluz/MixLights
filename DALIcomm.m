@@ -22,8 +22,11 @@
 
 
 #define DEFAULT_MIN_TIME_BETWEEN_CMDS 0.100 // default to 100ms between commands min
+#define MIN_WAIT_AFTER_ANSWER 0.050 // wait 50ms after receiving answer before sending next
 
 #define ACK_WAIT_TIME 1.0 // time to wait for commands for which we expect an ACK
+
+#define MAX_CONNECTION_IDLETIME 2.0 // how long connection remains open
 
 - (id)initWithBridgeCmd:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2
 {
@@ -70,6 +73,8 @@
     nextCmdPossible = 0;
     sendQueue = [[NSMutableArray alloc] init];
     responseWaitCmd = nil;
+    connectionLastUsed = 0;
+    connectionCheckerActive = NO;
   }
   return self;
 }
@@ -127,6 +132,38 @@
 }
 
 
+- (void)checkConnection
+{
+	NSTimeInterval now = [[NSDate date] timeIntervalSinceReferenceDate];
+	NSTimeInterval leftIdle = (connectionLastUsed+MAX_CONNECTION_IDLETIME)-now;
+  // let timeout only if not waiting for a response or still having queued commands 
+	if (leftIdle<=0 && !responseWaitCmd && [sendQueue count]==0) {
+  	// close connection now
+    NSLog(@"--- Closed connection after idle time");
+    [self closeConnection];
+    connectionCheckerActive = NO;
+  }
+  else {
+  	// check later again, in case of something else pending in 0.5 sec
+  	[self performSelector:@selector(checkConnection) withObject:nil afterDelay:leftIdle<0 ? 0.5 : leftIdle];
+  }
+}
+
+
+- (void)needConnection
+{
+	if (!readStream || !writeStream) {
+    NSLog(@"+++ needed to open connection");
+  	[self openConnection];
+  }
+  connectionLastUsed = [[NSDate date] timeIntervalSinceReferenceDate];
+  if (!connectionCheckerActive) {
+    connectionCheckerActive = YES;
+  	[self performSelector:@selector(checkConnection) withObject:nil afterDelay:MAX_CONNECTION_IDLETIME];
+  }
+}
+
+
 // stream delegate
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode
 {
@@ -134,7 +171,8 @@
  
   switch(eventCode) {
     case NSStreamEventErrorOccurred: {
-    	NSLog(@"Stream error:%@", [stream streamError]);
+    	NSLog(@"Stream error:%@, closing connection", [stream streamError]);
+      [self closeConnection];
     }
     case NSStreamEventHasSpaceAvailable: {
     	if (stream==writeStream) {
@@ -159,8 +197,8 @@
             }
             if (rwc.expectsResponse) {
               // expects response (but might not have a callback, if the response is only an ack to keep correct pacing)
-              nextCmdPossible = now; // next command can take place from now on	
-              [self performSelector:@selector(checkSend)]; // immediately check if there is a next command that needs sending
+              nextCmdPossible = now+MIN_WAIT_AFTER_ANSWER; // next command can take place from now on	
+              [self performSelector:@selector(checkSend) withObject:nil afterDelay:MIN_WAIT_AFTER_ANSWER]; // immediately check if there is a next command that needs sending
             }          
             // forget this response wait command
             [rwc release];           
@@ -192,7 +230,7 @@
     NSLog(@"[%f] answer wait timed out for command 0x%02X,0x%02X,0x%02X",now,responseWaitCmd.bridgeCmd,responseWaitCmd.dali1,responseWaitCmd.dali2);
   	if (responseWaitCmd.resultTarget && [responseWaitCmd.resultTarget respondsToSelector:responseWaitCmd.resultSelector]) {
     	// report no answer
-    	[responseWaitCmd.resultTarget performSelector:responseWaitCmd.resultSelector withObject:nil];
+    	[responseWaitCmd.resultTarget performSelector:responseWaitCmd.resultSelector withObject:nil afterDelay:0.001];
     }
     // forget this response wait command
     [responseWaitCmd release]; responseWaitCmd = nil;
@@ -205,33 +243,38 @@
     	// need to wait - schedule a check for later
       [self performSelector:@selector(checkSend) withObject:nil afterDelay:nextCmdPossible-now];
     }
-    else if ([writeStream hasSpaceAvailable]) {
-    	// time to send, and write stream available
-      // - extract command from queue
-      DALIcmdBlock *cmd = [[sendQueue objectAtIndex:0] retain];
-      // - delete from queue
-      [sendQueue removeObjectAtIndex:0];
-      // - keep it we need to wait for a response
-      if (cmd.expectsResponse) {
-      	responseWaitCmd = [cmd retain];
+    else {
+      // need connection
+  		[self needConnection];
+      // send now if write space available, otherwise event will re-trigger checkSend later
+      if ([writeStream hasSpaceAvailable]) {
+        // time to send, and write stream available
+        // - extract command from queue
+        DALIcmdBlock *cmd = [[sendQueue objectAtIndex:0] retain];
+        // - delete from queue
+        [sendQueue removeObjectAtIndex:0];
+        // - keep it we need to wait for a response
+        if (cmd.expectsResponse) {
+          responseWaitCmd = [cmd retain];
+        }
+        // - actually send
+        uint8_t bridgeCmd[3];
+        bridgeCmd[0] = cmd.bridgeCmd;
+        bridgeCmd[1] = cmd.dali1;
+        bridgeCmd[2] = cmd.dali2;
+        if ([writeStream write:bridgeCmd maxLength:3]!=3) {
+          NSLog(@"could not send 3 command bytes");
+        }
+        else {
+          NSLog(@"[%f] sent command 0x%02X,0x%02X,0x%02X",now,cmd.bridgeCmd,cmd.dali1,cmd.dali2);
+        }
+        // - calculate when next command can be sent earliest
+        nextCmdPossible = now+cmd.minTimeToNextCmd;
+        // - schedule a check then (to see if more to send, and to time out wait for response)
+        [self performSelector:@selector(checkSend) withObject:nil afterDelay:cmd.minTimeToNextCmd];
+        // - done with this cmd
+        [cmd release];
       }
-      // - actually send
-      uint8_t bridgeCmd[3];
-      bridgeCmd[0] = cmd.bridgeCmd;
-      bridgeCmd[1] = cmd.dali1;
-      bridgeCmd[2] = cmd.dali2;
-      if ([writeStream write:bridgeCmd maxLength:3]!=3) {
-      	NSLog(@"could not send 3 command bytes");
-      }
-      else {
-		    NSLog(@"[%f] sent command 0x%02X,0x%02X,0x%02X",now,cmd.bridgeCmd,cmd.dali1,cmd.dali2);
-      }
-      // - calculate when next command can be sent earliest
-      nextCmdPossible = now+cmd.minTimeToNextCmd;
-      // - schedule a check then (to see if more to send, and to time out wait for response)
-      [self performSelector:@selector(checkSend) withObject:nil afterDelay:cmd.minTimeToNextCmd];
-      // - done with this cmd
-      [cmd release];
     }
   }
 }
@@ -257,6 +300,12 @@
 }
 
 
+- (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd
+{
+	// simple send with Ack
+	[self sendDaliBridgeCommand:0x30 dali1:aDali1 dali2:aDali2 expectsAnswer:NO answerTarget:nil selector:nil timeout:aMinTimeToNextCmd];	
+}
+
 - (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2
 {
 	// simple send with Ack
@@ -264,10 +313,24 @@
 }
 
 
+
+- (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd
+{
+	// double send with Ack
+	[self sendDaliBridgeCommand:0x31 dali1:aDali1 dali2:aDali2 expectsAnswer:NO answerTarget:nil selector:nil timeout:aMinTimeToNextCmd];	
+}
+
 - (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2
 {
 	// double send with Ack
 	[self sendDaliBridgeCommand:0x31 dali1:aDali1 dali2:aDali2 expectsAnswer:YES answerTarget:nil selector:nil timeout:ACK_WAIT_TIME];	
+}
+
+
+- (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aTimeout
+{
+	// send and wait for single byte answer
+	[self sendDaliBridgeCommand:0x32 dali1:aDali1 dali2:aDali2 expectsAnswer:YES answerTarget:aTarget selector:aSelector timeout:aTimeout];
 }
 
 
