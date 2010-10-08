@@ -202,8 +202,8 @@
     dtrValueField.text = [NSString stringWithFormat:@"%d",newAddress+1];
 		// blink lamp
   	for (int i=1; i<4; i++) {
-      [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:(newAddress<<1)+1 dali2:5 duration:0.5]; // recall max
-      [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:(newAddress<<1)+1 dali2:6 duration:0.5]; // recall min
+      [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:(newAddress<<1)+1 dali2:5 duration:1]; // recall max
+      [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:(newAddress<<1)+1 dali2:6 duration:1]; // recall min
     }
   }
 }
@@ -289,7 +289,7 @@
     }
     searchMin = searchAddr+1; // new min
   }
-  if (searchMin>=searchMax) {
+  if (searchMin==searchMax && searchAddr==searchMin) {
     // found!
 		NSLog(@">>> Lowest random address is 0x%lX (searchMin=0x%lX, searchMax=0x%lX)", searchAddr, searchMin, searchMax);
     // program new address here

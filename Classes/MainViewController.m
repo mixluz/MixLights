@@ -90,6 +90,27 @@
 }
 
 
+#define LOGARITHMIC_LIGHT
+
+int sliderToArcpower(double aSlider)
+{
+	#ifdef LOGARITHMIC_LIGHT
+  return log10((aSlider*9)+1)*254; // logarithmic
+  #else
+	return aSlider*254; // simple linear
+  #endif
+}
+
+
+double arcpowerToSlider(int aArcpower)
+{
+	#ifdef LOGARITHMIC_LIGHT
+  return (pow(10, aArcpower/254.0)-1)/9; // logarithmic
+  #else
+	return ((double)aArcPower)/254; // simple linear
+  #endif
+}
+
 
 - (uint8_t)daliAddr
 {
@@ -119,7 +140,7 @@
 - (void)lightLevelAnswer:(NSNumber *)aLightLevel
 {
 	if (aLightLevel) {
-		[dimmerSlider setValue:[aLightLevel floatValue]/254 animated:YES];
+		[dimmerSlider setValue:arcpowerToSlider([aLightLevel intValue]) animated:YES];
   }
 }
 
@@ -160,7 +181,7 @@
 {
 	DALIcomm *daliComm = [MixLightsAppDelegate sharedAppDelegate].daliComm;
   if ([daliComm isReady]) {
-		[daliComm daliSend:[self daliAddr] dali2:[sender value]*254];
+		[daliComm daliSend:[self daliAddr] dali2:sliderToArcpower([sender value])];
   }
 }
 
