@@ -110,16 +110,32 @@
 }
 
 
+- (void)getLightLevel
+{
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliQuerySend:[self daliAddr]+1 dali2:0xA0 answerTarget:self selector:@selector(lightLevelAnswer:)];
+}
+
+
+- (void)lightLevelAnswer:(NSNumber *)aLightLevel
+{
+	if (aLightLevel) {
+		[dimmerSlider setValue:[aLightLevel floatValue]/254 animated:YES];
+  }
+}
+
+
 
 - (IBAction)addrGroupChanged:(UISegmentedControl *)sender
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"addrGroup"];
+  [self getLightLevel];
 }
 
 
 - (IBAction)addrDigitChanged:(UISegmentedControl *)sender
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"addrDigit"];
+  [self getLightLevel];
 }
 
 
@@ -128,12 +144,14 @@
 - (IBAction)lightOn:(UIButton *)sender
 {
 	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:254];
+  [dimmerSlider setValue:1 animated:YES];
 }
 
 
 - (IBAction)lightOff:(UIButton *)sender
 {
 	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr] dali2:0];
+  [dimmerSlider setValue:0 animated:YES];
 }
 
 
@@ -151,6 +169,7 @@
 {
 	// goto scene (for all ballasts)
 	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xFF dali2:0x10+sender.selectedSegmentIndex];
+  [self getLightLevel];
 }
 
 
@@ -158,16 +177,16 @@
 {
 	// add addressed ballasts to scene
   // - get current arc power level into DTR
-  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x21];
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliDoubleSend:[self daliAddr]+1 dali2:0x21];
   // - save it in the scene
-  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x40+sceneSegControl.selectedSegmentIndex];
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliDoubleSend:[self daliAddr]+1 dali2:0x40+sceneSegControl.selectedSegmentIndex];
 }
 
 
 - (IBAction)removeFromScene:(UIButton *)sender
 {
 	// remove addressed ballasts from scene
-  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:[self daliAddr]+1 dali2:0x50+sceneSegControl.selectedSegmentIndex];
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliDoubleSend:[self daliAddr]+1 dali2:0x50+sceneSegControl.selectedSegmentIndex];
 }
 
 

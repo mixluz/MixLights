@@ -13,6 +13,7 @@
 	IBOutlet UISegmentedControl *addrGroupSegControl;
 	IBOutlet UISegmentedControl *addrDigitSegControl;
 	IBOutlet UISegmentedControl *sceneSegControl;
+  IBOutlet UISlider *dimmerSlider;
   // vars
   FlipsideViewController *flipSideViewController;
 }

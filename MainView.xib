@@ -207,7 +207,7 @@
 							<reference ref="4"/>
 						</object>
 					</object>
-					<object class="IBUISegmentedControl" id="903604239">
+					<object class="IBUISegmentedControl" id="525746700">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">1314</int>
 						<string key="NSFrame">{{20, 397}, {280, 44}}</string>
@@ -376,7 +376,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1017498414"/>
 					</object>
-					<object class="IBUIButton" id="193204859">
+					<object class="IBUIButton" id="833669575">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">1313</int>
 						<string key="NSFrame">{{112, 344}, {90, 38}}</string>
@@ -396,7 +396,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1017498414"/>
 					</object>
-					<object class="IBUIButton" id="900454786">
+					<object class="IBUIButton" id="374956394">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">1313</int>
 						<string key="NSFrame">{{210, 344}, {90, 38}}</string>
@@ -416,7 +416,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1017498414"/>
 					</object>
-					<object class="IBUILabel" id="818967120">
+					<object class="IBUILabel" id="517051283">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">1316</int>
 						<string key="NSFrame">{{20, 349}, {71, 29}}</string>
@@ -540,7 +540,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">sceneChanged:</string>
-						<reference key="source" ref="903604239"/>
+						<reference key="source" ref="525746700"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">13</int>
 					</object>
@@ -550,14 +550,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">sceneSegControl</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="903604239"/>
+						<reference key="destination" ref="525746700"/>
 					</object>
 					<int key="connectionID">71</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addToScene:</string>
-						<reference key="source" ref="193204859"/>
+						<reference key="source" ref="833669575"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
@@ -566,11 +566,19 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">removeFromScene:</string>
-						<reference key="source" ref="900454786"/>
+						<reference key="source" ref="374956394"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">73</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">dimmerSlider</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="228009858"/>
+					</object>
+					<int key="connectionID">74</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -600,16 +608,16 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="764216110"/>
 							<reference ref="558454645"/>
-							<reference ref="228009858"/>
 							<reference ref="753401657"/>
 							<reference ref="284528000"/>
 							<reference ref="837555176"/>
 							<reference ref="31961172"/>
 							<reference ref="963571853"/>
-							<reference ref="903604239"/>
-							<reference ref="900454786"/>
-							<reference ref="193204859"/>
-							<reference ref="818967120"/>
+							<reference ref="525746700"/>
+							<reference ref="374956394"/>
+							<reference ref="833669575"/>
+							<reference ref="517051283"/>
+							<reference ref="228009858"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -655,22 +663,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">63</int>
-						<reference key="object" ref="903604239"/>
+						<reference key="object" ref="525746700"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">65</int>
-						<reference key="object" ref="193204859"/>
+						<reference key="object" ref="833669575"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">66</int>
-						<reference key="object" ref="900454786"/>
+						<reference key="object" ref="374956394"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
-						<reference key="object" ref="818967120"/>
+						<reference key="object" ref="517051283"/>
 						<reference key="parent" ref="883825266"/>
 					</object>
 				</object>
@@ -718,7 +726,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBkAAAwxsAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBkAAAwxEAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -772,7 +780,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">73</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -874,12 +882,14 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addrDigitSegControl</string>
 							<string>addrGroupSegControl</string>
+							<string>dimmerSlider</string>
 							<string>sceneSegControl</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
+							<string>UISlider</string>
 							<string>UISegmentedControl</string>
 						</object>
 					</object>
@@ -889,6 +899,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addrDigitSegControl</string>
 							<string>addrGroupSegControl</string>
+							<string>dimmerSlider</string>
 							<string>sceneSegControl</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -900,6 +911,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">addrGroupSegControl</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">dimmerSlider</string>
+								<string key="candidateClassName">UISlider</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">sceneSegControl</string>
