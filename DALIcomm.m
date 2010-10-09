@@ -3,7 +3,7 @@
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/10/05.
-//  Copyright 2010 luz code&coins. All rights reserved.
+//  Copyright 2010 Lukas Zeller/mixwerk.ch. All rights reserved.
 //
 
 #import "DALIcomm.h"

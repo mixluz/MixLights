@@ -1,0 +1,1 @@
+All files are licensed BSD (LICENSE.BSD.txt)
