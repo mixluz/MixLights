@@ -26,9 +26,9 @@
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-  // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
   [daliComm setConnectionHost:@"192.168.23.12" port:2101]; // Digi Connect ME in MixWerk LAN, TCP raw access
   // Add the main view controller's view to the window and display.

@@ -36,6 +36,13 @@
 
 
 
+int dimmerToArcpower(double aSlider);
+double arcpowerToDimmer(int aArcpower);
+
+#define LAMP_GROUP_OFFSET 100
+#define LAMPGROUP(x) (x|LAMP_GROUP_OFFSET)
+#define LAMPBROADCAST 999
+
 @interface DALIcomm : NSObject <NSStreamDelegate>
 {
 	// host and port
@@ -59,13 +66,18 @@
 - (void)closeConnection;
 - (void)checkSend;
 - (BOOL)isReady;
-- (void)sendDaliBridgeCommand:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2 expectsAnswer:(BOOL)aExpectsAnswer answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aMinTimeToNextCmd;
 
+// direct DALI bridge commands
+- (void)sendDaliBridgeCommand:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2 expectsAnswer:(BOOL)aExpectsAnswer answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aMinTimeToNextCmd;
+// direct DALI commands
 - (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd;
 - (void)daliSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2;
 - (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 duration:(NSTimeInterval)aMinTimeToNextCmd;
 - (void)daliDoubleSend:(uint8_t)aDali1 dali2:(uint8_t)aDali2;
 - (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aTimeout;
 - (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector;
+// abstracted
+- (uint8_t)daliAddressForLamp:(int)aLampAddr;
+- (void)setLamp:(int)aLampAddr dimmerValue:(double)aDimmerValue keepOn:(BOOL)aKeepOn;
 
 @end

@@ -90,45 +90,30 @@
 }
 
 
-#define LOGARITHMIC_LIGHT
-
-int sliderToArcpower(double aSlider)
-{
-	#ifdef LOGARITHMIC_LIGHT
-  return log10((aSlider*9)+1)*254; // logarithmic
-  #else
-	return aSlider*254; // simple linear
-  #endif
-}
-
-
-double arcpowerToSlider(int aArcpower)
-{
-	#ifdef LOGARITHMIC_LIGHT
-  return (pow(10, aArcpower/254.0)-1)/9; // logarithmic
-  #else
-	return ((double)aArcPower)/254; // simple linear
-  #endif
-}
-
-
-- (uint8_t)daliAddr
+- (int)lampAddr
 {
 	int group = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrGroup"];
 	int digit = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrDigit"];
   if (group==0) {
   	// broadcast to all
-    return 0xFE;
+    return LAMPBROADCAST;
   }
   else if (group==3) {
   	// group address
-    return 0x80+(digit<<1);
+    return LAMPGROUP(digit);
   }
   else {
   	// single lamp address
-    return ((group-1)*10+digit) << 1;
+    return (group-1)*10+digit;
   }
 }
+
+
+- (uint8_t)daliAddr
+{
+	return [[MixLightsAppDelegate sharedAppDelegate].daliComm daliAddressForLamp:[self lampAddr]];
+}
+
 
 
 - (void)getLightLevel
@@ -140,7 +125,7 @@ double arcpowerToSlider(int aArcpower)
 - (void)lightLevelAnswer:(NSNumber *)aLightLevel
 {
 	if (aLightLevel) {
-		[dimmerSlider setValue:arcpowerToSlider([aLightLevel intValue]) animated:YES];
+		[dimmerSlider setValue:arcpowerToDimmer([aLightLevel intValue]) animated:YES];
   }
 }
 
@@ -181,7 +166,7 @@ double arcpowerToSlider(int aArcpower)
 {
 	DALIcomm *daliComm = [MixLightsAppDelegate sharedAppDelegate].daliComm;
   if ([daliComm isReady]) {
-		[daliComm daliSend:[self daliAddr] dali2:sliderToArcpower([sender value])];
+		[daliComm setLamp:[self lampAddr] dimmerValue:[sender value] keepOn:NO];
   }
 }
 

@@ -341,6 +341,58 @@
 }
 
 
+#pragma mark abstracted functionality
+
+
+#define LOGARITHMIC_LIGHT
+
+int dimmerToArcpower(double aSlider)
+{
+	#ifdef LOGARITHMIC_LIGHT
+  return log10((aSlider*9)+1)*254; // logarithmic
+  #else
+	return aSlider*254; // simple linear
+  #endif
+}
+
+
+double arcpowerToDimmer(int aArcpower)
+{
+	#ifdef LOGARITHMIC_LIGHT
+  return (pow(10, aArcpower/254.0)-1)/9; // logarithmic
+  #else
+	return ((double)aArcPower)/254; // simple linear
+  #endif
+}
+
+
+- (uint8_t)daliAddressForLamp:(int)aLampAddr
+{
+	uint8_t daliAddr = 0;
+	if (aLampAddr==LAMPBROADCAST) {
+  	// broadcast
+  	daliAddr = 0xFE;
+  }
+  else if (aLampAddr>=LAMP_GROUP_OFFSET) {
+  	// group
+    daliAddr = 0x80+((aLampAddr-LAMP_GROUP_OFFSET)<<1);
+  }
+  else {
+  	// single lamp
+    daliAddr = (aLampAddr)<<1;
+  }
+  return daliAddr;
+}
+
+
+- (void)setLamp:(int)aLampAddr dimmerValue:(double)aDimmerValue keepOn:(BOOL)aKeepOn
+{
+	uint8_t arcPower = dimmerToArcpower(aDimmerValue);
+  if (aKeepOn && arcPower==0)
+  	arcPower=1; // keep lamp on
+  [self daliSend:[self daliAddressForLamp:aLampAddr] dali2:arcPower];
+}
+
 
 
 @end // DALIcomm
