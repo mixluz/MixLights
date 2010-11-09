@@ -29,6 +29,9 @@
 - (IBAction)addToScene:(UIButton *)sender;
 - (IBAction)removeFromScene:(UIButton *)sender;
 
+// private
+- (void)getLightLevel;
+
 // call Flipside
 - (IBAction)showInfo:(id)sender;
 

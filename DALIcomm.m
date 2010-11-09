@@ -348,6 +348,8 @@
 
 int dimmerToArcpower(double aSlider)
 {
+	if (aSlider<0) aSlider = 0;
+	if (aSlider>1) aSlider = 1;
 	#ifdef LOGARITHMIC_LIGHT
   return log10((aSlider*9)+1)*254; // logarithmic
   #else
@@ -366,7 +368,7 @@ double arcpowerToDimmer(int aArcpower)
 }
 
 
-- (uint8_t)daliAddressForLamp:(int)aLampAddr
++ (uint8_t)daliAddressForLamp:(int)aLampAddr
 {
 	uint8_t daliAddr = 0;
 	if (aLampAddr==LAMPBROADCAST) {
@@ -390,7 +392,7 @@ double arcpowerToDimmer(int aArcpower)
 	uint8_t arcPower = dimmerToArcpower(aDimmerValue);
   if (aKeepOn && arcPower==0)
   	arcPower=1; // keep lamp on
-  [self daliSend:[self daliAddressForLamp:aLampAddr] dali2:arcPower];
+  [self daliSend:[DALIcomm daliAddressForLamp:aLampAddr] dali2:arcPower];
 }
 
 

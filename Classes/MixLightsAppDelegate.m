@@ -28,9 +28,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	// init the defaults
+  [[NSUserDefaults standardUserDefaults] registerDefaults:
+  	[NSDictionary dictionaryWithObjectsAndKeys:
+    	@"192.168.23.50", @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN
+    	nil
+    ]
+  ];
 	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
-  [daliComm setConnectionHost:@"192.168.23.12" port:2101]; // Digi Connect ME in MixWerk LAN, TCP raw access
   // Add the main view controller's view to the window and display.
   [window addSubview:mainViewController.view];
   [window makeKeyAndVisible];
@@ -42,7 +48,7 @@
 - (void)prepareForPossibleTermination
 {
   // save prefs
-  [NSUserDefaults resetStandardUserDefaults];  
+  [NSUserDefaults resetStandardUserDefaults];
   // close connection
   [daliComm closeConnection];
 }

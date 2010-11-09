@@ -77,7 +77,7 @@ double arcpowerToDimmer(int aArcpower);
 - (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aTimeout;
 - (void)daliQuerySend:(uint8_t)aDali1 dali2:(uint8_t)aDali2 answerTarget:(id)aTarget selector:(SEL)aSelector;
 // abstracted
-- (uint8_t)daliAddressForLamp:(int)aLampAddr;
++ (uint8_t)daliAddressForLamp:(int)aLampAddr;
 - (void)setLamp:(int)aLampAddr dimmerValue:(double)aDimmerValue keepOn:(BOOL)aKeepOn;
 
 @end

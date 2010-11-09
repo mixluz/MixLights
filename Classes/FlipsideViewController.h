@@ -19,9 +19,12 @@
   IBOutlet UITextField *daliAnswerField;
   IBOutlet UITextField *dtrValueField;
   IBOutlet UIActivityIndicatorView *progressSpinner;
+  IBOutlet UITextField *daliBridgeAddrField;
+  IBOutlet UISwitch *alsoWithShortAddrSwitch;
   // vars
   unsigned newAddress;
   BOOL assignInProgress;
+  BOOL searchInProgress;
   uint32_t searchMin, searchMax;
 	uint32_t searchAddr;
   uint8_t searchH, searchM, searchL;
@@ -34,10 +37,12 @@
 - (IBAction)sendDTRAndCommand:(id)sender;
 - (IBAction)assignAddressPhysical;
 - (IBAction)assignAddressRandom;
+- (IBAction)findNextAdressableBallast;
 
 - (IBAction)editDone:(UIResponder *)aResponder;
 
 // private
+- (void)startNewSearchUpwardsFrom:(uint32_t)aMinSearchAddr;
 - (void)verifyNewShortAddr;
 - (void)verifyShortAddrAnswer:(NSNumber *)aAnswer;
 - (void)nextCompare;

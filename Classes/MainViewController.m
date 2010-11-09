@@ -34,6 +34,18 @@
 }
 
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	// set IP (which might have changed on flipside)
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm setConnectionHost:[[NSUserDefaults standardUserDefaults] stringForKey:@"DaliBridgeIP"] port:2101]; // port = TCP raw access
+	// get current light level
+	[self getLightLevel];  
+	// done
+	[super viewDidAppear:animated];
+}
+
+
+
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
 {    
 	[self dismissModalViewControllerAnimated:YES];
@@ -111,7 +123,7 @@
 
 - (uint8_t)daliAddr
 {
-	return [[MixLightsAppDelegate sharedAppDelegate].daliComm daliAddressForLamp:[self lampAddr]];
+	return [DALIcomm daliAddressForLamp:[self lampAddr]];
 }
 
 
