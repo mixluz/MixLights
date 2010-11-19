@@ -13,7 +13,7 @@
 
 
 @synthesize window;
-@synthesize technoViewController;
+@synthesize tabBarController;
 @synthesize daliComm;
 
 
@@ -28,6 +28,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	// App properties
+  application.statusBarStyle = UIStatusBarStyleBlackOpaque;
 	// init the defaults
   [[NSUserDefaults standardUserDefaults] registerDefaults:
   	[NSDictionary dictionaryWithObjectsAndKeys:
@@ -38,7 +40,7 @@
 	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
   // Add the main view controller's view to the window and display.
-  [window addSubview:technoViewController.view];
+  [window addSubview:tabBarController.view];
   [window makeKeyAndVisible];
 
   return YES;
@@ -118,7 +120,6 @@
 	// comm
   [daliComm release];
 	// UI
-  [TechnoViewController release];
   [window release];
   [super dealloc];
 }

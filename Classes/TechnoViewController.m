@@ -24,12 +24,14 @@
   	[NSDictionary dictionaryWithObjectsAndKeys:
     	[NSNumber numberWithInt:0], @"addrGroup", // all lamps
     	[NSNumber numberWithInt:0], @"addrDigit", // first digit
+    	[NSNumber numberWithInt:0], @"defScene", // default scene
     	nil
     ]
   ];
 	// get segment controls from defaults
 	addrGroupSegControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrGroup"];
 	addrDigitSegControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"addrDigit"];
+	sceneSegControl.selectedSegmentIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"defScene"];
 	[super viewDidLoad];
 }
 
@@ -44,6 +46,34 @@
 	[super viewDidAppear:animated];
 }
 
+
+
+- (void)didReceiveMemoryWarning
+{
+	// Releases the view if it doesn't have a superview.
+  [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc. that aren't in use.
+}
+
+
+- (void)viewDidUnload
+{
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+  [hackerViewController release]; hackerViewController=nil;
+}
+
+
+- (void)dealloc
+{
+  [HackerViewController release];
+  [super dealloc];
+}
+
+
+
+#pragma mark Flipside view
 
 
 - (void)HackerViewControllerDidFinish:(HackerViewController *)controller
@@ -64,42 +94,8 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-	// Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc. that aren't in use.
-}
 
-
-- (void)viewDidUnload
-{
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-  [hackerViewController release]; hackerViewController=nil;
-}
-
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	// Return YES for supported orientations.
-	//return (interfaceOrientation == UIInterfaceOrientationPortrait);
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-  	return YES; // iPad: all supported
-  }
-  else {
-  	return (interfaceOrientation == UIInterfaceOrientationPortrait); // iPhone: only portrait
-  }
-}
-
-
-- (void)dealloc
-{
-  [HackerViewController release];
-  [super dealloc];
-}
+#pragma mark MixLight controlling
 
 
 - (int)lampAddr
@@ -178,17 +174,25 @@
 {
 	DALIcomm *daliComm = [MixLightsAppDelegate sharedAppDelegate].daliComm;
   if ([daliComm isReady]) {
-		[daliComm setLamp:[self lampAddr] dimmerValue:[sender value] keepOn:NO];
+		[daliComm setLamp:[self lampAddr] dimmerValue:[sender value] keepOn:YES];
   }
 }
 
 
 - (IBAction)sceneChanged:(UISegmentedControl *)sender
 {
+	[[NSUserDefaults standardUserDefaults] setInteger:sceneSegControl.selectedSegmentIndex forKey:@"defScene"];
+}
+
+
+- (IBAction)loadScene:(UIButton *)sender
+{
 	// goto scene (for all ballasts)
-	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xFF dali2:0x10+sender.selectedSegmentIndex];
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xFF dali2:0x10+sceneSegControl.selectedSegmentIndex];
   [self getLightLevel];
 }
+
+
 
 
 - (IBAction)addToScene:(UIButton *)sender
@@ -206,17 +210,6 @@
 	// remove addressed ballasts from scene
   [[MixLightsAppDelegate sharedAppDelegate].daliComm daliDoubleSend:[self daliAddr]+1 dali2:0x50+sceneSegControl.selectedSegmentIndex];
 }
-
-
-
-- (IBAction)resetBridge:(UIButton *)sender
-{
-	[[MixLightsAppDelegate sharedAppDelegate].daliComm sendDaliBridgeCommand:0 dali1:0 dali2:0 expectsAnswer:NO answerTarget:nil selector:nil timeout:1];
-}
-
-
-
-
 
 
 @end

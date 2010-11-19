@@ -17,11 +17,20 @@
 		288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765580DF743DE002DB57D /* CoreGraphics.framework */; };
 		289233AE0DB2D0DB0083E9F9 /* TechnoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233A90DB2D0DB0083E9F9 /* TechnoViewController.m */; };
 		289233B00DB2D0DB0083E9F9 /* HackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289233AD0DB2D0DB0083E9F9 /* HackerViewController.m */; };
+		ED09E4761297155F004DD81F /* SliderViewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E4751297155F004DD81F /* SliderViewImage.png */; };
+		ED09E47812971563004DD81F /* SliderViewImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E47712971562004DD81F /* SliderViewImage@2x.png */; };
+		ED09E48112971822004DD81F /* TechnoViewImage.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E48012971821004DD81F /* TechnoViewImage.png */; };
+		ED09E48312971826004DD81F /* TechnoViewImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E48212971826004DD81F /* TechnoViewImage@2x.png */; };
+		ED09E4AD12971F47004DD81F /* MemSave.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E4AC12971F46004DD81F /* MemSave.png */; };
+		ED09E4AF12971F4A004DD81F /* MemSave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E4AE12971F4A004DD81F /* MemSave@2x.png */; };
+		ED09E4B21297206F004DD81F /* MemClr.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E4B11297206F004DD81F /* MemClr.png */; };
+		ED09E4B412972073004DD81F /* MemClr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED09E4B312972072004DD81F /* MemClr@2x.png */; };
+		ED09E4D712972EA9004DD81F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED09E4D612972EA9004DD81F /* MainViewController.m */; };
 		ED2889F5125B45AC00E2609F /* DALIcomm.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2889F4125B45AC00E2609F /* DALIcomm.m */; };
 		ED29FB21125B741F002492DD /* MixLights_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FB1F125B741F002492DD /* MixLights_icon@2x.png */; };
 		ED29FB22125B741F002492DD /* MixLights_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FB20125B741F002492DD /* MixLights_icon.png */; };
 		ED29FCCC125D2478002492DD /* MixLights_icon-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */; };
-		ED8DC2871296D667006D6463 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8DC2851296D667006D6463 /* SliderView.m */; };
+		ED8DC2871296D667006D6463 /* SliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8DC2851296D667006D6463 /* SliderViewController.m */; };
 		ED8DC2881296D667006D6463 /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2861296D667006D6463 /* SliderView.xib */; };
 		ED8DC2981296DAA6006D6463 /* MixButton_off.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2941296DAA6006D6463 /* MixButton_off.png */; };
 		ED8DC2991296DAA6006D6463 /* MixButton_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2951296DAA6006D6463 /* MixButton_off@2x.png */; };
@@ -49,13 +58,23 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MixLights_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixLights_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MixLights-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MixLights-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		ED09E4751297155F004DD81F /* SliderViewImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderViewImage.png; sourceTree = "<group>"; };
+		ED09E47712971562004DD81F /* SliderViewImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderViewImage@2x.png"; sourceTree = "<group>"; };
+		ED09E48012971821004DD81F /* TechnoViewImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TechnoViewImage.png; sourceTree = "<group>"; };
+		ED09E48212971826004DD81F /* TechnoViewImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TechnoViewImage@2x.png"; sourceTree = "<group>"; };
+		ED09E4AC12971F46004DD81F /* MemSave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MemSave.png; sourceTree = "<group>"; };
+		ED09E4AE12971F4A004DD81F /* MemSave@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MemSave@2x.png"; sourceTree = "<group>"; };
+		ED09E4B11297206F004DD81F /* MemClr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MemClr.png; sourceTree = "<group>"; };
+		ED09E4B312972072004DD81F /* MemClr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MemClr@2x.png"; sourceTree = "<group>"; };
+		ED09E4D512972EA9004DD81F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		ED09E4D612972EA9004DD81F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		ED2889F3125B45AC00E2609F /* DALIcomm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALIcomm.h; sourceTree = "<group>"; };
 		ED2889F4125B45AC00E2609F /* DALIcomm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALIcomm.m; sourceTree = "<group>"; };
 		ED29FB1F125B741F002492DD /* MixLights_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixLights_icon@2x.png"; sourceTree = "<group>"; };
 		ED29FB20125B741F002492DD /* MixLights_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixLights_icon.png; sourceTree = "<group>"; };
 		ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixLights_icon-ipad.png"; sourceTree = "<group>"; };
-		ED8DC2841296D667006D6463 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
-		ED8DC2851296D667006D6463 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
+		ED8DC2841296D667006D6463 /* SliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderViewController.h; sourceTree = "<group>"; };
+		ED8DC2851296D667006D6463 /* SliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderViewController.m; sourceTree = "<group>"; };
 		ED8DC2861296D667006D6463 /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
 		ED8DC2941296DAA6006D6463 /* MixButton_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixButton_off.png; sourceTree = "<group>"; };
 		ED8DC2951296DAA6006D6463 /* MixButton_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixButton_off@2x.png"; sourceTree = "<group>"; };
@@ -154,6 +173,14 @@
 				ED29FB20125B741F002492DD /* MixLights_icon.png */,
 				ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */,
 				280E754C0DD40C5E005A515E /* MainWindow.xib */,
+				ED09E4751297155F004DD81F /* SliderViewImage.png */,
+				ED09E47712971562004DD81F /* SliderViewImage@2x.png */,
+				ED09E48012971821004DD81F /* TechnoViewImage.png */,
+				ED09E48212971826004DD81F /* TechnoViewImage@2x.png */,
+				ED09E4AC12971F46004DD81F /* MemSave.png */,
+				ED09E4AE12971F4A004DD81F /* MemSave@2x.png */,
+				ED09E4B11297206F004DD81F /* MemClr.png */,
+				ED09E4B312972072004DD81F /* MemClr@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -171,8 +198,10 @@
 		ED8DC2E71296E957006D6463 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				ED8DC2841296D667006D6463 /* SliderView.h */,
-				ED8DC2851296D667006D6463 /* SliderView.m */,
+				ED09E4D512972EA9004DD81F /* MainViewController.h */,
+				ED09E4D612972EA9004DD81F /* MainViewController.m */,
+				ED8DC2841296D667006D6463 /* SliderViewController.h */,
+				ED8DC2851296D667006D6463 /* SliderViewController.m */,
 				289233A80DB2D0DB0083E9F9 /* TechnoViewController.h */,
 				289233A90DB2D0DB0083E9F9 /* TechnoViewController.m */,
 				289233AC0DB2D0DB0083E9F9 /* HackerViewController.h */,
@@ -251,6 +280,14 @@
 				ED8DC29B1296DAA6006D6463 /* MixButton_on@2x.png in Resources */,
 				ED8DC29E1296DFDF006D6463 /* darkButton.png in Resources */,
 				ED8DC29F1296DFDF006D6463 /* darkButton@2x.png in Resources */,
+				ED09E4761297155F004DD81F /* SliderViewImage.png in Resources */,
+				ED09E47812971563004DD81F /* SliderViewImage@2x.png in Resources */,
+				ED09E48112971822004DD81F /* TechnoViewImage.png in Resources */,
+				ED09E48312971826004DD81F /* TechnoViewImage@2x.png in Resources */,
+				ED09E4AD12971F47004DD81F /* MemSave.png in Resources */,
+				ED09E4AF12971F4A004DD81F /* MemSave@2x.png in Resources */,
+				ED09E4B21297206F004DD81F /* MemClr.png in Resources */,
+				ED09E4B412972073004DD81F /* MemClr@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,8 +303,9 @@
 				289233AE0DB2D0DB0083E9F9 /* TechnoViewController.m in Sources */,
 				289233B00DB2D0DB0083E9F9 /* HackerViewController.m in Sources */,
 				ED2889F5125B45AC00E2609F /* DALIcomm.m in Sources */,
-				ED8DC2871296D667006D6463 /* SliderView.m in Sources */,
+				ED8DC2871296D667006D6463 /* SliderViewController.m in Sources */,
 				ED8DC2B61296E3DB006D6463 /* ZButton.m in Sources */,
+				ED09E4D712972EA9004DD81F /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

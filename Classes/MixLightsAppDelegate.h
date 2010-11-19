@@ -15,13 +15,15 @@
 @interface MixLightsAppDelegate : NSObject <UIApplicationDelegate>
 {
   UIWindow *window;
-  TechnoViewController *TechnoViewController;
+  //TechnoViewController *technoViewController;
+  UITabBarController *tabBarController;
   // DALI communicator
   DALIcomm *daliComm;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet TechnoViewController *technoViewController;
+//@property (nonatomic, retain) IBOutlet TechnoViewController *technoViewController;
+@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (readonly) DALIcomm *daliComm;
 
 + (MixLightsAppDelegate *)sharedAppDelegate;

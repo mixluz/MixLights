@@ -1,5 +1,5 @@
 //
-//  SliderView.h
+//  MainViewController.h
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/11/19.
@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SliderView : UIViewController {
+@interface MainViewController : UITabBarController 
+{
 
 }
 

@@ -26,6 +26,7 @@
 - (IBAction)addrGroupChanged:(UISegmentedControl *)sender;
 - (IBAction)addrDigitChanged:(UISegmentedControl *)sender;
 - (IBAction)sceneChanged:(UISegmentedControl *)sender;
+- (IBAction)loadScene:(UIButton *)sender;
 - (IBAction)addToScene:(UIButton *)sender;
 - (IBAction)removeFromScene:(UIButton *)sender;
 
