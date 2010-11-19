@@ -21,6 +21,15 @@
 		ED29FB21125B741F002492DD /* MixLights_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FB1F125B741F002492DD /* MixLights_icon@2x.png */; };
 		ED29FB22125B741F002492DD /* MixLights_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FB20125B741F002492DD /* MixLights_icon.png */; };
 		ED29FCCC125D2478002492DD /* MixLights_icon-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */; };
+		ED8DC2871296D667006D6463 /* SliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8DC2851296D667006D6463 /* SliderView.m */; };
+		ED8DC2881296D667006D6463 /* SliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2861296D667006D6463 /* SliderView.xib */; };
+		ED8DC2981296DAA6006D6463 /* MixButton_off.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2941296DAA6006D6463 /* MixButton_off.png */; };
+		ED8DC2991296DAA6006D6463 /* MixButton_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2951296DAA6006D6463 /* MixButton_off@2x.png */; };
+		ED8DC29A1296DAA6006D6463 /* MixButton_on.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2961296DAA6006D6463 /* MixButton_on.png */; };
+		ED8DC29B1296DAA6006D6463 /* MixButton_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC2971296DAA6006D6463 /* MixButton_on@2x.png */; };
+		ED8DC29E1296DFDF006D6463 /* darkButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC29C1296DFDF006D6463 /* darkButton.png */; };
+		ED8DC29F1296DFDF006D6463 /* darkButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC29D1296DFDF006D6463 /* darkButton@2x.png */; };
+		ED8DC2B61296E3DB006D6463 /* ZButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8DC2B51296E3DB006D6463 /* ZButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +54,17 @@
 		ED29FB1F125B741F002492DD /* MixLights_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixLights_icon@2x.png"; sourceTree = "<group>"; };
 		ED29FB20125B741F002492DD /* MixLights_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixLights_icon.png; sourceTree = "<group>"; };
 		ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixLights_icon-ipad.png"; sourceTree = "<group>"; };
+		ED8DC2841296D667006D6463 /* SliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderView.h; sourceTree = "<group>"; };
+		ED8DC2851296D667006D6463 /* SliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderView.m; sourceTree = "<group>"; };
+		ED8DC2861296D667006D6463 /* SliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderView.xib; sourceTree = "<group>"; };
+		ED8DC2941296DAA6006D6463 /* MixButton_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixButton_off.png; sourceTree = "<group>"; };
+		ED8DC2951296DAA6006D6463 /* MixButton_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixButton_off@2x.png"; sourceTree = "<group>"; };
+		ED8DC2961296DAA6006D6463 /* MixButton_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MixButton_on.png; sourceTree = "<group>"; };
+		ED8DC2971296DAA6006D6463 /* MixButton_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MixButton_on@2x.png"; sourceTree = "<group>"; };
+		ED8DC29C1296DFDF006D6463 /* darkButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkButton.png; sourceTree = "<group>"; };
+		ED8DC29D1296DFDF006D6463 /* darkButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkButton@2x.png"; sourceTree = "<group>"; };
+		ED8DC2B41296E3DB006D6463 /* ZButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZButton.h; sourceTree = "<group>"; };
+		ED8DC2B51296E3DB006D6463 /* ZButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +138,8 @@
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				ED2889F3125B45AC00E2609F /* DALIcomm.h */,
 				ED2889F4125B45AC00E2609F /* DALIcomm.m */,
+				ED8DC2B41296E3DB006D6463 /* ZButton.h */,
+				ED8DC2B51296E3DB006D6463 /* ZButton.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -125,11 +147,20 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED8DC2941296DAA6006D6463 /* MixButton_off.png */,
+				ED8DC2951296DAA6006D6463 /* MixButton_off@2x.png */,
+				ED8DC2961296DAA6006D6463 /* MixButton_on.png */,
+				ED8DC2971296DAA6006D6463 /* MixButton_on@2x.png */,
+				ED8DC29C1296DFDF006D6463 /* darkButton.png */,
+				ED8DC29D1296DFDF006D6463 /* darkButton@2x.png */,
 				ED29FB1F125B741F002492DD /* MixLights_icon@2x.png */,
 				ED29FB20125B741F002492DD /* MixLights_icon.png */,
 				ED29FCCB125D2478002492DD /* MixLights_icon-ipad.png */,
 				280E754A0DD40C5E005A515E /* FlipsideView.xib */,
 				280E754B0DD40C5E005A515E /* MainView.xib */,
+				ED8DC2841296D667006D6463 /* SliderView.h */,
+				ED8DC2851296D667006D6463 /* SliderView.m */,
+				ED8DC2861296D667006D6463 /* SliderView.xib */,
 				280E754C0DD40C5E005A515E /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MixLights-Info.plist */,
 			);
@@ -205,6 +236,13 @@
 				ED29FB21125B741F002492DD /* MixLights_icon@2x.png in Resources */,
 				ED29FB22125B741F002492DD /* MixLights_icon.png in Resources */,
 				ED29FCCC125D2478002492DD /* MixLights_icon-ipad.png in Resources */,
+				ED8DC2881296D667006D6463 /* SliderView.xib in Resources */,
+				ED8DC2981296DAA6006D6463 /* MixButton_off.png in Resources */,
+				ED8DC2991296DAA6006D6463 /* MixButton_off@2x.png in Resources */,
+				ED8DC29A1296DAA6006D6463 /* MixButton_on.png in Resources */,
+				ED8DC29B1296DAA6006D6463 /* MixButton_on@2x.png in Resources */,
+				ED8DC29E1296DFDF006D6463 /* darkButton.png in Resources */,
+				ED8DC29F1296DFDF006D6463 /* darkButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +258,8 @@
 				289233AE0DB2D0DB0083E9F9 /* MainViewController.m in Sources */,
 				289233B00DB2D0DB0083E9F9 /* FlipsideViewController.m in Sources */,
 				ED2889F5125B45AC00E2609F /* DALIcomm.m in Sources */,
+				ED8DC2871296D667006D6463 /* SliderView.m in Sources */,
+				ED8DC2B61296E3DB006D6463 /* ZButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
