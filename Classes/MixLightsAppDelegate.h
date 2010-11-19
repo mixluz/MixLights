@@ -10,18 +10,18 @@
 
 #import "DALIcomm.h"
 
-@class MainViewController;
+@class TechnoViewController;
 
 @interface MixLightsAppDelegate : NSObject <UIApplicationDelegate>
 {
   UIWindow *window;
-  MainViewController *mainViewController;
+  TechnoViewController *TechnoViewController;
   // DALI communicator
   DALIcomm *daliComm;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet MainViewController *mainViewController;
+@property (nonatomic, retain) IBOutlet TechnoViewController *technoViewController;
 @property (readonly) DALIcomm *daliComm;
 
 + (MixLightsAppDelegate *)sharedAppDelegate;

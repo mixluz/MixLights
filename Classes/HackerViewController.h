@@ -1,5 +1,5 @@
 //
-//  FlipsideViewController.h
+//  HackerViewController.h
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/10/05.
@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol FlipsideViewControllerDelegate;
+@protocol HackerViewControllerDelegate;
 
 
-@interface FlipsideViewController : UIViewController {
-	id <FlipsideViewControllerDelegate> delegate;
+@interface HackerViewController : UIViewController {
+	id <HackerViewControllerDelegate> delegate;
   // controls
   IBOutlet UITextField *bridgeCmdField;
   IBOutlet UITextField *daliCmdField;
@@ -30,7 +30,7 @@
   uint8_t searchH, searchM, searchL;
   int noAnswerReps;
 }
-@property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
+@property (nonatomic, assign) id <HackerViewControllerDelegate> delegate;
 
 - (IBAction)done:(id)sender;
 - (IBAction)sendCommand:(id)sender;
@@ -53,7 +53,7 @@
 @end
 
 
-@protocol FlipsideViewControllerDelegate
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
+@protocol HackerViewControllerDelegate
+- (void)HackerViewControllerDidFinish:(HackerViewController *)controller;
 @end
 

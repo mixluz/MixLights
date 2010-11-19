@@ -1,24 +1,24 @@
 //
-//  MainViewController.m
+//  TechnoViewController.m
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/10/05.
 //  Copyright 2010 Lukas Zeller/mixwerk.ch. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "TechnoViewController.h"
 
 #import "MixLightsAppDelegate.h"
 #import "DALIcomm.h"
 
-@implementation MainViewController
+@implementation TechnoViewController
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
 	// flip side not yet loaded
-  flipSideViewController = nil;
+  hackerViewController = nil;
 	// init defaults
   [[NSUserDefaults standardUserDefaults] registerDefaults:
   	[NSDictionary dictionaryWithObjectsAndKeys:
@@ -46,7 +46,7 @@
 
 
 
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
+- (void)HackerViewControllerDidFinish:(HackerViewController *)controller
 {    
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -54,13 +54,13 @@
 
 - (IBAction)showInfo:(id)sender
 { 
-	if (!flipSideViewController) {   	
-		flipSideViewController = [[FlipsideViewController alloc] initWithNibName:@"FlipsideView" bundle:nil];
-		flipSideViewController.delegate = self;
+	if (!hackerViewController) {   	
+		hackerViewController = [[HackerViewController alloc] initWithNibName:@"HackerView" bundle:nil];
+		hackerViewController.delegate = self;
   }
 	
-	flipSideViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:flipSideViewController animated:YES];	
+	hackerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:hackerViewController animated:YES];	
 }
 
 
@@ -77,7 +77,7 @@
 {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
-  [flipSideViewController release]; flipSideViewController=nil;
+  [hackerViewController release]; hackerViewController=nil;
 }
 
 
@@ -97,7 +97,7 @@
 
 - (void)dealloc
 {
-  [flipSideViewController release];
+  [HackerViewController release];
   [super dealloc];
 }
 

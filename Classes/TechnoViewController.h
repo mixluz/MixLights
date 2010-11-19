@@ -1,21 +1,21 @@
 //
-//  MainViewController.h
+//  TechnoViewController.h
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/10/05.
 //  Copyright 2010 Lukas Zeller/mixwerk.ch. All rights reserved.
 //
 
-#import "FlipsideViewController.h"
+#import "HackerViewController.h"
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
+@interface TechnoViewController : UIViewController <HackerViewControllerDelegate>
 {
 	IBOutlet UISegmentedControl *addrGroupSegControl;
 	IBOutlet UISegmentedControl *addrDigitSegControl;
 	IBOutlet UISegmentedControl *sceneSegControl;
   IBOutlet UISlider *dimmerSlider;
   // vars
-  FlipsideViewController *flipSideViewController;
+  HackerViewController *hackerViewController;
 }
 
 // controls for light

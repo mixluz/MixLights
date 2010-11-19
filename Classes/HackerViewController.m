@@ -1,16 +1,16 @@
 //
-//  FlipsideViewController.m
+//  HackerViewController.m
 //  MixLights
 //
 //  Created by Lukas Zeller on 2010/10/05.
 //  Copyright 2010 Lukas Zeller/mixwerk.ch. All rights reserved.
 //
 
-#import "FlipsideViewController.h"
+#import "HackerViewController.h"
 
 #import "MixLightsAppDelegate.h"
 
-@implementation FlipsideViewController
+@implementation HackerViewController
 
 @synthesize delegate;
 
@@ -27,7 +27,7 @@
 - (IBAction)done:(id)sender
 {
 	if (!assignInProgress) {
-		[self.delegate flipsideViewControllerDidFinish:self];
+		[self.delegate HackerViewControllerDidFinish:self];
   }
 }
 

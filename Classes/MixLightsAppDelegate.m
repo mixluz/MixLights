@@ -7,13 +7,13 @@
 //
 
 #import "MixLightsAppDelegate.h"
-#import "MainViewController.h"
+#import "TechnoViewController.h"
 
 @implementation MixLightsAppDelegate
 
 
 @synthesize window;
-@synthesize mainViewController;
+@synthesize technoViewController;
 @synthesize daliComm;
 
 
@@ -38,7 +38,7 @@
 	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
   // Add the main view controller's view to the window and display.
-  [window addSubview:mainViewController.view];
+  [window addSubview:technoViewController.view];
   [window makeKeyAndVisible];
 
   return YES;
@@ -118,7 +118,7 @@
 	// comm
   [daliComm release];
 	// UI
-  [mainViewController release];
+  [TechnoViewController release];
   [window release];
   [super dealloc];
 }
