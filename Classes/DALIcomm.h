@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreFoundation/CoreFoundation.h>
 
+#import "Reachability.h"
 
 @interface DALIcmdBlock : NSObject
 {
@@ -45,6 +46,9 @@ double arcpowerToDimmer(int aArcpower);
 
 @interface DALIcomm : NSObject <NSStreamDelegate>
 {
+	// reachability
+  Reachability *reachability;
+  
 	// host and port
   NSString *host;
   NSInteger port;
@@ -62,10 +66,12 @@ double arcpowerToDimmer(int aArcpower);
   BOOL connectionCheckerActive;  
 }
 - (void)setConnectionHost:(NSString *)aHost port:(NSInteger)aPort;
-- (void)openConnection;
+- (BOOL)openConnection;
 - (void)closeConnection;
 - (void)checkSend;
 - (BOOL)isReady;
+- (BOOL)isConnectable;
+
 
 // direct DALI bridge commands
 - (void)sendDaliBridgeCommand:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2 expectsAnswer:(BOOL)aExpectsAnswer answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aMinTimeToNextCmd;

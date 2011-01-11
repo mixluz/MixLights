@@ -124,8 +124,16 @@
 
 
 
+- (void)updateConnectionStatus
+{
+	titleLabel.textColor = [[MixLightsAppDelegate sharedAppDelegate].daliComm isConnectable] ? [UIColor yellowColor] : [UIColor redColor];
+}
+
+
+
 - (void)getLightLevel
 {
+	[self updateConnectionStatus];
 	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliQuerySend:[self daliAddr]+1 dali2:0xA0 answerTarget:self selector:@selector(lightLevelAnswer:)];
 }
 

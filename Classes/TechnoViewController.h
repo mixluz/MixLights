@@ -14,6 +14,7 @@
 	IBOutlet UISegmentedControl *addrDigitSegControl;
 	IBOutlet UISegmentedControl *sceneSegControl;
   IBOutlet UISlider *dimmerSlider;
+  IBOutlet UILabel *titleLabel;
   // vars
   HackerViewController *hackerViewController;
 }

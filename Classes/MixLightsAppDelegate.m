@@ -33,7 +33,7 @@
 	// init the defaults
   [[NSUserDefaults standardUserDefaults] registerDefaults:
   	[NSDictionary dictionaryWithObjectsAndKeys:
-    	@"192.168.23.50", @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN
+    	@"192.168.59.50", @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN (new VLAN: 59, old VLAN: 23)
     	nil
     ]
   ];

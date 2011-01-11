@@ -75,6 +75,7 @@
     responseWaitCmd = nil;
     connectionLastUsed = 0;
     connectionCheckerActive = NO;
+    reachability = nil;
   }
   return self;
 }
@@ -86,6 +87,7 @@
   [host release];
   [sendQueue release];
   [responseWaitCmd release];
+  [reachability release];
 	[super dealloc];
 }
 
@@ -95,13 +97,28 @@
 	[host release];
   host = [aHost retain];
   port = aPort;
+  // monitor reachability for the host
+  [reachability release];
+	reachability = [[Reachability reachabilityWithHostName:host] retain];
+  [reachability startNotifier];
 }
 
 
-- (void)openConnection
+- (BOOL)isConnectable
+{
+	return [reachability currentReachabilityStatus]==ReachableViaWiFi;
+}
+
+
+- (BOOL)openConnection
 {
 	// close previous connection
 	[self closeConnection];
+  // check reachability
+  if (![self isConnectable]) {
+  	// not reachable via WiFi
+    return NO;
+  }
   // create stream pair to remote socket
   CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)host, port, (CFReadStreamRef *)&readStream, (CFWriteStreamRef *)&writeStream);
 	// set delegate
@@ -113,6 +130,8 @@
   // open both
   [readStream open];
   [writeStream open];
+  // open possible
+  return YES;
 }
 
 
@@ -284,6 +303,8 @@
 
 - (void)sendDaliBridgeCommand:(uint8_t)aCmd dali1:(uint8_t)aDali1 dali2:(uint8_t)aDali2 expectsAnswer:(BOOL)aExpectsAnswer answerTarget:(id)aTarget selector:(SEL)aSelector timeout:(NSTimeInterval)aMinTimeToNextCmd
 {
+	// check connectability
+  if (![self isConnectable]) return;
 	// create command
   DALIcmdBlock *cmd = [[DALIcmdBlock alloc] initWithBridgeCmd:aCmd dali1:aDali1 dali2:aDali2];
   cmd.resultTarget = aTarget;

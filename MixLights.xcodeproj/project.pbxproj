@@ -39,6 +39,8 @@
 		ED8DC29E1296DFDF006D6463 /* darkButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC29C1296DFDF006D6463 /* darkButton.png */; };
 		ED8DC29F1296DFDF006D6463 /* darkButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED8DC29D1296DFDF006D6463 /* darkButton@2x.png */; };
 		ED8DC2B61296E3DB006D6463 /* ZButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ED8DC2B51296E3DB006D6463 /* ZButton.m */; };
+		EDC9FD7812A54C800014F60B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC9FD7712A54C800014F60B /* Reachability.m */; };
+		EDC9FD7F12A54FC10014F60B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC9FD7E12A54FC10014F60B /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,9 @@
 		ED8DC29D1296DFDF006D6463 /* darkButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkButton@2x.png"; sourceTree = "<group>"; };
 		ED8DC2B41296E3DB006D6463 /* ZButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZButton.h; sourceTree = "<group>"; };
 		ED8DC2B51296E3DB006D6463 /* ZButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZButton.m; sourceTree = "<group>"; };
+		EDC9FD7612A54C800014F60B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		EDC9FD7712A54C800014F60B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		EDC9FD7E12A54FC10014F60B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */,
+				EDC9FD7F12A54FC10014F60B /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,26 +124,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		281C6CD70DB2D82200F60ACC /* HackerView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HackerView;
-			sourceTree = "<group>";
-		};
-		289233A00DB2D0730083E9F9 /* TechnoView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TechnoView;
-			sourceTree = "<group>";
-		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
 				ED8DC2E71296E957006D6463 /* Classes */,
-				289233A00DB2D0730083E9F9 /* TechnoView */,
-				281C6CD70DB2D82200F60ACC /* HackerView */,
 				080E96DDFE201D6D7F000001 /* Application Delegate */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -191,6 +181,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765580DF743DE002DB57D /* CoreGraphics.framework */,
+				EDC9FD7E12A54FC10014F60B /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,6 +201,8 @@
 				ED2889F4125B45AC00E2609F /* DALIcomm.m */,
 				ED8DC2B41296E3DB006D6463 /* ZButton.h */,
 				ED8DC2B51296E3DB006D6463 /* ZButton.m */,
+				EDC9FD7612A54C800014F60B /* Reachability.h */,
+				EDC9FD7712A54C800014F60B /* Reachability.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -306,6 +299,7 @@
 				ED8DC2871296D667006D6463 /* SliderViewController.m in Sources */,
 				ED8DC2B61296E3DB006D6463 /* ZButton.m in Sources */,
 				ED09E4D712972EA9004DD81F /* MainViewController.m in Sources */,
+				EDC9FD7812A54C800014F60B /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +392,7 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
-				PROVISIONING_PROFILE = "BFD8E8D9-281B-4B82-8B46-54098D59190A";
+				PROVISIONING_PROFILE = "9E11C2B0-6C8F-42C8-91B0-A5C48B2FE5E5";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AdHoc;
