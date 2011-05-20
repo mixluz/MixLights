@@ -12,7 +12,8 @@
 ; original from 16F628A template for MPASM suite
 ; __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_OFF & _PWRTE_ON & _INTOSC_OSC_NOCLKOUT
 
- __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_ON & _PWRTE_ON & _INTOSC_OSC_CLKOUT
+; __CONFIG _CP_OFF & _DATA_CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_ON & _PWRTE_ON & _INTOSC_OSC_CLKOUT
+ __CONFIG _CP_OFF & _LVP_OFF & _BOREN_OFF & _MCLRE_ON & _WDT_ON & _PWRTE_ON & _INTOSC_OSC_CLKOUT
 
 
 #include    common.inc		; include stuff that is common to all files

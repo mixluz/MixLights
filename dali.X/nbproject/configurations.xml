@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="62">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>../232macro.inc</itemPath>
+      <itemPath>../common.inc</itemPath>
+      <itemPath>../instruct.inc</itemPath>
+      <itemPath>../main.inc</itemPath>
+      <itemPath>../user_mac.inc</itemPath>
+    </logicalFolder>
+    <logicalFolder name="LibraryFiles"
+                   displayName="Library Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="LinkerScript"
+                   displayName="Linker Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ObjectFiles"
+                   displayName="Object Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>../cmd1.asm</itemPath>
+      <itemPath>../cmd2.asm</itemPath>
+      <itemPath>../cmd3.asm</itemPath>
+      <itemPath>../cmd4.asm</itemPath>
+      <itemPath>../cmd5.asm</itemPath>
+      <itemPath>../cmd6.asm</itemPath>
+      <itemPath>../delay.asm</itemPath>
+      <itemPath>../main.asm</itemPath>
+      <itemPath>../reset.asm</itemPath>
+      <itemPath>../rs232.asm</itemPath>
+      <itemPath>../rxdali.asm</itemPath>
+      <itemPath>../timecnt.asm</itemPath>
+      <itemPath>../txdali.asm</itemPath>
+      <itemPath>../writeee.asm</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="default" type="2">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC16F628A</targetDevice>
+        <targetHeader></targetHeader>
+        <platformTool>PK3OBPlatformTool</platformTool>
+        <languageToolchain>MPASMWIN</languageToolchain>
+        <languageToolchainVersion>5.40</languageToolchainVersion>
+        <platform>4</platform>
+      </toolsSet>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <MPASMWIN-AS>
+        <property key="default.radix" value="HEX"/>
+        <property key="hex.output.format" value="INHX32"/>
+        <property key="enable.case.sensitivity" value="false"/>
+        <property key="preprocessor.macros" value=""/>
+        <property key="warning.level" value="0"/>
+        <property key="cross.reference.file" value=""/>
+      </MPASMWIN-AS>
+      <MPASMWIN-LD>
+        <property key="hex-output-format" value="INHX32"/>
+        <property key="map-file" value=""/>
+        <property key="extra-lib-directories" value="..;"/>
+      </MPASMWIN-LD>
+      <PK3OBPlatformTool>
+      </PK3OBPlatformTool>
+    </conf>
+  </confs>
+</configurationDescriptor>
