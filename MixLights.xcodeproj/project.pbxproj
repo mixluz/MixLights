@@ -324,11 +324,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lukas Zeller";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
+				PROVISIONING_PROFILE = "7C4862F1-9267-4F6D-AF1A-8C71B147D595";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
