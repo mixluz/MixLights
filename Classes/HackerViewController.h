@@ -21,6 +21,7 @@
   IBOutlet UIActivityIndicatorView *progressSpinner;
   IBOutlet UITextField *daliBridgeAddrField;
   IBOutlet UISwitch *alsoWithShortAddrSwitch;
+  IBOutlet UISwitch *tunnelSwitch;
   // vars
   unsigned newAddress;
   BOOL assignInProgress;

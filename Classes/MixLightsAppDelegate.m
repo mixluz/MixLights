@@ -15,6 +15,7 @@
 @synthesize window;
 @synthesize tabBarController;
 @synthesize daliComm;
+@synthesize useTunnel;
 
 
 + (MixLightsAppDelegate *)sharedAppDelegate
@@ -22,6 +23,11 @@
 	return (MixLightsAppDelegate *)([UIApplication sharedApplication].delegate);
 }
 
+
+- (NSString *)defaultBridgeAddress
+{
+  return @"192.168.59.200";
+}
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -33,17 +39,36 @@
 	// init the defaults
   [[NSUserDefaults standardUserDefaults] registerDefaults:
   	[NSDictionary dictionaryWithObjectsAndKeys:
-    	@"192.168.59.200", @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN (new VLAN: 59)
+    	self.defaultBridgeAddress, @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN (new VLAN: 59)
     	nil
     ]
   ];
 	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
+  useTunnel = NO;
   // Add the main view controller's view to the window and display.
   [window addSubview:tabBarController.view];
   [window makeKeyAndVisible];
 
   return YES;
+}
+
+
+- (void)setUseTunnel:(BOOL)aUseTunnel
+{
+  if (aUseTunnel!=useTunnel) {
+    useTunnel = aUseTunnel;
+    [self initDaliComm];
+  }
+}
+
+
+- (void)initDaliComm
+{  
+  [daliComm
+    setConnectionHost:self.useTunnel ? @"127.0.0.1" : [[NSUserDefaults standardUserDefaults] stringForKey:@"DaliBridgeIP"]
+    port:2101
+  ]; // port = TCP raw access
 }
 
 

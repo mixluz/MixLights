@@ -43,6 +43,8 @@
 
 - (void)viewDidUnload
 {
+  [tunnelSwitch release];
+  tunnelSwitch = nil;
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
@@ -59,6 +61,7 @@
 
 - (void)dealloc
 {
+  [tunnelSwitch release];
   [super dealloc];
 }
 
@@ -71,14 +74,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+  daliBridgeAddrField.placeholder = [MixLightsAppDelegate sharedAppDelegate].defaultBridgeAddress;
 	daliBridgeAddrField.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"DaliBridgeIP"];
+  tunnelSwitch.on = [MixLightsAppDelegate sharedAppDelegate].useTunnel;
 	[super viewWillAppear:animated];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  // store new IP
 	[[NSUserDefaults standardUserDefaults] setObject:daliBridgeAddrField.text forKey:@"DaliBridgeIP"];
+  // pass tunnel switch state
+  [MixLightsAppDelegate sharedAppDelegate].useTunnel = tunnelSwitch.on;
 	[super viewWillDisappear:animated];
 }
 
@@ -220,7 +228,6 @@ done:
   noAnswerReps = 0;
   [self queryBallast];
 }
-
 
 
 

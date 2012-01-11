@@ -25,8 +25,11 @@
 //@property (nonatomic, retain) IBOutlet TechnoViewController *technoViewController;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (readonly) DALIcomm *daliComm;
+@property (readonly) NSString *defaultBridgeAddress;
+@property (assign,nonatomic) BOOL useTunnel;
 
 + (MixLightsAppDelegate *)sharedAppDelegate;
+- (void)initDaliComm;
 
 @end
 

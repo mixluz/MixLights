@@ -39,7 +39,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	// set IP (which might have changed on flipside)
-  [[MixLightsAppDelegate sharedAppDelegate].daliComm setConnectionHost:[[NSUserDefaults standardUserDefaults] stringForKey:@"DaliBridgeIP"] port:2101]; // port = TCP raw access
+  [[MixLightsAppDelegate sharedAppDelegate] initDaliComm];
 	// get current light level
 	[self getLightLevel];  
 	// done

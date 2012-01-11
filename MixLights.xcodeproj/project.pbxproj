@@ -310,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lukas Zeller (7Z3P4LBQ7Z)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -317,6 +318,7 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
+				PROVISIONING_PROFILE = "C357766D-3B5B-41A6-BCD0-3A92BD86A75B";
 			};
 			name = Debug;
 		};
@@ -330,7 +332,7 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
-				PROVISIONING_PROFILE = "7C4862F1-9267-4F6D-AF1A-8C71B147D595";
+				PROVISIONING_PROFILE = "BF5920C9-409D-4FB6-B051-2F3DE9C81E56";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

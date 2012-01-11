@@ -147,6 +147,8 @@
   	[writeStream close];
     [writeStream release];
     writeStream = nil;
+    // don't keep queued commands accross re-connections
+    [sendQueue removeAllObjects];
   }
 }
 
