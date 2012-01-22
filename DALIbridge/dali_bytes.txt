@@ -1,0 +1,12 @@
+// Query bridge status
+aU*
+
+// Echo - comm test
+EXY
+E@Z
+
+// Send UU to DALI
+UU
+
+// Send ** to DALI and wait for Answer
+**

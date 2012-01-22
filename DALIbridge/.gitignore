@@ -1,0 +1,5 @@
+# MPASM output files
+*.lst
+*.o
+*.cof
+*.err
