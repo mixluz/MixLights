@@ -14,6 +14,10 @@
 @interface SliderViewController : UIViewController {
 
 }
+@property (retain, nonatomic) IBOutlet UISlider *sweepSlider;
+
+- (IBAction)sweepChanged:(id)sender;
+- (IBAction)sweepTouchUp:(id)sender;
 
 - (IBAction)lightToggle:(ZButton *)sender;
 - (IBAction)lightDimmer:(UISlider *)sender;
