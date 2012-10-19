@@ -369,6 +369,7 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
+				PROVISIONING_PROFILE = "FAB11E9B-64C5-4367-BB48-F3301F98CF7F";
 			};
 			name = Debug;
 		};
@@ -381,6 +382,7 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
+				PROVISIONING_PROFILE = "87159443-00EF-4536-BBE8-82CCD34E7077";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

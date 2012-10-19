@@ -416,7 +416,7 @@ done:
     [self performSelector:@selector(nextCompare) withObject:nil afterDelay:0.03]; // try again to make sure we did not just miss a YES!
     return;
   }
-	NSLog(@">>> compareResult = %s, search=0x%lX, searchMin=0x%lX, searchMax=0x%lX", aResult==nil ? "No " : "Yes", searchAddr, searchMin, searchMax);
+	NSLog(@">>> compareResult = %s, search=0x%lX, searchMin=0x%lX, searchMax=0x%X", aResult==nil ? "No " : "Yes", searchAddr, searchMin, searchMax);
 	// count this as a result, next will start again
   noAnswerReps = 0;
 	// any ballast has smaller or equal random address?
@@ -435,7 +435,7 @@ done:
   }
   if (searchMin==searchMax && searchAddr==searchMin) {
     // found!
-		NSLog(@">>> Lowest random address is 0x%lX (searchMin=0x%lX, searchMax=0x%lX)", searchAddr, searchMin, searchMax);
+		NSLog(@">>> Lowest random address is 0x%lX (searchMin=0x%lX, searchMax=0x%X)", searchAddr, searchMin, searchMax);
     // program new address here
     [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xB7 dali2:(newAddress<<1)+1 duration:1];
     // withdraw it from further searches
@@ -447,7 +447,7 @@ done:
 	else {
   	// not yet - continue
 	  searchAddr = searchMin + (searchMax-searchMin)/2;
-		NSLog(@"                                      new searchMin=0x%lX, searchMax=0x%lX", searchMin, searchMax);
+		NSLog(@"                                      new searchMin=0x%lX, searchMax=0x%X", searchMin, searchMax);
     // issue next compare
     [self performSelector:@selector(nextCompare) withObject:nil afterDelay:0.001];
     return;

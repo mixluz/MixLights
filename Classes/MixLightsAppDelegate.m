@@ -34,22 +34,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// App properties
+	// App appearance
   application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+//  [[UISegmentedControl appearance] setTintColor:[UIColor colorWithWhite:0.6 alpha:1]];
+  
 	// init the defaults
   [[NSUserDefaults standardUserDefaults] registerDefaults:
-  	[NSDictionary dictionaryWithObjectsAndKeys:
-    	self.defaultBridgeAddress, @"DaliBridgeIP", // Digi Connect ME in MixWerk LAN (new VLAN: 59)
-    	nil
-    ]
+    @{
+      @"DaliBridgeIP" : self.defaultBridgeAddress, // Digi Connect ME in MixWerk LAN (new VLAN: 59)
+      @"SelectedTabAtStart": @1
+    }
   ];
 	// create DALI communication handler    
   daliComm = [[DALIcomm alloc] init];
   useTunnel = NO;
   // Add the main view controller's view to the window and display.
   [window addSubview:tabBarController.view];
+  tabBarController.selectedIndex = [[[NSUserDefaults standardUserDefaults] valueForKey:@"SelectedTabAtStart"] integerValue];
   [window makeKeyAndVisible];
-
   return YES;
 }
 
@@ -75,6 +77,7 @@
 - (void)prepareForPossibleTermination
 {
   // save prefs
+  [[NSUserDefaults standardUserDefaults] setInteger:tabBarController.selectedIndex forKey:@"SelectedTabAtStart"];
   [NSUserDefaults resetStandardUserDefaults];
   // close connection
   [daliComm closeConnection];
