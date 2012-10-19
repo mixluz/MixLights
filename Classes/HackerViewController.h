@@ -22,6 +22,9 @@
   IBOutlet UITextField *daliBridgeAddrField;
   IBOutlet UISwitch *alsoWithShortAddrSwitch;
   IBOutlet UISwitch *tunnelSwitch;
+  IBOutlet UILabel *SearchProgressLabel;
+  IBOutlet UITextField *fromAddrField;
+  IBOutlet UITextField *toAddrField;
   // vars
   unsigned newAddress;
   BOOL assignInProgress;
@@ -39,6 +42,7 @@
 - (IBAction)assignAddressPhysical;
 - (IBAction)assignAddressRandom;
 - (IBAction)findNextAdressableBallast;
+- (IBAction)remapShortAddress:(id)sender;
 
 - (IBAction)editDone:(UIResponder *)aResponder;
 

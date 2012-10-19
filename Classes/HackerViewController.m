@@ -10,6 +10,8 @@
 
 #import "MixLightsAppDelegate.h"
 
+#import "UIAlertView+ZUtils.h"
+
 @implementation HackerViewController
 
 @synthesize delegate;
@@ -43,6 +45,12 @@
 
 - (void)viewDidUnload
 {
+  [toAddrField release];
+  toAddrField = nil;
+  [fromAddrField release];
+  fromAddrField = nil;
+  [SearchProgressLabel release];
+  SearchProgressLabel = nil;
   [tunnelSwitch release];
   tunnelSwitch = nil;
 	// Release any retained subviews of the main view.
@@ -62,6 +70,9 @@
 - (void)dealloc
 {
   [tunnelSwitch release];
+  [SearchProgressLabel release];
+  [fromAddrField release];
+  [toAddrField release];
   [super dealloc];
 }
 
@@ -231,6 +242,22 @@ done:
 
 
 
+- (IBAction)remapShortAddress:(id)sender
+{
+  unsigned fromAddress = [fromAddrField.text intValue];
+  unsigned toAddress = [toAddrField.text intValue];
+  // remap
+  // - set DTR with new address
+  if (toAddress>63) toAddress=0x7F; // mask = results in 0xFF = remove short address
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm
+    daliSend:0xA3 dali2:(toAddress<<1)+1
+  ];
+  // - send remap
+	[[MixLightsAppDelegate sharedAppDelegate].daliComm daliDoubleSend:(fromAddress<<1)+1 dali2:0x80 duration:1];
+}
+
+
+
 
 
 
@@ -286,6 +313,15 @@ done:
 }
 
 
+- (void)programNewAddress
+{
+  [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xB7 dali2:(newAddress<<1)+1 duration:1];
+  // Verify new address and display result
+  noAnswerReps = 0;
+  [self verifyNewShortAddr];
+}
+
+
 - (void)verifyNewShortAddr
 {
   // query
@@ -298,6 +334,7 @@ done:
 	if (!aAnswer && noAnswerReps<3) {
   	noAnswerReps++;
   	[self performSelector:@selector(verifyNewShortAddr) withObject:nil afterDelay:0.3];
+    return;
   }
   [self displayAndEndAddressAssignWithSuccess:aAnswer!=nil];
 }
@@ -307,11 +344,31 @@ done:
 - (void)displayAndEndAddressAssignWithSuccess:(BOOL)aSuccess
 {
 	// verified if aAnswer
-  [[[[UIAlertView alloc]
-  	initWithTitle: @"DALI address assignment"
-    message: (aSuccess ? [NSString stringWithFormat:@"New address %d set and verified", newAddress] : @"Failed setting new address or no device found")
-   	delegate:self cancelButtonTitle:@"Done" otherButtonTitles:@"Continue",nil
-  ] autorelease] show];
+  UIAlertView *alert = [UIAlertView
+    alertViewWithTitle:@"DALI address assignment"
+    message:(aSuccess ? [NSString stringWithFormat:@"New address %d set and verified", newAddress] : @"Failed setting new address or no device found")
+    whenDismissed:^(UIAlertView *alertView, NSInteger buttonIndex) {
+      if (buttonIndex==alertView.cancelButtonIndex) {
+        // done, terminate
+        [self endAssignAddress];
+      }
+      else if (buttonIndex==2) {
+        // retry assigning ID
+        [self programNewAddress];
+      }
+      else {
+        // continue
+        // re-start searching
+        newAddress++;
+        [self startNewSearchUpwardsFrom:searchAddr+1]; // start one after known lowest address
+      }
+    }
+  ];
+  [alert addButtonWithTitle:@"Done"];
+  alert.cancelButtonIndex = 0;
+  [alert addButtonWithTitle:@"Continue"];
+  [alert addButtonWithTitle:@"Retry Assign"];
+  [alert show];
   if (aSuccess) {
     // next scan assigns one higher
     dtrValueField.text = [NSString stringWithFormat:@"%d",newAddress+1];
@@ -320,26 +377,6 @@ done:
 	}
   // let alert decide whether to continue
 }
-
-
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	switch (buttonIndex) {
-  	case 0:
-      // done, terminate
-      [self endAssignAddress];
-      break;
-    case 1:
-    	// re-start searching
-      newAddress++;
-		  [self startNewSearchUpwardsFrom:searchAddr+1]; // start one after known lowest address
-      break;
-  }
-}
-
-
 
 
 #pragma mark Random Address Search and Assignment
@@ -416,7 +453,8 @@ done:
     [self performSelector:@selector(nextCompare) withObject:nil afterDelay:0.03]; // try again to make sure we did not just miss a YES!
     return;
   }
-	NSLog(@">>> compareResult = %s, search=0x%lX, searchMin=0x%lX, searchMax=0x%X", aResult==nil ? "No " : "Yes", searchAddr, searchMin, searchMax);
+	NSLog(@">>> compareResult = %s, search=0x%X, searchMin=0x%X, searchMax=0x%X", aResult==nil ? "No " : "Yes", searchAddr, searchMin, searchMax);
+  SearchProgressLabel.text = [NSString stringWithFormat:@"%s=%X (%X…%X)", aResult==nil ? "No " : "Yes", searchAddr, searchMin, searchMax];
 	// count this as a result, next will start again
   noAnswerReps = 0;
 	// any ballast has smaller or equal random address?
@@ -435,19 +473,37 @@ done:
   }
   if (searchMin==searchMax && searchAddr==searchMin) {
     // found!
-		NSLog(@">>> Lowest random address is 0x%lX (searchMin=0x%lX, searchMax=0x%X)", searchAddr, searchMin, searchMax);
-    // program new address here
-    [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xB7 dali2:(newAddress<<1)+1 duration:1];
+		NSLog(@">>> Lowest random address is 0x%X (searchMin=0x%X, searchMax=0x%X)", searchAddr, searchMin, searchMax);
+//    UIAlertView *alert = [UIAlertView
+//      alertViewWithTitle:@"Ballast found"
+//      message:[NSString stringWithFormat:@"Lowest random address is 0x%X (searchMin=0x%X, searchMax=0x%X) - program new short address %d for this ballast now?", searchAddr, searchMin, searchMax, newAddress]
+//      whenDismissed:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//        if (buttonIndex!=alertView.cancelButtonIndex) {
+//          // program new address here
+//          [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xB7 dali2:(newAddress<<1)+1 duration:1];
+//          // withdraw it from further searches
+//          [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xAB dali2:0 duration:1];
+//          // Verify new address and display result
+//          noAnswerReps = 0;
+//          [self verifyNewShortAddr];
+//        }
+//      }
+//    ];
+//    [alert addButtonWithTitle:@"Assign"];
+//    [alert addButtonWithTitle:@"Cancel"];
+//    alert.cancelButtonIndex = 1;
+//    [alert show];
+    SearchProgressLabel.text = [NSString stringWithFormat:@"Found=%X, programming short addr=%d", searchAddr, newAddress];
     // withdraw it from further searches
     [[MixLightsAppDelegate sharedAppDelegate].daliComm daliSend:0xAB dali2:0 duration:1];
-    // Verify new address and display result
-    noAnswerReps = 0;
-		[self verifyNewShortAddr];
+    // program new address here
+    [self programNewAddress];
+    return;
   }
 	else {
   	// not yet - continue
 	  searchAddr = searchMin + (searchMax-searchMin)/2;
-		NSLog(@"                                      new searchMin=0x%lX, searchMax=0x%X", searchMin, searchMax);
+		NSLog(@"                                      new searchMin=0x%X, searchMax=0x%X", searchMin, searchMax);
     // issue next compare
     [self performSelector:@selector(nextCompare) withObject:nil afterDelay:0.001];
     return;

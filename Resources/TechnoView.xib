@@ -2,20 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-<<<<<<< HEAD
-		<string key="IBDocument.SystemVersion">12B19</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
-=======
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
->>>>>>> refs/remotes/github/master_air
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">1929</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -54,11 +47,8 @@
 						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{282, 19}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="753401657"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -95,11 +85,8 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrame">{{18, 162}, {284, 23}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="31961172"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -108,15 +95,10 @@
 					<object class="IBUISegmentedControl" id="753401657">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">290</int>
-<<<<<<< HEAD
-						<string key="NSFrame">{{20, 58}, {280, 40}}</string>
-						<reference key="NSSuperview" ref="883825266"/>
-						<reference key="NSWindow"/>
-=======
 						<string key="NSFrame">{{20, 63}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="284528000"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBSegmentControlStyle">2</int>
@@ -165,15 +147,10 @@
 					<object class="IBUISegmentedControl" id="284528000">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">290</int>
-<<<<<<< HEAD
-						<string key="NSFrame">{{20, 106}, {280, 40}}</string>
-						<reference key="NSSuperview" ref="883825266"/>
-						<reference key="NSWindow"/>
-=======
 						<string key="NSFrame">{{20, 111}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="228009858"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBSegmentControlStyle">2</int>
@@ -252,15 +229,10 @@
 					<object class="IBUISegmentedControl" id="525746700">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">266</int>
-<<<<<<< HEAD
-						<string key="NSFrame">{{20, 297}, {280, 40}}</string>
-						<reference key="NSSuperview" ref="883825266"/>
-						<reference key="NSWindow"/>
-=======
 						<string key="NSFrame">{{20, 302}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="7880828"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBSegmentControlStyle">2</int>
@@ -341,11 +313,8 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 12}, {177, 38}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="558454645"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -379,11 +348,8 @@
 						<int key="NSvFlags">291</int>
 						<string key="NSFrame">{{171, 201}, {129, 36}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="517051283"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -403,11 +369,7 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">darkButton.png</string>
 						</object>
-<<<<<<< HEAD
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="419515095">
-=======
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="963781800">
->>>>>>> refs/remotes/github/master_air
 							<string key="name">Helvetica-Bold</string>
 							<string key="family">Helvetica</string>
 							<int key="traits">2</int>
@@ -424,11 +386,8 @@
 						<int key="NSvFlags">294</int>
 						<string key="NSFrame">{{20, 201}, {129, 36}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="837555176"/>
->>>>>>> refs/remotes/github/master_air
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -446,11 +405,7 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="289642050"/>
 						<reference key="IBUINormalBackgroundImage" ref="209898171"/>
-<<<<<<< HEAD
-						<reference key="IBUIFontDescription" ref="419515095"/>
-=======
 						<reference key="IBUIFontDescription" ref="963781800"/>
->>>>>>> refs/remotes/github/master_air
 						<reference key="IBUIFont" ref="396741926"/>
 					</object>
 					<object class="IBUIButton" id="833669575">
@@ -458,11 +413,8 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{186, 353}, {52, 38}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="374956394"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -476,11 +428,7 @@
 							<string key="NSResourceName">MemSave.png</string>
 						</object>
 						<reference key="IBUINormalBackgroundImage" ref="209898171"/>
-<<<<<<< HEAD
-						<reference key="IBUIFontDescription" ref="419515095"/>
-=======
 						<reference key="IBUIFontDescription" ref="963781800"/>
->>>>>>> refs/remotes/github/master_air
 						<reference key="IBUIFont" ref="396741926"/>
 					</object>
 					<object class="IBUIButton" id="374956394">
@@ -488,11 +436,7 @@
 						<int key="NSvFlags">265</int>
 						<string key="NSFrame">{{246, 353}, {54, 38}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
-						<reference key="NSNextKeyView"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -509,11 +453,7 @@
 							<string key="NSResourceName">MemClr.png</string>
 						</object>
 						<reference key="IBUINormalBackgroundImage" ref="209898171"/>
-<<<<<<< HEAD
-						<reference key="IBUIFontDescription" ref="419515095"/>
-=======
 						<reference key="IBUIFontDescription" ref="963781800"/>
->>>>>>> refs/remotes/github/master_air
 						<reference key="IBUIFont" ref="396741926"/>
 					</object>
 					<object class="IBUILabel" id="517051283">
@@ -521,11 +461,8 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{20, 260}, {85, 29}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="525746700"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -556,11 +493,8 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{20, 353}, {102, 38}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
-<<<<<<< HEAD
 						<reference key="NSWindow"/>
-=======
 						<reference key="NSNextKeyView" ref="833669575"/>
->>>>>>> refs/remotes/github/master_air
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -571,21 +505,14 @@
 						<reference key="IBUINormalTitleColor" ref="970113589"/>
 						<reference key="IBUINormalTitleShadowColor" ref="289642050"/>
 						<reference key="IBUINormalBackgroundImage" ref="209898171"/>
-<<<<<<< HEAD
-						<reference key="IBUIFontDescription" ref="419515095"/>
-=======
 						<reference key="IBUIFontDescription" ref="963781800"/>
->>>>>>> refs/remotes/github/master_air
 						<reference key="IBUIFont" ref="396741926"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
-<<<<<<< HEAD
 				<reference key="NSWindow"/>
-=======
 				<reference key="NSNextKeyView" ref="764216110"/>
->>>>>>> refs/remotes/github/master_air
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MC4xNTY1NjU2NTY2IDAuMTU2NTY1NjU2NiAwLjE1NjU2NTY1NjYAA</bytes>
@@ -909,7 +836,6 @@
 			<nil key="sourceID"/>
 			<int key="maxID">80</int>
 		</object>
-<<<<<<< HEAD
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1079,15 +1005,8 @@
 				</object>
 			</object>
 		</object>
-=======
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
->>>>>>> refs/remotes/github/master_air
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="3100" key="NS.object.0"/>
@@ -1109,6 +1028,6 @@
 				<string>{33, 33}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
 </archive>
