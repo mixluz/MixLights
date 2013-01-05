@@ -310,7 +310,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lukas Zeller (7Z3P4LBQ7Z)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -318,7 +317,6 @@
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
-				PROVISIONING_PROFILE = "FAB11E9B-64C5-4367-BB48-F3301F98CF7F";
 			};
 			name = Debug;
 		};
@@ -326,13 +324,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lukas Zeller";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MixLights_Prefix.pch;
 				INFOPLIST_FILE = "MixLights-Info.plist";
 				PRODUCT_NAME = MixLights;
-				PROVISIONING_PROFILE = "87159443-00EF-4536-BBE8-82CCD34E7077";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -367,7 +363,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "8A3C0874-0396-46BA-AD16-A451EEED1A23";
+				PROVISIONING_PROFILE = "4244D43E-CFCE-4926-8AEC-A7B18CA45152";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
