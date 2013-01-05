@@ -242,6 +242,15 @@
 }
 
 
+- (int)queueSize
+{
+  return [sendQueue count];
+}
+
+
+
+
+
 
 - (void)checkSend
 {

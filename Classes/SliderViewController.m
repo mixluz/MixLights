@@ -107,9 +107,9 @@
   }
   // set new intensities
 	DALIcomm *daliComm = [MixLightsAppDelegate sharedAppDelegate].daliComm;
-  for (int i=0; i<NUM_LAMPS_IN_LINE; i++) {
-    [((UISlider *)[self getSubViewOfClass:[UISlider class] withTag:FIRST_LAMP_IN_LINE+i]) setValue:newintensities[i] animated:NO];
-    if ([daliComm isReady]) {
+  if (daliComm.queueSize<30) {
+    for (int i=0; i<NUM_LAMPS_IN_LINE; i++) {
+      [((UISlider *)[self getSubViewOfClass:[UISlider class] withTag:FIRST_LAMP_IN_LINE+i]) setValue:newintensities[i] animated:NO];
       [daliComm setLamp:FIRST_LAMP_IN_LINE+i dimmerValue:newintensities[i] keepOn:YES];
     }
   }
@@ -134,7 +134,7 @@
   }
   else {
     double diff = val - lastVal;
-    if (fabs(diff)>1.0/111) {
+    if (fabs(diff)>1.0/30) {
       // actually apply
       lastVal = val;
       // change translation

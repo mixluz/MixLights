@@ -1,0 +1,578 @@
+[Header]
+MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
+Version=1.0
+[File000]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd1.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File001]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd1.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File002]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd2.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File003]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd2.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File004]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd3.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File005]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd3.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File006]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd4.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File007]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd4.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File008]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd5.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File009]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd5.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File010]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd6.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File011]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd6.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File012]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\delay.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File013]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\delay.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File014]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\main.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File015]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\main.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File016]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\reset.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File017]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\reset.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File018]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rs232.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File019]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rs232.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File020]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rxdali.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File021]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rxdali.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File022]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\timecnt.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File023]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\timecnt.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File024]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\txdali.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File025]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\txdali.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File026]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\writeee.o
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File027]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\writeee.err
+Folder=Intermediary
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File028]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd1.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File029]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd2.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File030]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd3.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File031]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd4.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File032]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd5.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File033]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\cmd6.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File034]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\delay.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File035]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\main.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File036]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\reset.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File037]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rs232.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File038]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\rxdali.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File039]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\timecnt.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File040]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\txdali.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File041]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\writeee.lst
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={49D3CA3F-D9A3-4518-9943-226A347E8CC7}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=
+TraceCmdString=
+DebugOptions=/d__DEBUG=1
+[File042]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\dali.cof
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\mplink.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
+TraceCmdString=
+DebugOptions=/z__MPLAB_DEBUG=1
+[File043]
+Location=E:\Lukas\DALI_MixWerk\DALI Bridge MixWerk - MPASM project\dali.hex
+Folder=Output
+DeviceName=PIC16F628A
+LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
+LanguageToolID={96C98149-AA1B-4CF9-B967-FAE79CAB663C}
+LanguageToolLocation=C:\Programme\Microchip\MPASM Suite\mplink.exe
+PPAD=$(BINDIR)||$(TMPDIR)||$(AINDIR)||$(INCDIR)||$(LIBDIR)||$(LKRDIR)||
+SOLK=<src>|cmd1.asm|cmd2.asm|cmd3.asm|cmd4.asm|cmd5.asm|cmd6.asm|delay.asm|main.asm|reset.asm|rs232.asm|rxdali.asm|timecnt.asm|txdali.asm|writeee.asm||<obj>||<lib>||<lkr>||
+SuiteArgsString=
+ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
+TraceCmdString=
+DebugOptions=/z__MPLAB_DEBUG=1
+[TOOL_LOC_STAMPS]
+tool_loc{49D3CA3F-D9A3-4518-9943-226A347E8CC7}=C:\Programme\Microchip\MPASM Suite\MPASMWIN.exe
+tool_loc{96C98149-AA1B-4CF9-B967-FAE79CAB663C}=C:\Programme\Microchip\MPASM Suite\mplink.exe

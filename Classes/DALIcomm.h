@@ -70,6 +70,7 @@ double arcpowerToDimmer(int aArcpower);
 - (void)closeConnection;
 - (void)checkSend;
 - (BOOL)isReady;
+- (int)queueSize;
 - (BOOL)isConnectable;
 
 
